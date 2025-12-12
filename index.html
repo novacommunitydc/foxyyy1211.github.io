@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova Community — Loja Premium de Serviços</title>
+  <!-- Fonte Roboto via Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: #121e3a;
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      overflow-x: hidden;
+    }
+
+    /* Sidebar */
+    nav {
+      width: 220px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #000000cc;
+      backdrop-filter: blur(10px);
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      font-weight: 500;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      transition: 0.3s;
+      font-size: 1.1rem;
+    }
+
+    nav a:hover {
+      color: #a48bff;
+    }
+
+    /* Main content */
+    main {
+      margin-left: 240px; /* espaço para a barra */
+      padding: 40px;
+      width: calc(100% - 240px);
+    }
+
+    /* Hero */
+    header {
+      width: 100%;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-img {
+      width: 300px;
+      max-width: 100%;
+      border-radius: 20px;
+      filter: drop-shadow(0 0 20px #a48bff60);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .hero-title {
+      margin-top: 30px;
+      font-size: 3rem;
+      font-weight: 900;
+    }
+
+    .hero-title span {
+      color: #b48cff;
+    }
+
+    /* Sections */
+    h2 {
+      font-size: 2.2rem;
+      text-align: center;
+      margin: 60px 0 30px;
+      font-weight: 900;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+
+    .card {
+      background: #0f0f11;
+      padding: 20px;
+      border-radius: 18px;
+      border: 1px solid #ffffff10;
+      transition: 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: #b48cff;
+      box-shadow: 0 0 25px #b48cff40;
+    }
+
+    /* Terms */
+    .terms {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 30px;
+      background: #0f0f10;
+      border-radius: 20px;
+      border: 1px solid #ffffff15;
+    }
+
+    .terms h3 {
+      margin-top: 30px;
+      font-size: 1.7rem;
+      color: #caa6ff;
+    }
+
+    .terms p {
+      color: #ddd;
+      line-height: 1.5rem;
+      margin: 8px 0;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 60px;
+      padding: 40px;
+      text-align: center;
+      background: #09090a;
+      color: #aaa;
+    }
+
+    footer a {
+      color: #b48cff;
+      text-decoration: none;
+    }
+
+    footer section {
+      margin-top: 20px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#home">Página Inicial</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#termos">Termos</a>
+    <a href="#contato">Contato</a>
+    <a href="https://discord.gg/csEcMBd9Gf" target="_blank">Servidor</a>
+  </nav>
+
+  <main>
+    <header id="home">
+      <!-- Logo -->
+      <img src="https://64.media.tumblr.com/a17d8adeaaa5cefc2d690c81c325966f/e5278ae8b7ef6804-0b/s1280x1920/a462b421519bff4f7b066353e011a088d8119de4.pnj" alt="Nova Community Logo" class="hero-img"/>
+      <h1 class="hero-title">Nova Community<br><span>Loja Premium</span> de Genshin Impact</h1>
+    </header>
+
+    <!-- Serviços -->
+    <div id="servicos">
+      <h2>Giros — Manual</h2>
+      <div class="card-grid">
+        <div class="card"><p>800 gemas — 05 Giros — R$ 6,00 (2 dias)</p></div>
+        <div class="card"><p>1.600 gemas — 10 Giros — R$ 12,00 (4 dias)</p></div>
+        <div class="card"><p>3.200 gemas — 20 Giros — R$ 24,00 (7 dias)</p></div>
+        <div class="card"><p>4.800 gemas — 30 Giros — R$ 36,00 (12 dias)</p></div>
+        <div class="card"><p>6.400 gemas — 40 Giros — R$ 48,00 (16 dias)</p></div>
+        <div class="card"><p>8.000 gemas — 50 Giros — R$ 60,00 (20 dias)</p></div>
+      </div>
+
+      <h2>Giros — Script</h2>
+      <div class="card-grid">
+        <div class="card"><p>800 gemas — 05 Giros — R$ 5,00 (1 dia)</p></div>
+        <div class="card"><p>1.600 gemas — 10 Giros — R$ 11,00 (1 dia)</p></div>
+        <div class="card"><p>3.200 gemas — 20 Giros — R$ 23,00 (2 dias)</p></div>
+        <div class="card"><p>4.800 gemas — 30 Giros — R$ 35,00 (2 dias)</p></div>
+        <div class="card"><p>6.400 gemas — 40 Giros — R$ 47,00 (4 dias)</p></div>
+        <div class="card"><p>8.000 gemas — 50 Giros — R$ 57,00 (4 dias)</p></div>
+      </div>
+
+      <!-- Missões -->
+      <h2>Missões</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Manual</h3>
+          <p>Lendária/Personagens/Encontros – R$ 6,50 (1 dia)</p>
+          <p>Missão 76 Aranaras – R$ 45,00 (7 dias)</p>
+          <p>Mondstadt – R$ 10,00 (7 dias)</p>
+          <p>Liyue – R$ 20,00 (7 dias)</p>
+          <p>Inazuma – R$ 35,00 (7 dias)</p>
+          <p>Sumeru – R$ 60,00 (7 dias)</p>
+          <p>Fontaine – R$ 60,00 (7 dias)</p>
+          <p>Natlan – R$ 65,00 (7 dias)</p>
+          <p>Nod-Krai – R$ 50,00 (7 dias)</p>
+        </div>
+        <div class="card">
+          <h3>Script</h3>
+          <p>Lendária/Personagens/Encontros – R$ 5,00 (1 dia)</p>
+          <p>Missão 76 Aranaras – R$ 25,00 (1 dia)</p>
+          <p>Mondstadt – R$ 5,00 (1 dia)</p>
+          <p>Liyue – R$ 15,00 (1 dia)</p>
+          <p>Inazuma – R$ 20,00 (1 dia)</p>
+          <p>Sumeru – R$ 25,00 (1 dia)</p>
+          <p>Fontaine – R$ 30 (1 dia)</p>
+          <p>Natlan – R$ 35,00 (1 dia)</p>
+          <p>Nod-Krai – R$ 40,00 (1 dia)</p>
+        </div>
+      </div>
+
+      <!-- Upgrades -->
+      <h2>Upgrades</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Serviços</h3>
+          <p>Farm-pers. lvl20-90 – R$ 15,00 (Sem prazo)</p>
+          <p>Up/Arma lvl20-90 – R$ 15,00 (Sem prazo)</p>
+          <p>Farm 01 Set – R$ 2,00 (1 hora)</p>
+          <p>Farm 50 unid. Itens – R$ 1,00 cada (1 hora)</p>
+        </div>
+      </div>
+
+      <!-- Abismo -->
+      <h2>Abismo</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Manual</h3>
+          <p>Cada Piso – R$ 2,50 (3 dias)</p>
+          <p>Piso 01–08 – R$ 18,00 (3 dias)</p>
+          <p>Lua Abissal – R$ 10,00 (3 dias)</p>
+        </div>
+        <div class="card">
+          <h3>Script</h3>
+          <p>Cada Piso – R$ 1,00 (1 hora)</p>
+          <p>Piso 01–08 – R$ 6,50 (1 hora)</p>
+          <p>Lua Abissal – R$ 8,00 (1 hora)</p>
+        </div>
+      </div>
+
+      <!-- Teatro -->
+      <h2>Teatro</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Manual</h3>
+          <p>Fácil – R$ 5,00 (2 horas)</p>
+          <p>Médio – R$ 10,00 (3/4 horas)</p>
+          <p>Difícil – R$ 15,00 (1 dia)</p>
+          <p>Visionário – R$ 20,00 (3 dias)</p>
+          <p>Lunar – R$ 25,00 (4 dias)</p>
+        </div>
+        <div class="card">
+          <h3>Script</h3>
+          <p>Fácil – R$ 3,00 (1 hora)</p>
+          <p>Médio – R$ 7,00 (1/2 horas)</p>
+          <p>Difícil – R$ 10,00 (2 horas)</p>
+          <p>Visionário – R$ 13,00 (2/3 horas)</p>
+          <p>Lunar – R$ 17,00 (3 horas)</p>
+        </div>
+      </div>
+
+      <!-- Oculis -->
+      <h2>Oculis</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Manual</h3>
+          <p>Anemoculus – R$ 15 (3 dias)</p>
+          <p>Geoculus – R$ 25 (7 dias)</p>
+          <p>Eletroculus – R$ 40 (7 dias)</p>
+          <p>Dendroculus (Floresta) – R$ 40 (10 dias)</p>
+          <p>Dendroculus (Deserto) – R$ 40 (12 dias)</p>
+          <p>Hydroculus – R$ 50 (12 dias)</p>
+          <p>Pyroculus – R$ 60 (15 dias)</p>
+          <p>Lunoculus – R$ 25 (4 dias)</p>
+        </div>
+        <div class="card">
+          <h3>Script</h3>
+          <p>Anemoculus – R$ 10 (1 dia)</p>
+          <p>Geoculus – R$ 20 (2 dias)</p>
+          <p>Eletroculus – R$ 25 (3 dias)</p>
+          <p>Dendroculus (Floresta) – R$ 30 (4 dias)</p>
+          <p>Dendroculus (Deserto) – R$ 30 (4 dias)</p>
+          <p>Hydroculus – R$ 30 (4 dias)</p>
+          <p>Pyroculus – R$ 40 (4 dias)</p>
+          <p>Lunoculus – R$ 10 (1 dia)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Termos -->
+    <div id="termos" class="terms">
+      <h3>Pagamentos e Início do Serviço</h3>
+      <p>O prazo padrão para inicialização do serviço é de até 48 horas após a confirmação do pagamento.</p>
+      <p>Durante períodos de alta demanda, o tempo pode variar.</p>
+      <p>Pressões ou cobranças indevidas não serão toleradas.</p>
+
+      <h3>Reembolsos e Arrependimentos</h3>
+      <p>Arrependimentos e mudanças de ideia não são reembolsáveis.</p>
+      <p>Reembolsos só serão analisados em caso de falha comprovada pela equipe.</p>
+      <p>Tentativas de forçar reembolso resultam em bloqueio permanente.</p>
+
+      <h3>Atendimento e Suporte</h3>
+      <p>O atendimento ocorre exclusivamente via tickets do Discord.</p>
+      <p>Mensagens privadas serão ignoradas.</p>
+      <p>Atendimento por ordem de chegada.</p>
+
+      <h3>Execução e Entrega</h3>
+      <p>A Nova Community entrega exatamente o que foi solicitado.</p>
+      <p>Se o cliente não enviar as informações necessárias, o prazo será suspenso.</p>
+      <p>Algumas entregas podem ser divididas em etapas.</p>
+
+      <h3>Conduta e Respeito</h3>
+      <p>Respeito à equipe é obrigatório.</p>
+      <p>Ofensas, ironias e spam podem gerar recusa de atendimento.</p>
+
+      <h3>Responsabilidade do Comprador</h3>
+      <p>O cliente assume responsabilidade total sobre riscos envolvendo ferramentas usadas.</p>
+      <p>A Nova Community não se responsabiliza por bans, penalidades ou bloqueios.</p>
+
+      <h3>Alterações nos Termos</h3>
+      <p>Os termos podem ser alterados sem aviso prévio.</p>
+      <p>O cliente deve manter-se atualizado.</p>
+    </div>
+
+    <!-- Contato -->
+    <footer id="contato">
+      <p>Contato oficial:</p>
+      <p>Discord: @wz.foxyyy</p>
+      <p>Telefone: 67 99338‑2426</p>
+      <p><a href="https://discord.gg/csEcMBd9Gf">Servidor: discord.gg/csEcMBd9Gf</a></p>
+    </footer>
+
+  </main>
+
+</body>
+</html>
