@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
+<head> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nova Community — Catálogo</title>
@@ -23,6 +23,29 @@
   --green: #22c55e;
   --red: #ef4444;
   --btn-blocked: #27272a;
+}
+
+/* Container único para o conteúdo do Overlay */
+.single-card-wrapper {
+    background: var(--bg-card);
+    border-radius: 16px;
+    overflow: hidden; /* Garante que a imagem não saia das bordas arredondadas */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+/* Espaçamento para a parte de listas dentro do card único */
+.nested-prices-container {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+/* Divisor visual discreto entre o topo e a lista */
+.card-internal-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.05);
+    margin: 0 1.5rem 1.5rem 1.5rem;
 }
 
 * {
@@ -231,7 +254,7 @@ header p {
   margin-top: auto;
 }
 
-.preco {
+.preco   {
   font-size: 1.2rem;
   color: #fff;
   font-weight: 700;
@@ -457,12 +480,7 @@ footer {
   border-color: var(--red);
 }
 
-.overlay-content {
-  padding: 0 6% 4rem;
-  max-width: 700px;
-  margin: auto;
-  margin-top: -2rem; /* Sobe levemente */
-}
+
 
 /* Ajustes Específicos do Card dentro do Overlay */
 .overlay-top-card {
@@ -535,6 +553,271 @@ footer {
   .footer-links-group { flex-direction: column; gap: 2rem; }
   .footer-bottom { flex-direction: column; text-align: center; }
 }
+
+.team-wrapper {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.team-title {
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.team-subtitle {
+  color: #999;
+  margin-bottom: 50px;
+}
+
+.team-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* CARD BASE */
+.team-card {
+  position: relative;
+  width: 320px;
+  background: linear-gradient(145deg, #0a0a0a, #050505);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 30px;
+  padding: 30px;
+  transition: transform 0.4s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-8px) scale(1.05);
+}
+
+.team-card.destaque {
+  transform: scale(1.07);
+  z-index: 2;
+}
+
+.team-card.destaque:hover {
+  transform: translateY(-8px) scale(1.09);
+}
+
+/* BADGE */
+.role-badge {
+  display: inline-block;
+  background: #f1c40f;
+  color: #000;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px 22px;
+  border-radius: 50px;
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+/* ÍCONE */
+.card-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 22px;
+  color: rgba(255,215,0,0.3);
+  transition: 0.4s;
+}
+
+.team-card:hover .card-icon {
+  color: gold;
+  transform: rotate(12deg);
+}
+
+/* AVATAR */
+.avatar-wrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid rgba(255,255,255,0.1);
+  transition: 0.4s;
+}
+
+.avatar-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-card:hover .avatar-wrapper {
+  border-color: rgba(255,215,0,0.4);
+  box-shadow: 0 0 40px rgba(255,215,0,0.2);
+}
+
+/* BADGE HOVER */
+.hover-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.team-card:hover .hover-badge {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.hover-badge span {
+  background: linear-gradient(to right, #facc15, #eab308);
+  padding: 6px 18px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: black;
+}
+
+/* LABELS */
+.role-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.role-gold { color: #facc15; }
+.role-blue { color: #a855f7; }
+.role-purple { color: #70ffab; }
+
+.desc {
+  color: #aaa;
+  font-size: 13px;
+}
+
+
+/* =========================================
+   NEW CSS FOR COMPACT OVERLAYS
+   ========================================= */
+.compact-wrapper {
+    max-width: 600px; /* Reduced max-width for "exprimido" look */
+    margin: 4rem auto; /* Vertical centering and horizontal spacing */
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    padding: 0; /* Clear internal padding */
+}
+
+/* Target specific content areas within compact wrappers */
+.compact-wrapper.product-content {
+    padding: 1rem; /* Internal padding for product info and lists */
+}
+
+.compact-wrapper.info-content {
+    padding: 1.5rem; /* Standard internal padding for text-heavy info popups */
+}
+
+/* Nested elements styles to remove internal borders and adjust spacing */
+.compact-wrapper .card.info-card {
+    border: none;
+    background: transparent;
+    border-radius: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.compact-wrapper .card.info-card .card-content {
+    padding: 0; /* Let overall compact wrapper handle padding */
+}
+
+/* Target image wraps specifically inside a card inside compact-wrapper to adjust for product popups */
+.compact-wrapper .card.nested-product-card {
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+.compact-wrapper .card.nested-product-card .image-wrap {
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    height: 180px; /* Matching compact cards on main page */
+}
+.compact-wrapper .card.nested-product-card .card-content {
+    padding: 0;
+}
+.compact-wrapper .card.nested-product-card .status {
+    margin-bottom: 1rem;
+}
+.compact-wrapper .card.nested-product-card .info {
+    margin-bottom: 0.5rem;
+}
+
+/* Global nested image wrap style adjustment inside compact wrapper for standard cards */
+.compact-wrapper .card.info-card .image-wrap {
+    height: 180px; /* Matching compact image look */
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+}
+.compact-wrapper .card.info-card .image-wrap img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.compact-wrapper .card.info-card .card-content h3 {
+    font-size: 1.2rem;
+}
+.compact-wrapper .card.info-card .status {
+    margin-bottom: 0.5rem;
+}
+.compact-wrapper .card.info-card .info {
+    margin-bottom: 1rem;
+}
+
+.compact-wrapper .overlay-divider {
+    margin: 1rem 0; /* Decreased global margin for nested elements */
+}
+
+.compact-wrapper .section-wrapper {
+    margin-bottom: 1rem; /* Decreased margin */
+}
+
+.compact-wrapper .price-table {
+    background: transparent; /* Rely on compact wrapper border */
+    border: 1px solid rgba(255,255,255,0.05); /* Lighter nested border */
+}
+.compact-wrapper .price-row {
+    padding: 0.8rem 1rem; /* Decreased padding */
+}
+
+/* Re-target nested info-list within compact wrapper info card */
+.compact-wrapper .card.info-card .info-list {
+    margin-top: 1rem;
+}
+.compact-wrapper .card.info-card .info-item {
+    margin-bottom: 0.5rem; /* Reduced margin */
+}
+.compact-wrapper .card.info-card .card-footer {
+    margin-top: 1rem;
+}
+
+/* CSS for team overlay (Quem Faz Acontecer) to ensure it stays wide and clean */
+#overlayContent .team-wrapper {
+    width: 100%;
+    padding: 40px; /* Keep good spacing */
+    max-width: none; /* No max width limitation */
+    margin: 0;
+    display: block !important; /* Ensure it overrides any flex/display changes */
+}
+#overlayContent .team-grid {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+#overlayContent .team-card {
+    width: 320px; /* Keep defined width */
+}
+
 </style>
 </head>
 
@@ -552,8 +835,7 @@ footer {
       
       <a href="#" onclick="openInfoOverlay('comoComprar')">Como Comprar</a>
       <a href="#" onclick="openInfoOverlay('termos')">Termos de Compra</a>
-      <a href="#" onclick="alert('O Sistema de Ticket do Site está DESATIVADO, Por gentileza utilizar do discord: https://discord.com/channels/1404336816563159111/1404503231245193376')">Tickets</a>
-      <a href="#">SITE EM MANUTENÇÃO!!</a>
+      <a href="https://discord.com/channels/1404336816563159111/1404503231245193376">Tickets</a>
     </div>
 
     <button class="mobile-menu-btn" onclick="alert('Menu para Mobile em Breve!')">
@@ -572,7 +854,7 @@ footer {
 
   <div class="card">
     <div class="image-wrap">
-      <img src="https://i.ytimg.com/vi/WvUxzNW0X4I/maxresdefault.jpg" alt="Genshin Impact">
+      <img src="https://fastcdn.hoyoverse.com/content-v2/plat/162828/c50d8c6e2597e9f88a66e06c3c32c5c5_8400293576027107227.jpg" alt="Genshin Impact">
     </div>
     <div class="card-content">
       <h3>Genshin Impact: Manual</h3>
@@ -581,6 +863,21 @@ footer {
       <div class="card-footer">
         <span class="preco">R$ 1,00</span>
         <a onclick="openOverlay('genshin')" class="btn-acao btn-ver-mais">Ver Mais</a>
+      </div>
+    </div>
+  </div> 
+
+<div class="card">
+    <div class="image-wrap">
+      <img src="https://onpoplife.com.br/wp-content/uploads/2026/01/Key-Art_EN.jpg" alt="Genshin Impact">
+    </div>
+    <div class="card-content">
+      <h3>Genshin Impact: Script</h3>
+      <div class="status disponivel">Disponível</div>
+      <p class="info">Serviços Premium de Genshin Impact.</p>
+      <div class="card-footer">
+        <span class="preco">R$ 0,50</span>
+        <a onclick="openOverlay('genshinsc')" class="btn-acao btn-ver-mais">Ver Mais</a>
       </div>
     </div>
   </div> 
@@ -644,21 +941,7 @@ footer {
       </div>
     </div>
   </div>
-
-  <div class="card em-breve">
-    <div class="image-wrap">
-      <img src="https://img.game8.co/4294980/a3758b24003c046ca453fe12e1af9dd0.jpeg/show" alt="Duet">
-    </div>
-    <div class="card-content">
-      <h3>Duet Night Abyss</h3>
-      <div class="status em-breve">Em breve</div>
-      <p class="info">Serviços premium chegando em breve para este título.</p>
-      <div class="card-footer">
-        <span class="preco">---</span>
-        <span class="btn-acao btn-bloqueado">Bloqueado</span>
-      </div>
-    </div>
-  </div>
+</div>
 
 </div>
 </section>
@@ -683,9 +966,15 @@ footer {
       <div class="footer-column">
         <h5>CONTATOS</h5>
         <ul>
-          <li><a href="https://discord.gg/Szqbsd4TNa">Servidor do Discord</a></li>
-          <li><a href="#">WhatsApp (Indisponível no Momento...)</a></li>
+          <li><a href="https://discord.gg/Szqbsd4TNa">Servidor</a></li>
+          <li><a href="#">WhatsApp</a></li>
         </ul>
+      </div>
+      <div class="footer-column">
+        <h5>SOBRE NÓS</h5>
+        <ul>
+          <li><a href="#" onclick="openInfoOverlay('equipe'); return false;">Quem faz acontecer</a></li>
+          <li><a href="javascript:void(0)" onclick="openInfoOverlay('cargos')">Cargos</a></li>        </ul>
       </div>
       <div class="footer-column">
         <h5>USE AGORA</h5>
@@ -696,10 +985,10 @@ footer {
       </div>
     </div>
     <div>
-      <a href="#" class="status-badge">
-        <span class="status-dot"></span>
-        STATUS
-      </a>
+      <a href="#" class="status-badge" onclick="openInfoOverlay('status'); return false;">
+  <span class="status-dot"></span>
+  STATUS
+</a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -709,7 +998,7 @@ footer {
     </div>
     <div class="build-version">
       <span class="dot-purple"></span>
-      V1.1.0
+      V1.6.0
     </div>
   </div>
 </footer>
@@ -723,151 +1012,267 @@ footer {
 </div>
 
 <script>
-  function openInfoOverlay(type) {
+// Helper function to build compact HTML structure
+function buildCompactHTML(content, className) {
+    return `<div class="compact-wrapper ${className}">${content}</div>`;
+}
+
+// Function to build terms sections directly for cleaner compact look
+function buildTermSection(title, text) {
+    return `
+        <div class="section-wrapper">
+          <h4 class="section-title">${title}</h4>
+          <p class="info" style="margin-top: 0.5rem; padding: 0 5px;">${text}</p>
+        </div>
+    `;
+}
+
+function openInfoOverlay(type) {
   const overlay = document.getElementById("overlay");
   const content = document.getElementById("overlayContent");
 
   let html = "";
 
   if (type === "comoComprar") {
+  let innerHTML = `
+    <div class="image-wrap" style="height: 200px; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden;">
+      <img src="https://placehold.co/600x400/252525/fff?font=poppins&text=Guia%20de%20Compra" alt="Banner Guia" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+
+    <h1 class="team-title">Como Comprar?</h1>
+    <p class="team-subtitle">Siga os passos abaixo para adquirir seus serviços na Nova Community de forma rápida e segura:</p>
+    <div style="margin-bottom: 1.5rem;"></div>
+  `;
+
+  // Dados das etapas de compra
+  const guiaData = [
+    {
+      title: "1. Aceite dos Termos",
+      text: "Ao contratar qualquer serviço, você confirma que leu e concorda integralmente com os nossos Termos de Compra. É fundamental estar ciente das regras antes de prosseguir."
+    },
+    {
+      title: "2. Escolha do Serviço",
+      text: "Navegue pelo nosso catálogo e escolha o serviço que melhor atende às suas necessidades. Verifique os valores e detalhes específicos de cada jogo (Genshin, HSR, ZZZ ou WuWa)."
+    },
+    {
+      title: "3. Abertura de Ticket",
+      text: "Entre no nosso servidor oficial do Discord. Vá até o canal de suporte e abra um ticket de compra. Todo o processo é realizado por lá para garantir a sua segurança."
+    },
+    {
+      title: "4. Atendimento e Formulário",
+      text: "Preencha o pequeno formulário automático no ticket com os dados do serviço escolhido. Após o envio, aguarde até que um de nossos especialistas assuma o seu atendimento."
+    }
+  ];
+
+  // Constrói as seções usando a mesma função auxiliar dos termos
+  innerHTML += guiaData.map(item => buildTermSection(item.title, item.text)).join('');
+
+  // Envelopa tudo no container compacto único
+  html = buildCompactHTML(innerHTML, 'info-content');
+}
+
+  if (type === "equipe") {
+  // Directly build HTML without compact-wrapper to maintain grid full width
   html = `
-    <div class="card info-card">
-      <div class="image-wrap">
-        <img src="https://placehold.co/600x350/252525/FFF?text=Como+Comprar" alt="Como Comprar">
-      </div>
-      <div class="card-content">
-        <h3>Como Comprar?</h3>
-        <div class="status disponivel">Guia Rápido</div>
-        
-        <div class="info-list">
-          <p class="info-item">Ao contratar um serviço, o cliente concorda com todas as regras.</p>
-          <p class="info-item">Não realizamos reembolso após o início do serviço.</p>
-          <p class="info-item">O prazo pode variar conforme a complexidade.</p>
-          <p class="info-item">Não nos responsabilizamos por punições externas.</p>
-          <p class="info-item">O cliente deve fornecer dados corretos da conta.</p>
+    <div class="team-wrapper">
+
+      <h1 class="team-title">Quem faz acontecer</h1>
+      <p class="team-subtitle">A elite por trás do projeto.</p>
+
+      <div class="team-grid">
+
+        <div class="team-card">
+          <div class="card-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+
+          <div class="avatar-wrapper">
+            <img src="https://media.discordapp.net/attachments/1476661396673527809/1476661419993989212/WhatsApp_Image_2026-02-25_at_20.07.27.jpeg?ex=69a1ef9d&is=69a09e1d&hm=9fa27beb7930e41f61fcaa40b6acff0f97bb488d0fc2ce856ec93fc801af124d&=&format=webp&width=443&height=788">
+            <div class="hover-badge">
+              <span>Administradora</span>
+            </div>
+          </div>
+
+          <h3>ol.sandy</h3>
+          <p class="role-label role-blue">ADMINISTRADORA</p>
+          <p class="desc">Mente ampla para ideas e soluções.</p>
         </div>
 
-        <div class="card-footer">
-          <span class="preco">Leia com atenção</span>
-          <span class="btn-acao">Entendi</span>
+        <div class="team-card destaque">
+          <div class="card-icon">
+            <i class="fas fa-crown"></i>
+          </div>
+
+          <div class="avatar-wrapper destaque-avatar">
+            <img src="https://media.discordapp.net/attachments/1476661396673527809/1476662821247783095/534415926_976416104957863_3466381384117587919_n.png?ex=69a1f0eb&is=69a09f6b&hm=7cfd1ef461d491b7355f3fe4bc3d215045ed54b258e17e64b8330a42346739c0&=&format=webp&quality=lossless">
+            <div class="hover-badge gold">
+              <span>Owner</span>
+            </div>
+          </div>
+
+          <h3>wz.foxyyy</h3>
+          <p class="role-label role-gold">OWNER</p>
+          <p class="desc">Liderança geral, decisões estratégicas e direção da equipe.</p>
         </div>
+
+        <div class="team-card">
+          <div class="card-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+
+          <div class="avatar-wrapper">
+            <img src="https://media.discordapp.net/attachments/1476661396673527809/1476664328894808106/IMG-20260126-WA0151.jpg?ex=69a1f253&is=69a0a0d3&hm=d1c4a4f17c6c939905c3072bfbb5acfdbbd4af90a47764dcb25bcf5095b31f4b&=&format=webp&width=706&height=788">
+            <div class="hover-badge purple">
+              <span>STAFF</span>
+            </div>
+          </div>
+
+          <h3>ventisfavone</h3>
+          <p class="role-label role-purple">STAFF SÊNIOR</p>
+          <p class="desc">Qualidade nos serviços e ideias para evolução da equipe.</p>
+        </div>
+
       </div>
     </div>
   `;
 }
 
-if (type === "termos") {
-  html = `
-    <div class="card info-card">
-      <div class="image-wrap">
-        <img src="https://images-ext-1.discordapp.net/external/hbmekzOx_6_kCH8PpVk-izW0vJXi0JG6RMF85WKIIMA/%3Fformat%3Dwebp/https/images-ext-1.discordapp.net/external/o58sE698_8TKgOHz8Tn0wKTkUfpx9lbpnnQF1UFBlc0/https/64.media.tumblr.com/9099abde36b4e77a456b0e213e802a80/e5278ae8b7ef6804-30/s2048x3072/8aae108567c4e5672b59b9ea991ff196a9131037.pnj?format=webp" alt="Termos">
-      </div>
-      <div class="card-content">
-        <h3>Termos de Compra</h3>
-        <div class="status em-breve">Obrigatório</div>
-        
-        <div class="info-list">
-          <p class="info-item">Ao efetuar qualquer compra na Nova Community, o cliente confirma que leu, entendeu e concorda integralmente com os termos abaixo:</p>
-        </div>
+if (type === "status") {
+  let innerHTML = `
+    <div class="image-wrap" style="height: 200px; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden;">
+      <img src="https://placehold.co/600x400/252525/fff?font=poppins&text=Status+do+Sistema" alt="Banner Status" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
 
-        <div class="card-footer">
-        </div>
-      </div>
-
-    </div>
-       <div class="card info-card">
-        <div class="card-content">
-        <h3>Pagamentos e início do serviço</h3>
-        
-        <div class="info-list">
-          <p class="info-item">O prazo padrão para inicialização do serviço é de até 48 horas após a confirmação do pagamento. Durante períodos de alta demanda, pedimos paciência. Pressões ou cobranças indevidas não serão toleradas. O tempo pode variar conforme a complexidade do pedido, e solicitações fora do prazo não garantem prioridade.</p>
-        </div>
-
-        <div class="card-footer">
-        </div>
-      </div>
-    </div>
-    </div>
-       <div class="card info-card">
-        <div class="card-content">
-        <h3>Reembolsos e arrependimentos</h3>
-        
-        <div class="info-list">
-          <p class="info-item">Arrependimentos e mudanças de ideia não são reembolsáveis. Reembolsos só serão considerados em casos de falha comprovada por parte da equipe e após análise interna. Tentativas de forçar reembolso, realizar ameaças ou causar transtornos resultarão em bloqueio permanente e perda de acesso a serviços futuros.</p>
-        </div>
-
-        <div class="card-footer">
-        </div>
-      </div>
-    </div>
-    </div>
-       <div class="card info-card">
-        <div class="card-content">
-        <h3>Atendimento e suporte</h3>
-        
-        <div class="info-list">
-          <p class="info-item">O atendimento ocorre exclusivamente via tickets do Discord. Mensagens privadas à equipe serão ignoradas sem exceção. Os atendimentos são feitos por ordem de chegada, sem favoritismos. Respeite o tempo da equipe — qualquer forma de desrespeito pode resultar em encerramento do atendimento.</p>
-        </div>
-
-        <div class="card-footer">
-        </div>
-      </div>
-    </div>
-    </div>
-       <div class="card info-card">
-        <div class="card-content">
-        <h3>Execução e entrega</h3>
-        
-        <div class="info-list">
-          <p class="info-item">A Nova Community se compromete a entregar exatamente o que foi solicitado e pago. Caso o cliente não envie as informações necessárias para execução, o prazo será suspenso até regularização. Entregas parciais não significam falha — algumas etapas podem ser feitas em fases separadas. Alterações pós-entrega podem gerar custo adicional.</p>
-        </div>
-
-        <div class="card-footer">
-        </div>
-      </div>
-    </div>
-    </div>
-       <div class="card info-card">
-        <div class="card-content">
-        <h3>Conduta e respeito</h3>
-        
-        <div class="info-list">
-          <p class="info-item">O respeito à equipe é obrigatório. Linguagem ofensiva, sarcasmo excessivo, spam ou ironias serão tratadas como falta de respeito. A Nova Community reserva o direito de recusar atendimento a qualquer cliente que descumpra os princípios básicos de convivência.</p>
-        </div>
-
-        <div class="card-footer">
-        </div>
-      </div>
-    </div>
-    </div>
-       <div class="card info-card">
-        <div class="card-content">
-        <h3>Responsabilidade do comprador</h3>
-        
-        <div class="info-list">
-          <p class="info-item">Ao adquirir qualquer serviço da Nova Community, o cliente concorda que o processo de execução envolve o uso de ferramentas que podem apresentar riscos à conta utilizada. Caso ocorra qualquer tipo de punição, bloqueio, erro ou banimento decorrente desse uso, a responsabilidade é integralmente do comprador. A Nova Community não se responsabiliza por perdas, danos ou penalidades aplicadas pela plataforma, nem oferece reembolso ou compensação em situações desse tipo.</p>
-        </div>
-
-        <div class="card-footer">
-        </div>
-      </div>
-    </div>
-    </div>
-       <div class="card info-card">
-        <div class="card-content">
-        <h3>Alterações nos termos</h3>
-        
-        <div class="info-list">
-          <p class="info-item">Os termos podem ser atualizados a qualquer momento, sem aviso prévio. A versão válida e aplicável será sempre a mais recente publicada oficialmente. É responsabilidade do cliente manter-se informado sobre as atualizações.</p>
-        </div>
-
-        <div class="card-footer">
-          <span class="preco">⠀</span>
-          <span class="btn-acao">Aceitar</span>
-        </div>
-      </div>
-    </div>
+    <h1 class="team-title">Status Atual</h1>
+    <p class="team-subtitle" style="color: #2ecc71;">● Todos os Sistemas Operacionais</p>
+    <div style="margin-bottom: 1.5rem;"></div>
   `;
+
+  // Dados de integridade do sistema
+  const statusData = [
+    {
+      title: "Plataforma Web",
+      text: "O site da Nova Community encontra-se On-line e operando com baixa latência. Todos os catálogos estão sincronizados."
+    },
+    {
+      title: "Serviços Script",
+      text: "Status: **Atualizando & Manutenção**. Nossos scripts estão sendo atualizados para a versão mais recente de cada jogo. Detecção: **Positiva/Negativa**."
+    },
+    {
+      title: "Fila de Atendimento",
+      text: "Tickets via Discord: Operando normalmente. Tempo médio de resposta: 15 a 45 minutos."
+    }
+  ];
+
+  // Constrói as seções usando a função auxiliar padrão
+  innerHTML += statusData.map(status => buildTermSection(status.title, status.text)).join('');
+
+  // Envelopa tudo no container compacto único para "mexer inteiro"
+  html = buildCompactHTML(innerHTML, 'info-content');
+}
+
+if (type === "cargos") {
+  let innerHTML = `
+    <div class="image-wrap" style="height: 200px; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden;">
+      <img src="https://placehold.co/600x400/1a1a1a/ffffff?font=poppins&text=Equipe+Nova+Community" alt="Banner Equipe" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+
+    <h1 class="team-title">Cargos e Funções</h1>
+    <p class="team-subtitle">Conheça a hierarquia e as responsabilidades da nossa equipe interna.</p>
+    <div style="margin-bottom: 1.5rem;"></div>
+  `;
+
+  // Dados dos Cargos
+  const cargosData = [
+    {
+      title: "👑 Owner = Proprietário",
+      text: "Responsável máximo pela loja, toma decisões finais, define diretrizes, gerencia a equipe, supervisiona operações e atua como representante oficial em qualquer contexto administrativo, comercial ou institucional."
+    },
+    {
+      title: "🛠️ Staff = Equipe",
+      text: "Conjunto de membros responsáveis pelo funcionamento geral do servidor/loja, incluindo atendimento, suporte ao cliente, moderação, organização de canais e auxílio nas rotinas diárias."
+    },
+    {
+      title: "🛡️ Adm = Administrador",
+      text: "Possui todas as permissões da Staff, com autoridade ampliada para gerenciar sistemas, resolver conflitos internos, aplicar decisões administrativas e representar a loja em tratativas formais e situações jurídicas."
+    },
+    {
+      title: "🎫 Farmers = Executores de Serviço",
+      text: "Responsáveis por realizar, entregar e comprovar os serviços contratados pelos clientes, seguindo padrões de qualidade, prazos e especificações definidas."
+    },
+    {
+      title: "🤝 Promotor = Promotor de Parcerias",
+      text: "Atua na captação e manutenção de parcerias, negociações com outros servidores/projetos, organização de ações conjuntas e fortalecimento da presença da loja em comunidades externas."
+    },
+    {
+      title: "📣 Divulgador = Divulgador",
+      text: "Encarregado de promover a loja em redes sociais, servidores, fóruns e aplicativos de mensagem, seguindo padrões de abordagem, identidade e regras de divulgação."
+    },
+    {
+      title: "💬 Mov Chat = Movimentador de Chat",
+      text: "Responsável por manter o chat ativo, puxar conversas, interagir com membros, estimular engajamento e evitar que os canais fiquem parados."
+    },
+    {
+      title: "📲 Dsg = Designer",
+      text: "Responsável pela criação e manutenção das artes visuais do servidor, incluindo banners, ícones, logos, capas, layouts e materiais gráficos usados em divulgação e identidade visual."
+    }
+  ];
+
+  // Constrói as seções usando sua função padrão
+  innerHTML += cargosData.map(cargo => buildTermSection(cargo.title, cargo.text)).join('');
+
+  // Envelopa tudo no container que "mexe inteiro"
+  html = buildCompactHTML(innerHTML, 'info-content');
+}
+
+if (type === "termos") {
+  let innerHTML = `
+    <div class="image-wrap" style="height: 200px; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden;">
+      <img src="https://images-ext-1.discordapp.net/external/hbmekzOx_6_kCH8PpVk-izW0vJXi0JG6RMF85WKIIMA/%3Fformat%3Dwebp/https/images-ext-1.discordapp.net/external/o58sE698_8TKgOHz8Tn0wKTkUfpx9lbpnnQF1UFBlc0/https/64.media.tumblr.com/9099abde36b4e77a456b0e213e802a80/e5278ae8b7ef6804-30/s2048x3072/8aae108567c4e5672b59b9ea991ff196a9131037.pnj?format=webp" alt="Banner Termos" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+
+    <h1 class="team-title">Termos de Compra</h1>
+    <p class="team-subtitle">Ao efetuar qualquer compra na Nova Community, o cliente confirma que leu, entendeu e concorda integralmente com os termos abaixo:</p>
+    <p class="info" style="margin-bottom: 1.5rem;">
+  `;
+
+  // Define term sections data for cleaner iteration
+  const termData = [
+    {
+      title: "Pagamentos e início do serviço",
+      text: "O prazo padrão para inicialização do serviço é de até 48 horas após a confirmação do pagamento. Durante períodos de alta demanda, pedimos paciência. Pressões ou cobranças indevidas não serão toleradas. O tempo pode variar conforme a complexidade do pedido, e solicitações fora do prazo não garantem prioridade."
+    },
+    {
+      title: "Reembolsos e arrependimentos",
+      text: "Arrependimentos e mudanças de ideia não são reembolsáveis. Reembolsos só serão considerados em casos de falha comprovada por parte da equipe e após análise interna. Tentativas de forçar reembolso, realizar ameaças ou causar transtornos resultarão em bloqueio permanente e perda de acesso a serviços futuros."
+    },
+    {
+      title: "Atendimento e suporte",
+      text: "O atendimento ocorre exclusivamente via tickets do Discord. Mensagens privadas à equipe serão ignoradas sem exceção. Os atendimentos são feitos por ordem de chegada, sem favoritismos. Respeite o tempo da equipe — qualquer forma de desrespeito pode resultar em encerramento do atendimento."
+    },
+    {
+      title: "Execução e entrega",
+      text: "A Nova Community se compromete a entregar exatamente o que foi solicitado e pago. Caso o cliente não envie as informações necessárias para execução, o prazo será suspenso até regularização. Entregas parciais não significam falha — algumas etapas podem ser feitas em fases separadas. Alterações pós-entrega podem gerar custo adicional."
+    },
+    {
+      title: "Conduta e respeito",
+      text: "O respeito à equipe é obrigatório. Linguagem ofensiva, sarcasmo excessivo, spam ou ironias serão tratadas como falta de respeito. A Nova Community reserva o direito de recusar atendimento a qualquer cliente que descumpra os princípios básicos de convivência."
+    },
+    {
+      title: "Responsabilidade do comprador",
+      text: "Ao adquirir qualquer serviço da Nova Community, o cliente concorda que o processo de execução envolve o uso de ferramentas que podem apresentar riscos à conta utilizada. Caso ocorra qualquer tipo de punição, bloqueio, erro ou banimento decorrente desse uso, a responsabilidade é integralmente do comprador. A Nova Community não se responsabiliza por perdas, danos ou penalidades aplicadas pela plataforma, nem oferece reembolso ou compensação em situações desse tipo."
+    },
+    {
+      title: "Alterações nos termos",
+      text: "Os termos podem ser atualizados a qualquer momento, sem aviso prévio. A versão válida e aplicável será sempre a mais recente publicada oficialmente. É responsabilidade do cliente manter-se informado sobre as atualizações."
+    }
+  ];
+
+  // Iteratively build direct HTML sections using helper function
+  innerHTML += termData.map(term => buildTermSection(term.title, term.text)).join('');
+
+  // Combine and wrap everything in one `compact-wrapper`
+  html = buildCompactHTML(innerHTML, 'info-content');
 }
 
 
@@ -878,480 +1283,627 @@ if (type === "termos") {
 // --- CONFIGURAÇÃO DOS PRODUTOS E LISTAS ---
 // Para criar novas listas, basta adicionar um bloco { title: "...", items: [...] } dentro de "sections"
 const produtos = {
-  genshin: {
-    title: "Genshin Impact: Manual — Serviços",
-    img: "https://i.ytimg.com/vi/WvUxzNW0X4I/maxresdefault.jpg",
-    desc: "Serviços Premium de Genshin Impact.",
-    status: "Disponível",
-    statusClass: "disponivel",
-    // AQUI VOCÊ EDITA AS LISTAS DO GENSHIN
-    sections: [
-        {
-          title: "Giros — Exploração Baixa (Abaixo de 70%)",
-          items: [
-            { name: "800 Gemas (05 giros)", price: "R$ 6,00" },
-            { name: "1.600 Gemas (10 giros)", price: "R$ 12,00" },
-            { name: "3.200 Gemas (20 giros)", price: "R$ 23,00" },
-            { name: "4.800 Gemas (30 giros)", price: "R$ 34,00" },
-            { name: "6.400 Gemas (40 giros)", price: "R$ 44,00" },
-            { name: "8.000 Gemas (50 giros)", price: "R$ 54,00" }
-          ]
-        },
+genshin: {
+  title: "Genshin Impact: Manual — Serviços",
+  img: "https://fastcdn.hoyoverse.com/content-v2/plat/162828/c50d8c6e2597e9f88a66e06c3c32c5c5_8400293576027107227.jpg",
+  desc: "Serviços Premium de Genshin Impact.",
+  status: "Disponível",
+  statusClass: "disponivel",
+  // AQUI VOCÊ EDITA AS LISTAS DO GENSHIN
+  sections: [
       {
-        title: "Giros — Exploração Baixa (Acima de 70%)",
+        title: "Giros — Exploração Baixa (Abaixo de 70%)",
         items: [
-          { name: "800 Gemas (05 giros)", price: "R$ 7,00" },
-          { name: "1.600 Gemas (10 giros)", price: "R$ 14,00" },
-          { name: "3.200 Gemas (20 giros)", price: "R$ 26,00" },
-          { name: "4.800 Gemas (30 giros)", price: "R$ 37,00" },
-          { name: "6.400 Gemas (40 giros)", price: "R$ 48,00" },
-          { name: "8.000 Gemas (50 giros)", price: "R$ 65,00" }
+          { name: "800 Gemas (05 giros)", price: "R$ 6,00" },
+          { name: "1.600 Gemas (10 giros)", price: "R$ 12,00" },
+          { name: "3.200 Gemas (20 giros)", price: "R$ 23,00" },
+          { name: "4.800 Gemas (30 giros)", price: "R$ 34,00" },
+          { name: "6.400 Gemas (40 giros)", price: "R$ 44,00" },
+          { name: "8.000 Gemas (50 giros)", price: "R$ 54,00" }
         ]
       },
-      {
-        title: "Ascenção",
-        items: [
-          { name: "Farm Pers. lvl 20–90", price: "R$ 15,00" },
-          { name: "Up Arma lvl 20–90", price: "R$ 15,00" },
-          { name: "Farm 01 set (status aleatórios)", price: "R$ 2,00" },
-          { name: "Talentos 1→9", price: "R$ 15,00" },
-          { name: "Talentos 9/9/9", price: "R$ 35,00" }
-        ]
-      },
-      {
-        title: "Missão",
-        items: [
-          { name: "Lendária / Personagens / Encontros", price: "R$ 5,00" },
-          { name: "Missão 76 Aranaras", price: "R$ 45,00" },
-          { name: "Arconte", price: "(cada ato) R$ 10,00" }
-        ]
-      },
-      {
-        title: "Abismo do Espiral",
-        items: [
-          { name: "Cada Piso", price: "R$ 2,00" },
-          { name: "Piso 01–08", price: "R$ 15,00" },
-          { name: "Lua Abissal", price: "R$ 10,00" }
-        ]
-      },
-      {
-        title: "Confronto Abissal",
-        items: [
-          { name: "Completo sem Penas", price: "R$ 7,00" },
-          { name: "Completo com Penas", price: "R$ 12,00" },
-          { name: "Completo com Armas 4★/5★", price: "R$ 20,00" }
-        ]
-      },
-      {
-        title: "Teatro Imaginário",
-        items: [
-          { name: "Fácil", price: "R$ 5,00" },
-          { name: "Médio", price: "R$ 10,00" },
-          { name: "Difícil", price: "R$ 15,00" },
-          { name: "Visionário", price: "R$ 20,00" },
-          { name: "Lunar", price: "R$ 25,00" }
-        ]
-      },
-      {
-        title: "Extras",
-        items: [
-          { name: "200k Moras", price: "R$ 1,00" },
-          { name: "Arma de Pesca", price: "R$ 14,00" },
-          { name: "Rastro Teatro", price: "R$ 4,00" },
-          { name: "Cada Refino", price: "R$ 7,00" },
-          { name: "TCG Completo", price: "R$ 45,00" },
-          { name: "Farm 50 unid. (Alimentos / Flores / Madeira / Inimigos)", price: "R$ 2,00 cada" }
-        ]
-      },
-      {
-        title: "Build de Personagem",
-        items: [
-          { name: "Básica", price: "R$ 5,00" },
-          { name: "Ótima", price: "R$ 15,00" },
-          { name: "Excelente", price: "R$ 30,00" }
-        ]
-      },
-      {
-        title: "Coleta de Oculis",
-        items: [
-          { name: "Anemoculus", price: "R$ 15,00" },
-          { name: "Geoculus", price: "R$ 25,00" },
-          { name: "Electroculus", price: "R$ 40,00" },
-          { name: "Dendroculus (Floresta)", price: "R$ 40,00" },
-          { name: "Dendroculus (Deserto)", price: "R$ 40,00" },
-          { name: "Hydroculus", price: "R$ 50,00" },
-          { name: "Pyroculus", price: "R$ 60,00" },
-          { name: "Lunoculus", price: "R$ 25,00" }
-        ]
-      },
-      {
-        title: "Exploração",
-        items: [
-          { name: "Mondstadt", price: "R$ 15,00" },
-          { name: "Espinha do Dragão", price: "R$ 25,00" },
-          { name: "Liyue", price: "R$ 35,00" },
-          { name: "Vale Chenyu", price: "R$ 30,00" },
-          { name: "Despenhadeiro", price: "R$ 30,00" },
-          { name: "Minas", price: "R$ 15,00" },
-          { name: "Inazuma", price: "R$ 45,00" },
-          { name: "Enkanomiya", price: "R$ 20,00" },
-          { name: "Sumeru (Floresta)", price: "R$ 55,00" },
-          { name: "Sumeru (Deserto)", price: "R$ 60,00" },
-          { name: "Fontaine", price: "R$ 50,00" },
-          { name: "Mar Antigo", price: "R$ 25,00" },
-          { name: "Natlan", price: "R$ 80,00" },
-          { name: "Montanha Sagrada", price: "R$ 25,00" },
-          { name: "Nod-Krai", price: "R$ 40,00" }
-        ]
-      },
-      {
-        title: "Eventos",
-        items: [
-          { name: "Evento Simples (eventos pequenos/secundários)", price: "R$ 5,00" },
-          { name: "Evento Principal (evento grande da versão)", price: "R$ 15,00" }
-        ]
-      },
-      {
-        title: "Cuidados com a Conta",
-        items: [
-          { name: "Manutenção Semanal (gasto de resina e missão diária)", price: "R$ 5,00" },
-          { name: "Manutenção Mensal (gasto de resina e missão diária)", price: "R$ 18,00" },
-          { name: "Manutenção da Versão (gasto de resina e missão diária)", price: "R$ 38,00" },
-        ]
-      }
-    ]
-  },
-  
-  zzz: {
-    title: "Zenless Zone Zero — Serviços",
-    img: "https://onpoplife.com.br/wp-content/uploads/2025/12/2.5-kv-capa.jpg",
-    desc: "Serviços Premium de Zenless Zone Zero.",
-    status: "Disponível",
-    statusClass: "disponivel",
-    // AQUI VOCÊ EDITA AS LISTAS DO ZZZ
-    sections: [
-      {
-        title: "Policromos",
-        items: [
-          { name: "800 Policromos (5 giros)", price: "R$ 9,00" },
-          { name: "1.600 Policromos (10 giros)", price: "R$ 14,00" },
-          { name: "3.200 Policromos (20 giros)", price: "R$ 24,00" },
-          { name: "4.800 Policromos (30 giros)", price: "R$ 34,00" },
-          { name: "6.400 Policromos (40 giros)", price: "R$ 44,00" },
-          { name: "8.000 Policromos (50 giros)", price: "R$ 54,00" }
-        ]
-      },
-      {
-        title: "Missão",
-        items: [
-          { name: "Missão principal (completa — 9 capítulos)", price: "R$ 70,00" },
-          { name: "Missão principal (1 capítulo)", price: "R$ 10,00" },
-          { name: "Missão secundária (cada)", price: "R$ 2,00" }
-        ]
-      },
-      {
-        title: "Evento",
-        items: [
-          { name: "Evento simples (eventos pequenos/secundários)", price: "R$ 5,00" },
-          { name: "Evento principal (evento grande da versão)", price: "R$ 20,00" }
-        ]
-      },
-      {
-        title: "Agentes",
-        items: [
-          { name: "Todas as histórias (18 no total)", price: "R$ 55,00" },
-          { name: "História individual (1)", price: "R$ 5,00" }
-        ]
-      },
-      {
-        title: "Oficial Miau-Miau",
-        items: [
-          { name: "Por área", price: "R$ 15,00" },
-          { name: "1 página", price: "R$ 6,00" }
-        ]
-      },
-      {
-        title: "End Games",
-        items: [
-          { name: "Nódulo Estável (Nível 1 ao 10)", price: "R$ 15,00" },
-          { name: "Nódulo de Conflito (Nível 1 ao 8)", price: "R$ 13,00" },
-          { name: "Nódulo Crítico (Nível 1 ao 7)", price: "R$ 12,00" },
-          { name: "Investida Mortal", price: "R$ 20,00" },
-          { name: "Teste de Combate Virtual (por nível)", price: "R$ 2,00" },
-          { name: "Teste de Combate: Sem Saída (por nível)", price: "R$ 3,00" } 
-        ]
-      },
-      {
-        title: "Cidade Definhada",
-        items: [
-          { name: "Área 01 — Metrô da Velha Capital", price: "R$ 10,00" },
-          { name: "Área 02 — Ruínas da Construção", price: "R$ 10,00" },
-          { name: "Área 03 — Ruínas do Edifício Gigante", price: "R$ 10,00" },
-          { name: "Canteiro Definhado", price: "R$ 15,00" },
-          { name: "Colheita Ardente", price: "R$ 15,00" }
-        ]
-      },
-      {
-        title: "Vazio Perdido",
-        items: [
-          { name: "Extermínio da Linha de Frente (até o nível máximo)", price: "R$ 15,00" },
-          { name: "Aniquilação dos Transgressores (todos os níveis)", price: "R$ 5,00" },
-          { name: "Operação de Reconstituição", price: "R$ 15,00" }
-        ]
-      },
-      {
-        title: "Cuidado com a Conta",
-        items: [
-          { name: "Pacote Semanal (diárias, gasto de bateria e passe)", price: "R$ 15,00" },
-          { name: "Pacote por Versão (diárias, gasto de bateria e passe)", price: "R$ 50,00" }
-        ]
-      }
-    ]
-  },
+    {
+      title: "Giros — Exploração Alta (Acima de 70%)",
+      items: [
+        { name: "800 Gemas (05 giros)", price: "R$ 7,00" },
+        { name: "1.600 Gemas (10 giros)", price: "R$ 14,00" },
+        { name: "3.200 Gemas (20 giros)", price: "R$ 26,00" },
+        { name: "4.800 Gemas (30 giros)", price: "R$ 37,00" },
+        { name: "6.400 Gemas (40 giros)", price: "R$ 48,00" },
+        { name: "8.000 Gemas (50 giros)", price: "R$ 65,00" }
+      ]
+    },
+    {
+      title: "Ascenção",
+      items: [
+        { name: "Farm Pers. lvl 20–90", price: "R$ 15,00" },
+        { name: "Up Arma lvl 20–90", price: "R$ 15,00" },
+        { name: "Farm 01 set (status aleatórios)", price: "R$ 2,00" },
+        { name: "Talentos 1→9", price: "R$ 15,00" },
+        { name: "Talentos 9/9/9", price: "R$ 35,00" }
+      ]
+    },
+    {
+      title: "Missão",
+      items: [
+        { name: "Lendária / Personagens / Encontros", price: "R$ 5,00" },
+        { name: "Missão 76 Aranaras", price: "R$ 45,00" },
+        { name: "Arconte", price: "(cada ato) R$ 10,00" }
+      ]
+    },
+    {
+      title: "Abismo do Espiral",
+      items: [
+        { name: "Cada Piso", price: "R$ 2,00" },
+        { name: "Piso 01–08", price: "R$ 15,00" },
+        { name: "Lua Abissal", price: "R$ 10,00" }
+      ]
+    },
+    {
+      title: "Confronto Abissal",
+      items: [
+        { name: "Completo sem Penas", price: "R$ 7,00" },
+        { name: "Completo com Penas", price: "R$ 12,00" },
+        { name: "Completo com Armas 4★/5★", price: "R$ 20,00" }
+      ]
+    },
+    {
+      title: "Teatro Imaginário",
+      items: [
+        { name: "Fácil", price: "R$ 5,00" },
+        { name: "Médio", price: "R$ 10,00" },
+        { name: "Difícil", price: "R$ 15,00" },
+        { name: "Visionário", price: "R$ 20,00" },
+        { name: "Lunar", price: "R$ 25,00" }
+      ]
+    },
+    {
+      title: "Extras",
+      items: [
+        { name: "200k Moras", price: "R$ 1,00" },
+        { name: "Arma de Pesca", price: "R$ 14,00" },
+        { name: "Rastro Teatro", price: "R$ 4,00" },
+        { name: "Cada Refino", price: "R$ 7,00" },
+        { name: "TCG Completo", price: "R$ 45,00" },
+        { name: "Farm 50 unid. (Alimentos / Flores / Madeira / Inimigos)", price: "R$ 2,00 cada" }
+      ]
+    },
+    {
+      title: "Build de Personagem",
+      items: [
+        { name: "Básica", price: "R$ 5,00" },
+        { name: "Ótima", price: "R$ 15,00" },
+        { name: "Excelente", price: "R$ 30,00" }
+      ]
+    },
+    {
+      title: "Coleta de Oculis",
+      items: [
+        { name: "Anemoculus", price: "R$ 15,00" },
+        { name: "Geoculus", price: "R$ 25,00" },
+        { name: "Electroculus", price: "R$ 40,00" },
+        { name: "Dendroculus (Floresta)", price: "R$ 40,00" },
+        { name: "Dendroculus (Deserto)", price: "R$ 40,00" },
+        { name: "Hydroculus", price: "R$ 50,00" },
+        { name: "Pyroculus", price: "R$ 60,00" },
+        { name: "Lunoculus", price: "R$ 25,00" }
+      ]
+    },
+    {
+      title: "Exploração",
+      items: [
+        { name: "Mondstadt", price: "R$ 15,00" },
+        { name: "Espinha do Dragão", price: "R$ 25,00" },
+        { name: "Liyue", price: "R$ 35,00" },
+        { name: "Vale Chenyu", price: "R$ 30,00" },
+        { name: "Despenhadeiro", price: "R$ 30,00" },
+        { name: "Minas", price: "R$ 15,00" },
+        { name: "Inazuma", price: "R$ 45,00" },
+        { name: "Enkanomiya", price: "R$ 20,00" },
+        { name: "Sumeru (Floresta)", price: "R$ 55,00" },
+        { name: "Sumeru (Deserto)", price: "R$ 60,00" },
+        { name: "Fontaine", price: "R$ 50,00" },
+        { name: "Mar Antigo", price: "R$ 25,00" },
+        { name: "Natlan", price: "R$ 80,00" },
+        { name: "Montanha Sagrada", price: "R$ 25,00" },
+        { name: "Nod-Krai", price: "R$ 40,00" }
+      ]
+    },
+    {
+      title: "Eventos",
+      items: [
+        { name: "Evento Simples (eventos pequenos/secundários)", price: "R$ 5,00" },
+        { name: "Evento Principal (evento grande da versão)", price: "R$ 15,00" }
+      ]
+    },
+    {
+      title: "Cuidados com a Conta",
+      items: [
+        { name: "Manutenção Semanal (gasto de resina e missão diária)", price: "R$ 5,00" },
+        { name: "Manutenção Mensal (gasto de resina e missão diária)", price: "R$ 18,00" },
+        { name: "Manutenção da Versão (gasto de resina e missão diária)", price: "R$ 38,00" },
+      ]
+    }
+  ]
+},
 
-  hsr: {
-    title: "Honkai: Star Rail — Serviços",
-    img: "https://webstatic.hoyoverse.com/upload/op-public/2023/09/14/3c862d085db721a5625b6e12649399bc_8067514115196038699.png",
-    desc: "Serviços Premium de Honkai: Star Rail.",
-    status: "Disponível",
-    statusClass: "disponivel",
-    sections: [
+genshinsc: {
+  title: "Genshin Impact: Script — Serviços",
+  img: "https://onpoplife.com.br/wp-content/uploads/2026/01/Key-Art_EN.jpg",
+  desc: "Serviços Premium de Genshin Impact.",
+  status: "Disponível",
+  statusClass: "disponivel",
+  // AQUI VOCÊ EDITA AS LISTAS DO GENSHIN SCRIPT
+  sections: [
       {
-        title: "Stellar Jade",
+        title: "Giros — Exploração Baixa (Abaixo de 70%)",
         items: [
-          { name: "800 Stellar (5 giros)", price: "R$ 8,00" },
-          { name: "1.600 Stellar (10 giros)", price: "R$ 12,00" },
-          { name: "3.200 Stellar (20 giros)", price: "R$ 24,00" },
-          { name: "4.800 Stellar (30 giros)", price: "R$ 36,00" },
-          { name: "8.000 Stellar (50 giros)", price: "R$ 48,00" }
+          { name: "800 Gemas (05 giros)", price: "R$ 5,00" },
+          { name: "1.600 Gemas (10 giros)", price: "R$ 9,00" },
+          { name: "3.200 Gemas (20 giros)", price: "R$ 17,00" },
+          { name: "4.800 Gemas (30 giros)", price: "R$ 25,00" },
+          { name: "6.400 Gemas (40 giros)", price: "R$ 32,00" },
+          { name: "8.000 Gemas (50 giros)", price: "R$ 40,00" }
         ]
       },
-      {
-        title: "Cuidados",
-        items: [
-          { name: "Cuidado mensal", price: "R$ 15,00" },
-          { name: "Cuidado completo da versão", price: "R$ 50,00" }
+    {
+      title: "Giros — Exploração Alta (Acima de 70%)",
+      items: [
+        { name: "800 Gemas (05 giros)", price: "R$ 5,00" },
+        { name: "1.600 Gemas (10 giros)", price: "R$ 10,00" },
+        { name: "3.200 Gemas (20 giros)", price: "R$ 20,00" },
+        { name: "4.800 Gemas (30 giros)", price: "R$ 30,00" },
+        { name: "6.400 Gemas (40 giros)", price: "R$ 38,00" },
+        { name: "8.000 Gemas (50 giros)", price: "R$ 50,00" }
+      ]
+    },
+    {
+      title: "Ascenção",
+      items: [
+        { name: "Farm Pers. lvl 20–90", price: "R$ 10,00" },
+        { name: "Up Arma lvl 20–90", price: "R$ 10,00" },
+        { name: "Farm 01 set (status aleatórios)", price: "R$ 1,00" },
+        { name: "Talentos 1→9", price: "R$ 10,00" },
+        { name: "Talentos 9/9/9", price: "R$ 25,00" }
+      ]
+    },
+    {
+      title: "Missão",
+      items: [
+        { name: "Lendária / Personagens / Encontros", price: "R$ 2,00" },
+        { name: "Missão 76 Aranaras", price: "R$ 35,00" },
+        { name: "Arconte", price: "(cada ato) R$ 5,00" }
+      ]
+    },
+    {
+      title: "Abismo do Espiral",
+      items: [
+        { name: "Cada Piso", price: "R$ 1,00" },
+        { name: "Piso 01–08", price: "R$ 10,00" },
+        { name: "Lua Abissal", price: "R$ 7,00" }
+      ]
+    },
+    {
+      title: "Confronto Abissal",
+      items: [
+        { name: "Completo sem Penas", price: "R$ 5,00" },
+        { name: "Completo com Penas", price: "R$ 8,00" },
+        { name: "Completo com Armas 4★/5★", price: "R$ 10,00" }
+      ]
+    },
+    {
+      title: "Teatro Imaginário",
+      items: [
+        { name: "Fácil", price: "R$ 5,00" },
+        { name: "Médio", price: "R$ 10,00" },
+        { name: "Difícil", price: "R$ 15,00" },
+        { name: "Visionário", price: "R$ 20,00" },
+        { name: "Lunar", price: "R$ 25,00" }
+      ]
+    },
+    {
+      title: "Extras",
+      items: [
+        { name: "200k Moras", price: "R$ 0,50" },
+        { name: "Arma de Pesca", price: "R$ 10,00" },
+        { name: "Rastro Teatro", price: "R$ 3,00" },
+        { name: "Cada Refino", price: "R$ 4,00" },
+        { name: "TCG Completo", price: "R$ 35,00" },
+        { name: "Farm 50 unid. (Alimentos / Flores / Madeira / Inimigos)", price: "R$ 1,00 cada" }
+      ]
+    },
+    {
+      title: "Build de Personagem",
+      items: [
+        { name: "Básica", price: "R$ 5,00" },
+        { name: "Ótima", price: "R$ 10,00" },
+        { name: "Excelente", price: "R$ 25,00" }
+      ]
+    },
+    {
+      title: "Coleta de Oculis",
+      items: [
+        { name: "Anemoculus", price: "R$ 15,00" },
+        { name: "Geoculus", price: "R$ 25,00" },
+        { name: "Electroculus", price: "R$ 25,00" },
+        { name: "Dendroculus (Floresta)", price: "R$ 25,00" },
+        { name: "Dendroculus (Deserto)", price: "R$ 25,00" },
+        { name: "Hydroculus", price: "R$ 35,00" },
+        { name: "Pyroculus", price: "R$ 45,00" },
+        { name: "Lunoculus", price: "R$ 20,00" }
+      ]
+    },
+    {
+      title: "Exploração",
+      items: [
+        { name: "Mondstadt", price: "R$ 15,00" },
+        { name: "Espinha do Dragão", price: "R$ 20,00" },
+        { name: "Liyue", price: "R$ 25,00" },
+        { name: "Vale Chenyu", price: "R$ 25,00" },
+        { name: "Despenhadeiro", price: "R$ 25,00" },
+        { name: "Minas", price: "R$ 15,00" },
+        { name: "Inazuma", price: "R$ 35,00" },
+        { name: "Enkanomiya", price: "R$ 20,00" },
+        { name: "Sumeru (Floresta)", price: "R$ 45,00" },
+        { name: "Sumeru (Deserto)", price: "R$ 50,00" },
+        { name: "Fontaine", price: "R$ 35,00" },
+        { name: "Mar Antigo", price: "R$ 15,00" },
+        { name: "Natlan", price: "R$ 70,00" },
+        { name: "Montanha Sagrada", price: "R$ 15,00" },
+        { name: "Nod-Krai", price: "R$ 20,00" }
+      ]
+    },
+    {
+      title: "Eventos",
+      items: [
+        { name: "Evento Simples (eventos pequenos/secundários)", price: "R$ 5,00" },
+        { name: "Evento Principal (evento grande da versão)", price: "R$ 10,00" }
+      ]
+    },
+    {
+      title: "Cuidados com a Conta",
+      items: [
+        { name: "Manutenção Semanal (gasto de resina e missão diária)", price: "R$ 3,00" },
+        { name: "Manutenção Mensal (gasto de resina e missão diária)", price: "R$ 20,00" },
+        { name: "Manutenção da Versão (gasto de resina e missão diária)", price: "R$25,00" },
+      ]
+    }
+  ]
+},
 
-        ]
-      },
-      {
-        title: "End Games",
-        items: [
-          { name: "MOC", price: "R$ 20,00" },
-          { name: "Sombra AP", price: "R$ 40,00" },
-          { name: "Pura Ficção", price: "R$ 60,00" },
-          { name: "Arbitragem de Anomalias", price: "R$ 100,00" }
-        ]
-      },
-      {
-        title: "Exploração",
-        items: [
-          { name: "Nave da Herta", price: "R$ 10,00" },
-          { name: "Jarilo-VI", price: "R$ 20,00" },
-          { name: "Xianzhou", price: "R$ 35,00" },
-          { name: "Penacony", price: "R$ 50,00" },
-          { name: "Amphoreus", price: "R$ 45,00" }
-        ]
-      },
-      {
-        title: "Coletas",
-        items: [
-          { name: "Coleta de Pássaros de Origami", price: "R$ 35,00" },
-          { name: "Coleta de Ninfas", price: "R$ 5,00 / 10 ninfas" }
-        ]
-      },
-      {
-        title: "Missões",
-        items: [
-          { name: "Missão de Desbravamento (por ato)", price: "R$ 10,00" },
-          { name: "Desbravamento (completo)", price: "R$ 40,00" },
-          { name: "Missão de Companheiro", price: "R$ 10,00" }
-        ]
-      },
-      {
-        title: "Ascenção",
-        items: [
-          { name: "Up de Personagem", price: "R$ 10,00" },
-          { name: "Up de Rastro", price: "R$ 15,00" },
-          { name: "Up de Cone de Luz", price: "R$ 15,00" }
-        ]
-      },
-      {
-        title: "Conteúdos",
-        items: [
-          { name: "Universo Simulado Inteiro (cada mundo)", price: "R$ 50" },
-          { name: "Universo Simulado Semanal (cada mundo)", price: "R$ 15,00" },
-          { name: "Universo do Enxame", price: "R$ 35,00" },
-          { name: "Universo do Ouro e Engrenagem", price: "R$ 35,00" },
-          { name: "Universo Domínio Incógnito", price: "R$ 35,00" },
-          { name: "Universo Divergente (Amphoreus) Inteiro", price: "R$ 25,00" },
-          { name: "Universo Divergente (Amphoreus) Semanal", price: "R$ 15,00" },
-          { name: "Guerras Monetárias", price: "R$ 20,00" }
-        ]
-      }
-    ]
-  },
+zzz: {
+  title: "Zenless Zone Zero — Serviços",
+  img: "https://onpoplife.com.br/wp-content/uploads/2025/12/2.5-kv-capa.jpg",
+  desc: "Serviços Premium de Zenless Zone Zero.",
+  status: "Disponível",
+  statusClass: "disponivel",
+  // AQUI VOCÊ EDITA AS LISTAS DO ZZZ
+  sections: [
+    {
+      title: "Policromos",
+      items: [
+        { name: "800 Policromos (5 giros)", price: "R$ 9,00" },
+        { name: "1.600 Policromos (10 giros)", price: "R$ 14,00" },
+        { name: "3.200 Policromos (20 giros)", price: "R$ 24,00" },
+        { name: "4.800 Policromos (30 giros)", price: "R$ 34,00" },
+        { name: "6.400 Policromos (40 giros)", price: "R$ 44,00" },
+        { name: "8.000 Policromos (50 giros)", price: "R$ 54,00" }
+      ]
+    },
+    {
+      title: "Missão",
+      items: [
+        { name: "Missão principal (completa — 9 capítulos)", price: "R$ 70,00" },
+        { name: "Missão principal (1 capítulo)", price: "R$ 10,00" },
+        { name: "Missão secundária (cada)", price: "R$ 2,00" }
+      ]
+    },
+    {
+      title: "Evento",
+      items: [
+        { name: "Evento simples (eventos pequenos/secundários)", price: "R$ 5,00" },
+        { name: "Evento principal (evento grande da versão)", price: "R$ 20,00" }
+      ]
+    },
+    {
+      title: "Agentes",
+      items: [
+        { name: "Todas as histórias (18 no total)", price: "R$ 55,00" },
+        { name: "História individual (1)", price: "R$ 5,00" }
+      ]
+    },
+    {
+      title: "Oficial Miau-Miau",
+      items: [
+        { name: "Por área", price: "R$ 15,00" },
+        { name: "1 página", price: "R$ 6,00" }
+      ]
+    },
+    {
+      title: "End Games",
+      items: [
+        { name: "Nódulo Estável (Nível 1 ao 10)", price: "R$ 15,00" },
+        { name: "Nódulo de Conflito (Nível 1 ao 8)", price: "R$ 13,00" },
+        { name: "Nódulo Crítico (Nível 1 ao 7)", price: "R$ 12,00" },
+        { name: "Investida Mortal", price: "R$ 20,00" },
+        { name: "Teste de Combate Virtual (por nível)", price: "R$ 2,00" },
+        { name: "Teste de Combate: Sem Saída (por nível)", price: "R$ 3,00" } 
+      ]
+    },
+    {
+      title: "Cidade Definhada",
+      items: [
+        { name: "Área 01 — Metrô da Velha Capital", price: "R$ 10,00" },
+        { name: "Área 02 — Ruínas da Construção", price: "R$ 10,00" },
+        { name: "Área 03 — Ruínas do Edifício Gigante", price: "R$ 10,00" },
+        { name: "Canteiro Definhado", price: "R$ 15,00" },
+        { name: "Colheita Ardente", price: "R$ 15,00" }
+      ]
+    },
+    {
+      title: "Vazio Perdido",
+      items: [
+        { name: "Extermínio da Linha de Frente (até o nível máximo)", price: "R$ 15,00" },
+        { name: "Aniquilação dos Transgressores (todos os níveis)", price: "R$ 5,00" },
+        { name: "Operação de Reconstituição", price: "R$ 15,00" }
+      ]
+    },
+    {
+      title: "Cuidado com a Conta",
+      items: [
+        { name: "Pacote Semanal (diárias, gasto de bateria e passe)", price: "R$ 15,00" },
+        { name: "Pacote por Versão (diárias, gasto de bateria e passe)", price: "R$ 50,00" }
+      ]
+    }
+  ]
+},
 
-  wuwa: {
-    title: "Wuthering Waves — Serviços",
-    img: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/05/wuthering_waves_banner_schedule.jpg",
-    desc: "Serviços Premium de Wuthering Waves.",
-    status: "Disponível",
-    statusClass: "disponivel",
-    sections: [
-      {
-        title: "Astrites",
-        items: [
-          { name: "800 Astrites", price: "R$ 6,00" },
-          { name: "1.600 Astrites", price: "R$ 14,00" },
-          { name: "3.200 Astrites", price: "R$ 24,00" },
-          { name: "4.800 Astrites", price: "R$ 34,00" },
-          { name: "6.400 Astrites", price: "R$ 44,00" },
-          { name: "8.000 Astrites", price: "R$ 54,00" },
-          { name: "9.600 Astrites", price: "R$ 64,00" }
-        ]
-      },
-      {
-        title: "Exploração — Huanglong",
-        items: [
-          { name: "Gorges of Spirits", price: "R$ 27,00" },
-          { name: "Norfall Barrens", price: "R$ 26,00" },
-          { name: "Whining Aix's Mire", price: "R$ 28,00" },
-          { name: "Dim Forest", price: "R$ 25,00" },
-          { name: "Port City of Guixu", price: "R$ 24,00" },
-          { name: "Tiger's Maw", price: "R$ 28,00" },
-          { name: "Wuming Bay", price: "R$ 23,00" },
-          { name: "Jinzhou", price: "R$ 30,00" },
-          { name: "Desorock Highland", price: "R$ 19,00" },
-          { name: "Central Plains", price: "R$ 24,00" },
-          { name: "Mt. Firmament", price: "R$ 29,00" },
-          { name: "Huanglong 100% (pacote completo)", price: "R$ 228,00" }
-        ]
-      },
-      {
-        title: "Exploração — Black Shores",
-        items: [
-          { name: "Black Shores Archipelago + Tethys' Deep", price: "R$ 29,00" },
-        ]
-      },
-      {
-        title: "Exploração — Rinascita",
-        items: [
-          { name: "Ilha Principal", price: "R$ 115,00" },
-          { name: "Beohr Waters", price: "R$ 24,00" },
-          { name: "Avinoleum", price: "R$ 26,00" },
-          { name: "Septimont", price: "R$ 36,00" },
-          { name: "Fabricatorium of the Deep", price: "R$ 14,00" },
-          { name: "Sanguis Plateaus", price: "R$ 32,00" },
-          { name: "Rinascita 100% (pacote completo)", price: "R$ 250,00" }
-        ]
-      },
-      {
-        title: "Exploração — Roya Frostlands",
-        items: [
-          { name: "Etching Plains", price: "R$ 26,00" },
-          { name: "Startorch Academy", price: "R$ 24,00" },
-          { name: "Starward Riseway", price: "R$ 23,00" },
-          { name: "Fangspire Chasm", price: "R$ 25,00" },
-          { name: "Bjartr Woods", price: "R$ 23,00" },
-          { name: "Stagnant Run", price: "R$ 23,00" },
-          { name: "Rebirth Uplands", price: "R$ 22,00" },
-          { name: "Mawburrow Desert", price: "R$ 24,00" },
-          { name: "Giant's Gaze", price: "R$ 23,00" },
-          { name: "Roya Frostlands 100%", price: "R$ 186,00" }
-        ]
-      },
-      {
-        title: "End Games — Tower of Adversity",
-        items: [
-          { name: "Resonant", price: "R$ 10,00" },
-          { name: "Hazard", price: "R$ 16,00" },
-          { name: "Echoing", price: "R$ 11,00" },
-          { name: "Tower of Adversity (completa)", price: "R$ 30,00" },
-          { name: "Whimpering Wastes", price: "R$ 21,00" },
-          { name: "Holograma (Phantom Pain / Synchronization / Impermanence)", price: "R$ 1,50 por dificuldade" }
+hsr: {
+  title: "Honkai: Star Rail — Serviços",
+  img: "https://webstatic.hoyoverse.com/upload/op-public/2023/09/14/3c862d085db721a5625b6e12649399bc_8067514115196038699.png",
+  desc: "Serviços Premium de Honkai: Star Rail.",
+  status: "Disponível",
+  statusClass: "disponivel",
+  // AQUI VOCÊ EDITA AS LISTAS DO HSR
+  sections: [
+    {
+      title: "Stellar Jade",
+      items: [
+        { name: "800 Stellar (5 giros)", price: "R$ 8,00" },
+        { name: "1.600 Stellar (10 giros)", price: "R$ 12,00" },
+        { name: "3.200 Stellar (20 giros)", price: "R$ 24,00" },
+        { name: "4.800 Stellar (30 giros)", price: "R$ 36,00" },
+        { name: "8.000 Stellar (50 giros)", price: "R$ 48,00" }
+      ]
+    },
+    {
+      title: "Cuidados",
+      items: [
+        { name: "Cuidado mensal", price: "R$ 15,00" },
+        { name: "Cuidado completo da versão", price: "R$ 50,00" }
 
-        ]
-      },
-      {
-        title: "Data Bank",
-        items: [
-          { name: "Data Bank (nível 1 ao 30)", price: "R$ 58,00" },
-          { name: "Data Bank (por nível)", price: "R$ 2,50" }
-        ]
-      },
-      {
-        title: "Missões",
-        items: [
-          { name: "Missão Principal", price: "R$ 50,00 por região" },
-          { name: "Missão de Companheiro", price: "R$ 13,00" },
-          { name: "Missões de Exploração", price: "R$ 13,00" },
-          { name: "Missões Secundárias", price: "R$ 9,00" }
-        ]
-      },
-      {
-        title: "Up de Personagens",
-        items: [
-          { name: "Nível 1 até 90", price: "R$ 15,00" },
-          { name: "De 10 em 10 níveis", price: "R$ 5,00" },
-        ]
-      },
-      {
-        title: "Builds",
-        items: [
-          { name: "Build Básica", price: "R$ 10,00" },
-          { name: "Build Média", price: "R$ 13,00" },
-          { name: "Build Excelente", price: "R$ 20,00" }
-        ]
-      }
-    ]
-  }
+      ]
+    },
+    {
+      title: "End Games",
+      items: [
+        { name: "MOC", price: "R$ 20,00" },
+        { name: "Sombra AP", price: "R$ 40,00" },
+        { name: "Pura Ficção", price: "R$ 60,00" },
+        { name: "Arbitragem de Anomalias", price: "R$ 100,00" }
+      ]
+    },
+    {
+      title: "Exploração",
+      items: [
+        { name: "Nave da Herta", price: "R$ 10,00" },
+        { name: "Jarilo-VI", price: "R$ 20,00" },
+        { name: "Xianzhou", price: "R$ 35,00" },
+        { name: "Penacony", price: "R$ 50,00" },
+        { name: "Amphoreus", price: "R$ 45,00" }
+      ]
+    },
+    {
+      title: "Coletas",
+      items: [
+        { name: "Coleta de Pássaros de Origami", price: "R$ 35,00" },
+        { name: "Coleta de Ninfas", price: "R$ 5,00 / 10 ninfas" }
+      ]
+    },
+    {
+      title: "Missões",
+      items: [
+        { name: "Missão de Desbravamento (por ato)", price: "R$ 10,00" },
+        { name: "Desbravamento (completo)", price: "R$ 40,00" },
+        { name: "Missão de Companheiro", price: "R$ 10,00" }
+      ]
+    },
+    {
+      title: "Ascenção",
+      items: [
+        { name: "Up de Personagem", price: "R$ 10,00" },
+        { name: "Up de Rastro", price: "R$ 15,00" },
+        { name: "Up de Cone de Luz", price: "R$ 15,00" }
+      ]
+    },
+    {
+      title: "Conteúdos",
+      items: [
+        { name: "Universo Simulado Inteiro (cada mundo)", price: "R$ 50" },
+        { name: "Universo Simulado Semanal (cada mundo)", price: "R$ 15,00" },
+        { name: "Universo do Enxame", price: "R$ 35,00" },
+        { name: "Universo do Ouro e Engrenagem", price: "R$ 35,00" },
+        { name: "Universo Domínio Incógnito", price: "R$ 35,00" },
+        { name: "Universo Divergente (Amphoreus) Inteiro", price: "R$ 25,00" },
+        { name: "Universo Divergente (Amphoreus) Semanal", price: "R$ 15,00" },
+        { name: "Guerras Monetárias", price: "R$ 20,00" }
+      ]
+    }
+  ]
+},
+
+wuwa: {
+  title: "Wuthering Waves — Serviços",
+  img: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/05/wuthering_waves_banner_schedule.jpg",
+  desc: "Serviços Premium de Wuthering Waves.",
+  status: "Disponível",
+  statusClass: "disponivel",
+  // AQUI VOCÊ EDITA AS LISTAS DO WUWA
+  sections: [
+    {
+      title: "Astrites",
+      items: [
+        { name: "800 Astrites", price: "R$ 6,00" },
+        { name: "1.600 Astrites", price: "R$ 14,00" },
+        { name: "3.200 Astrites", price: "R$ 24,00" },
+        { name: "4.800 Astrites", price: "R$ 34,00" },
+        { name: "6.400 Astrites", price: "R$ 44,00" },
+        { name: "8.000 Astrites", price: "R$ 54,00" },
+        { name: "9.600 Astrites", price: "R$ 64,00" }
+      ]
+    },
+    {
+      title: "Exploração — Huanglong",
+      items: [
+        { name: "Gorges of Spirits", price: "R$ 27,00" },
+        { name: "Norfall Barrens", price: "R$ 26,00" },
+        { name: "Whining Aix's Mire", price: "R$ 28,00" },
+        { name: "Dim Forest", price: "R$ 25,00" },
+        { name: "Port City of Guixu", price: "R$ 24,00" },
+        { name: "Tiger's Maw", price: "R$ 28,00" },
+        { name: "Wuming Bay", price: "R$ 23,00" },
+        { name: "Jinzhou", price: "R$ 30,00" },
+        { name: "Desorock Highland", price: "R$ 19,00" },
+        { name: "Central Plains", price: "R$ 24,00" },
+        { name: "Mt. Firmament", price: "R$ 29,00" },
+        { name: "Huanglong 100% (pacote completo)", price: "R$ 228,00" }
+      ]
+    },
+    {
+      title: "Exploração — Black Shores",
+      items: [
+        { name: "Black Shores Archipelago + Tethys' Deep", price: "R$ 29,00" },
+      ]
+    },
+    {
+      title: "Exploração — Rinascita",
+      items: [
+        { name: "Ilha Principal", price: "R$ 115,00" },
+        { name: "Beohr Waters", price: "R$ 24,00" },
+        { name: "Avinoleum", price: "R$ 26,00" },
+        { name: "Septimont", price: "R$ 36,00" },
+        { name: "Fabricatorium of the Deep", price: "R$ 14,00" },
+        { name: "Sanguis Plateaus", price: "R$ 32,00" },
+        { name: "Rinascita 100% (pacote completo)", price: "R$ 250,00" }
+      ]
+    },
+    {
+      title: "Exploração — Roya Frostlands",
+      items: [
+        { name: "Etching Plains", price: "R$ 26,00" },
+        { name: "Startorch Academy", price: "R$ 24,00" },
+        { name: "Starward Riseway", price: "R$ 23,00" },
+        { name: "Fangspire Chasm", price: "R$ 25,00" },
+        { name: "Bjartr Woods", price: "R$ 23,00" },
+        { name: "Stagnant Run", price: "R$ 23,00" },
+        { name: "Rebirth Uplands", price: "R$ 22,00" },
+        { name: "Mawburrow Desert", price: "R$ 24,00" },
+        { name: "Giant's Gaze", price: "R$ 23,00" },
+        { name: "Roya Frostlands 100%", price: "R$ 186,00" }
+      ]
+    },
+    {
+      title: "End Games — Tower of Adversity",
+      items: [
+        { name: "Resonant", price: "R$ 10,00" },
+        { name: "Hazard", price: "R$ 16,00" },
+        { name: "Echoing", price: "R$ 11,00" },
+        { name: "Tower of Adversity (completa)", price: "R$ 30,00" },
+        { name: "Whimpering Wastes", price: "R$ 21,00" },
+        { name: "Holograma (Phantom Pain / Synchronization / Impermanence)", price: "R$ 1,50 por dificuldade" }
+
+      ]
+    },
+    {
+      title: "Data Bank",
+      items: [
+        { name: "Data Bank (nível 1 ao 30)", price: "R$ 58,00" },
+        { name: "Data Bank (por nível)", price: "R$ 2,50" }
+      ]
+    },
+    {
+      title: "Missões",
+      items: [
+        { name: "Missão Principal", price: "R$ 50,00 por região" },
+        { name: "Missão de Companheiro", price: "R$ 13,00" },
+        { name: "Missões de Exploração", price: "R$ 13,00" },
+        { name: "Missões Secundárias", price: "R$ 9,00" }
+      ]
+    },
+    {
+      title: "Up de Personagens",
+      items: [
+        { name: "Nível 1 até 90", price: "R$ 15,00" },
+        { name: "De 10 em 10 níveis", price: "R$ 5,00" },
+      ]
+    },
+    {
+      title: "Builds",
+      items: [
+        { name: "Build Básica", price: "R$ 10,00" },
+        { name: "Build Média", price: "R$ 13,00" },
+        { name: "Build Excelente", price: "R$ 20,00" }
+      ]
+    }
+  ]
+}
 };
 
 // --- LÓGICA DO OVERLAY ---
+// --- NOVA LÓGICA DO OVERLAY (SEPARADA) ---
 function openOverlay(key) {
   const data = produtos[key];
   if (!data) return;
-  
-  // 1. Gera o HTML das Seções (Listas) dinamicamente
-  let listsHTML = "";
-  if (data.sections && data.sections.length > 0) {
-    listsHTML = data.sections.map(section => `
-      <div class="section-wrapper">
-        <h4 class="section-title">${section.title}</h4>
-        <div class="price-table">
-          ${section.items.map(item => `
-            <div class="price-row">
-              <span>${item.name}</span>
-              <span>${item.price}</span>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-    `).join('');
-  }
 
-  // 2. Monta o HTML Completo do Overlay
-  const contentHTML = `
-    <div class="card overlay-top-card">
-      <div class="image-wrap">
-        <img src="${data.img}" alt="${data.title}">
-      </div>
-      <div class="card-content">
-        <h3>${data.title}</h3>
-        <div class="status ${data.statusClass}">${data.status}</div>
-        <p class="info" style="margin-bottom:0.5rem;">${data.desc}</p>
+  const content = document.getElementById("overlayContent");
+
+  // 1. Criamos a parte das listas primeiro
+  let listsHTML = data.sections.map(section => `
+    <div class="section-wrapper">
+      <h4 class="section-title">${section.title}</h4>
+      <div class="price-table">
+        ${section.items.map(item => `
+          <div class="price-row">
+            <span>${item.name}</span>
+            <span>${item.price}</span>
+          </div>
+        `).join('')}
       </div>
     </div>
-    
-    <div class="overlay-divider"></div>
-    
-    ${listsHTML}
+  `).join('');
+
+  // 2. Juntamos tudo dentro de UM ÚNICO container centralizado (o segredo da largura)
+  content.innerHTML = `
+    <div style="max-width: 650px; margin: 0 auto; width: 95%;"> 
+      <div class="card overlay-top-card">
+        <div class="image-wrap">
+          <img src="${data.img}" alt="${data.title}">
+        </div>
+        <div class="card-content">
+          <h3>${data.title}</h3>
+          <div class="status ${data.statusClass}">${data.status}</div>
+          <p class="info" style="margin-bottom:0.5rem;">${data.desc}</p>
+        </div>
+      </div>
+
+      <div class="overlay-divider"></div>
+
+      ${listsHTML}
+    </div>
   `;
 
-  document.getElementById("overlayContent").innerHTML = contentHTML;
   document.getElementById("overlay").classList.add("active");
-  document.body.style.overflow = "hidden"; // Trava scroll
+  document.body.style.overflow = "hidden";
 }
 
 function closeOverlay() {
