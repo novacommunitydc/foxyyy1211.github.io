@@ -7,7 +7,7 @@
   <title>Nova Community — Catálogo</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Seu favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="https://64.media.tumblr.com/c4beee0769a4381a43741e02c28defea/182fcda3a0d77b6c-42/s2048x3072/aebc414dc2195a76b42655ed294e7633ed551872.pnj">
@@ -1279,6 +1279,107 @@ footer {
     width: 320px; /* Keep defined width */
 }
 
+/* =========================
+   STATUS TITLE STYLE
+   ========================= */
+
+.status-title{
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  font-size: 2.4rem;
+
+  display: flex;
+  align-items: center;
+  gap: 12px; /* distância entre as palavras */
+}
+
+.status-title .status-italic{
+  font-style: italic;
+}
+
+/* subtítulo */
+
+.status-subtitle{
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #2ecc71;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* bolinha verde */
+
+.status-dot{
+  width: 8px;
+  height: 8px;
+  background: #2ecc71;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* =========================
+   TEAM TITLE STYLE
+   ========================= */
+
+.team-title-custom{
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  font-size: 2.4rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.team-title-custom .team-italic{
+  font-style: italic;
+}
+
+.buy-title{
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  font-size: 2.4rem;
+
+  display: flex;
+  justify-content: flex-start; /* esquerda */
+  align-items: center;
+  gap: 14px;
+}
+
+.buy-title .buy-italic{
+  font-style: italic;
+}
+
+.site-title{
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  font-size: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.site-title .site-italic{
+  font-style: italic;
+}
+
 </style>
 </head>
 
@@ -1316,7 +1417,7 @@ footer {
   <div class="nav-container">
     <a href="#" class="logo">
       <img src="https://64.media.tumblr.com/c4beee0769a4381a43741e02c28defea/182fcda3a0d77b6c-42/s2048x3072/aebc414dc2195a76b42655ed294e7633ed551872.png" alt="Logo">
-      Nova Community
+      NovaCommunity
     </a>
 
     <div class="nav-links">
@@ -1335,7 +1436,10 @@ footer {
 </nav>
 
 <header>
-  <h1>Nova Community</h1>
+  <h1 class="site-title">
+    <span class="site-italic">Nova</span>
+    <span>Community</span>
+  </h1>
   <p>Catálogo oficial de serviços e contas</p>
 </header>
 
@@ -1488,7 +1592,7 @@ footer {
     </div>
     <div class="build-version">
       <span class="dot-purple"></span>
-      V1.9.0
+      V2.0.0
     </div>
   </div>
 </footer>
@@ -1529,8 +1633,11 @@ function openInfoOverlay(type) {
       <img src="https://placehold.co/600x400/252525/fff?font=poppins&text=Guia%20de%20Compra" alt="Banner Guia" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
 
-    <h1 class="team-title">Como Comprar?</h1>
-    <p class="team-subtitle">Siga os passos abaixo para adquirir seus serviços na Nova Community de forma rápida e segura:</p>
+    <h1 class="buy-title">
+       <span class="buy-italic">Como</span>
+       <span>Comprar?</span>
+    </h1>
+   <p class="team-subtitle">Siga os passos abaixo para adquirir seus serviços na Nova Community de forma rápida e segura:</p>
     <div style="margin-bottom: 1.5rem;"></div>
   `;
 
@@ -1566,7 +1673,11 @@ function openInfoOverlay(type) {
   html = `
     <div class="team-wrapper">
 
-      <h1 class="team-title">Quem faz acontecer</h1>
+      <h1 class="team-title-custom">
+      <span class="team-italic">Quem</span>
+      <span>Faz</span>
+      <span>Acontecer</span>
+      </h1>
       <p class="team-subtitle">A elite por trás do projeto.</p>
 
       <div class="team-grid">
@@ -1633,9 +1744,15 @@ if (type === "status") {
       <img src="https://placehold.co/600x400/252525/fff?font=poppins&text=Status+do+Sistema" alt="Banner Status" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
 
-    <h1 class="team-title">Status Atual</h1>
-    <p class="team-subtitle" style="color: #2ecc71;">● Todos os Sistemas Operacionais</p>
-    <div style="margin-bottom: 1.5rem;"></div>
+    <h1 class="status-title">
+   <span class="status-italic">Status</span> Atual
+   </h1>
+
+   <p class="status-subtitle">
+   <span class="status-dot"></span> Todos os Sistemas Operacionais
+   </p>
+
+<div style="margin-bottom: 1.5rem;"></div>
   `;
 
   // Dados de integridade do sistema
@@ -1721,7 +1838,11 @@ if (type === "termos") {
       <img src="https://64.media.tumblr.com/1ede90ae69c0a424dac5fae9cf535ee3/907e8089aa90150e-5e/s2048x3072/346b84b3331765752a5e9bea7df7e331b0055831.png" alt="Banner Termos" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
 
-    <h1 class="team-title">Termos de Compra</h1>
+    <h1 class="buy-title">
+      <span class="buy-italic">Termos</span>
+      <span>de</span>
+      <span>Compra</span>
+    </h1>
     <p class="team-subtitle">Ao efetuar qualquer compra na Nova Community, o cliente confirma que leu, entendeu e concorda integralmente com os termos abaixo:</p>
     <p class="info" style="margin-bottom: 1.5rem;">
   `;
