@@ -475,8 +475,8 @@ color:white;
   --bg-card: #0f0f10;
   --bg-footer: #000000;
   
-  --purple-start: #d946ef;
-  --purple-end: #8b5cf6;
+  --purple-start: #ff75e1;
+  --purple-end: rgba(249, 0, 193, 0.3);
   
   --text-main: #ffffff;
   --text-muted: #71717a;
@@ -595,7 +595,7 @@ header {
   background: 
     linear-gradient(to bottom, rgba(5, 5, 5, 0.3), var(--bg-body)),
     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
-    url('https://64.media.tumblr.com/b53af742882be5c7d2b862f4a42cc7dd/c8a0ce503241c5b5-93/s1280x1920/044d6209af75b8ae8c2ec769d99b7f5edfc93c60.gif');
+    url('https://64.media.tumblr.com/a63daddc6a9f668a6e469f3b67a16f00/c8a0ce503241c5b5-95/s400x600/99f95339505976886278a3b7b4397ca11256de6d.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1082,12 +1082,12 @@ footer {
   top: 20px;
   right: 20px;
   font-size: 22px;
-  color: rgba(255,215,0,0.3);
+  color: rgba(249, 0, 193, 0.3); /* #F900C1 suave */
   transition: 0.4s;
 }
 
 .team-card:hover .card-icon {
-  color: gold;
+  color: #ff75e1;
   transform: rotate(12deg);
 }
 
@@ -1110,8 +1110,8 @@ footer {
 }
 
 .team-card:hover .avatar-wrapper {
-  border-color: rgba(255,215,0,0.4);
-  box-shadow: 0 0 40px rgba(255,215,0,0.2);
+  border-color: rgba(249, 0, 193, 0.6); /* #F900C1 */
+  box-shadow: 0 0 40px rgba(255, 117, 225, 0.4); /* #ff75e1 */
 }
 
 /* BADGE HOVER */
@@ -1130,7 +1130,7 @@ footer {
 }
 
 .hover-badge span {
-  background: linear-gradient(to right, #facc15, #eab308);
+  background: linear-gradient(to right, #F900C1, #ff75e1);
   padding: 6px 18px;
   border-radius: 999px;
   font-size: 11px;
@@ -1146,9 +1146,9 @@ footer {
   margin-bottom: 10px;
 }
 
-.role-gold { color: #facc15; }
-.role-blue { color: #a855f7; }
-.role-purple { color: #70ffab; }
+.role-gold { color: #F900C1; }
+.role-blue { color: #F900C1; }
+.role-purple { color: #F900C1; }
 
 .desc {
   color: #aaa;
@@ -1440,7 +1440,7 @@ footer {
     <span class="site-italic">Nova</span>
     <span>Community</span>
   </h1>
-  <p>Catálogo oficial de serviços e contas</p>
+  <p>Catálogo Oficial de Serviços</p>
 </header>
 
 <section class="catalogo">
@@ -1567,7 +1567,7 @@ footer {
       <div class="footer-column">
         <h5>SOBRE NÓS</h5>
         <ul>
-          <li><a href="#" onclick="openInfoOverlay('equipe'); return false;">Quem faz acontecer</a></li>
+          <li><a href="#" onclick="openInfoOverlay('equipe'); return false;">Colaboradores</li>
           <li><a href="javascript:void(0)" onclick="openInfoOverlay('cargos')">Cargos</a></li>        </ul>
       </div>
       <div class="footer-column">
@@ -1592,7 +1592,7 @@ footer {
     </div>
     <div class="build-version">
       <span class="dot-purple"></span>
-      V2.0.0
+      V2.1.0
     </div>
   </div>
 </footer>
@@ -1674,29 +1674,26 @@ function openInfoOverlay(type) {
     <div class="team-wrapper">
 
       <h1 class="team-title-custom">
-      <span class="team-italic">Quem</span>
-      <span>Faz</span>
-      <span>Acontecer</span>
+      <span class="team-italic">Colaboradores</span>
       </h1>
-      <p class="team-subtitle">A elite por trás do projeto.</p>
+      <p class="team-subtitle">Equipe Central.</p>
 
       <div class="team-grid">
 
         <div class="team-card">
           <div class="card-icon">
-            <i class="fas fa-heart"></i>
+            <i class="fas fa-chess-queen"></i>
           </div>
 
           <div class="avatar-wrapper">
             <img src="https://media.discordapp.net/attachments/1476661396673527809/1476661419993989212/WhatsApp_Image_2026-02-25_at_20.07.27.jpeg?ex=69a1ef9d&is=69a09e1d&hm=9fa27beb7930e41f61fcaa40b6acff0f97bb488d0fc2ce856ec93fc801af124d&=&format=webp&width=443&height=788">
             <div class="hover-badge">
-              <span>Administradora</span>
+              <span>Administradorx</span>
             </div>
           </div>
 
-          <h3>ol.sandy</h3>
-          <p class="role-label role-blue">ADMINISTRADORA</p>
-          <p class="desc">Mente ampla para ideas e soluções.</p>
+          <h3>-</h3>
+          <p class="role-label role-blue">ADMINISTRADORX</p>
         </div>
 
         <div class="team-card destaque">
@@ -1705,7 +1702,7 @@ function openInfoOverlay(type) {
           </div>
 
           <div class="avatar-wrapper destaque-avatar">
-            <img src="https://media.discordapp.net/attachments/1476661396673527809/1476662821247783095/534415926_976416104957863_3466381384117587919_n.png?ex=69a1f0eb&is=69a09f6b&hm=7cfd1ef461d491b7355f3fe4bc3d215045ed54b258e17e64b8330a42346739c0&=&format=webp&quality=lossless">
+            <img src="https://media.discordapp.net/attachments/1363677152800800961/1487547726844399646/download.jpg?ex=69c98a47&is=69c838c7&hm=45c62667cace79cd36e216df2e3932336f4f9c17a794ea4b7a6abc7b2ad435d7&=&format=webp">
             <div class="hover-badge gold">
               <span>Owner</span>
             </div>
@@ -1713,12 +1710,11 @@ function openInfoOverlay(type) {
 
           <h3>wz.foxyyy</h3>
           <p class="role-label role-gold">OWNER</p>
-          <p class="desc">Liderança geral, decisões estratégicas e direção da equipe.</p>
         </div>
 
         <div class="team-card">
           <div class="card-icon">
-            <i class="fas fa-bolt"></i>
+            <i class="fas fa-shield"></i>
           </div>
 
           <div class="avatar-wrapper">
@@ -1730,7 +1726,6 @@ function openInfoOverlay(type) {
 
           <h3>ventisfavone</h3>
           <p class="role-label role-purple">STAFF SÊNIOR</p>
-          <p class="desc">Qualidade nos serviços e ideias para evolução da equipe.</p>
         </div>
 
       </div>
@@ -1749,7 +1744,7 @@ if (type === "status") {
    </h1>
 
    <p class="status-subtitle">
-   <span class="status-dot"></span> Todos os Sistemas Operacionais
+   <span class="status-dot"></span> Todos os Sistemas Operacionais (last att: 28/3)
    </p>
 
 <div style="margin-bottom: 1.5rem;"></div>
@@ -1784,45 +1779,46 @@ if (type === "cargos") {
       <img src="https://64.media.tumblr.com/a468c739fb65bce41727b16fec74ea75/907e8089aa90150e-b5/s2048x3072/7767dd1fc4bf32029a0d6e8d7c87a0e457befbf7.png" alt="Banner Equipe" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
 
-    <h1 class="team-title">Cargos e Funções</h1>
-    <p class="team-subtitle">Conheça a hierarquia e as responsabilidades da nossa equipe interna.</p>
+    <h1 class="status-title">
+   <span class="status-italic">Cargos</span></h1>
+    <p class="team-subtitle">Conheça nossa equipe e o que cada um faz.</p>
     <div style="margin-bottom: 1.5rem;"></div>
   `;
 
   // Dados dos Cargos
   const cargosData = [
     {
-      title: "👑 Owner = Proprietário",
-      text: "Responsável máximo pela loja, toma decisões finais, define diretrizes, gerencia a equipe, supervisiona operações e atua como representante oficial em qualquer contexto administrativo, comercial ou institucional."
+  title: "Owner",
+  text: "Responsável pela loja. Define diretrizes, toma decisões finais e supervisiona a equipe e as operações."
     },
     {
-      title: "🛠️ Staff = Equipe",
-      text: "Conjunto de membros responsáveis pelo funcionamento geral do servidor/loja, incluindo atendimento, suporte ao cliente, moderação, organização de canais e auxílio nas rotinas diárias."
+  title: "Staff",
+  text: "Responsável pelo funcionamento geral, incluindo atendimento, suporte, moderação e organização."
     },
     {
-      title: "🛡️ Adm = Administrador",
-      text: "Possui todas as permissões da Staff, com autoridade ampliada para gerenciar sistemas, resolver conflitos internos, aplicar decisões administrativas e representar a loja em tratativas formais e situações jurídicas."
+  title: "Administrador",
+  text: "Gerencia sistemas, resolve conflitos e aplica decisões administrativas."
     },
     {
-      title: "🎫 Farmers = Executores de Serviço",
-      text: "Responsáveis por realizar, entregar e comprovar os serviços contratados pelos clientes, seguindo padrões de qualidade, prazos e especificações definidas."
+  title: "Farmers",
+  text: "Realizam e entregam os serviços conforme prazos e padrões definidos."
     },
     {
-      title: "🤝 Promotor = Promotor de Parcerias",
-      text: "Atua na captação e manutenção de parcerias, negociações com outros servidores/projetos, organização de ações conjuntas e fortalecimento da presença da loja em comunidades externas."
+  title: "Promotor",
+  text: "Cuida de parcerias e negociações com outros servidores e projetos."
     },
     {
-      title: "📣 Divulgador = Divulgador",
-      text: "Encarregado de promover a loja em redes sociais, servidores, fóruns e aplicativos de mensagem, seguindo padrões de abordagem, identidade e regras de divulgação."
+  title: "Divulgador",
+  text: "Responsável por divulgar a loja em redes e comunidades."
     },
     {
-      title: "💬 Mov Chat = Movimentador de Chat",
-      text: "Responsável por manter o chat ativo, puxar conversas, interagir com membros, estimular engajamento e evitar que os canais fiquem parados."
+  title: "Mov Chat",
+  text: "Mantém o chat ativo e interage com os membros."
     },
-    {
-      title: "📲 Dsg = Designer",
-      text: "Responsável pela criação e manutenção das artes visuais do servidor, incluindo banners, ícones, logos, capas, layouts e materiais gráficos usados em divulgação e identidade visual."
-    }
+{
+  title: "Designer",
+  text: "Cria e mantém as artes e a identidade visual."
+}
   ];
 
   // Constrói as seções usando sua função padrão
