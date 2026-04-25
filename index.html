@@ -1,651 +1,406 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nova Community — Catálogo</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <!-- Seu favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="https://64.media.tumblr.com/c4beee0769a4381a43741e02c28defea/182fcda3a0d77b6c-42/s2048x3072/aebc414dc2195a76b42655ed294e7633ed551872.pnj">
-  <link rel="icon" type="image/png" sizes="16x16" href="https://64.media.tumblr.com/c4beee0769a4381a43741e02c28defea/182fcda3a0d77b6c-42/s2048x3072/aebc414dc2195a76b42655ed294e7633ed551872.pnj">
-  <link rel="shortcut icon" href="https://64.media.tumblr.com/c4beee0769a4381a43741e02c28defea/182fcda3a0d77b6c-42/s2048x3072/aebc414dc2195a76b42655ed294e7633ed551872.pnj">
-
-  <!-- Seus outros links de CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="icon" type="image/png" href="https://64.media.tumblr.com/c4beee0769a4381a43741e02c28defea/182fcda3a0d77b6c-42/s2048x3072/aebc414dc2195a76b42655ed294e7633ed551872.pnj">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-
-/* Isso garante que o menu mobile NÃO seja afetado pelo status "Em breve" dos produtos */
-.mobile-sidebar {
-    display: flex !important; /* Garante que ele exista no código */
-    visibility: visible;
-    z-index: 99999; /* Valor bem alto para ficar na frente de TUDO */
-}
-
-/* Garante que ele só apareça quando a classe active for adicionada */
-.mobile-sidebar:not(.active) {
-    right: -100%;
-}
-
-/* Botão de abrir (só aparece no celular) */
-.mobile-open-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-/* Overlay Escuro */
-.menu-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    z-index: 1999;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s;
-}
-
-.menu-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Sidebar (Menu) */
-.mobile-sidebar {
-    position: fixed;
-    top: 0;
-    right: -100%; /* Escondido na direita */
-    width: 280px;
-    height: 100vh;
-    background: #0a0a0b;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    z-index: 2000;
-    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-}
-
-.mobile-sidebar.active {
-    right: 0; /* Desliza para dentro */
-}
-
-/* Cabeçalho do Menu */
-.sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.sidebar-logo {
-    font-weight: 800;
-    background: linear-gradient(90deg, #d946ef, #8b5cf6);
-    background-clip: text; /* Versão padrão para navegadores modernos */
-    -webkit-background-clip: text; /* Versão para Chrome/Safari */
-    -webkit-text-fill-color: transparent;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    color: #71717a;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-/* Links do Menu */
-.sidebar-links {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.sidebar-links a {
-    color: #e4e4e7;
-    text-decoration: none;
-    font-size: 1.1rem;
-    padding: 12px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.03);
-    transition: 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.sidebar-links a:hover {
-    background: rgba(139, 92, 246, 0.1);
-    color: #d946ef;
-}
-
-/* Responsividade: Mostrar o botão no mobile */
-@media (max-width: 768px) {
-    .mobile-open-btn {
-        display: block;
-    }
-}
-
-/* Estilo do Botão Flutuante */
-.floating-btn {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  width: 60px;
-  height: 60px;
-  z-index: 10000;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  filter: drop-shadow(0 4px 15px rgba(139, 92, 246, 0.4));
-}
-
-.floating-btn img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.floating-btn:hover {
-  transform: scale(1.1) rotate(5deg);
-  filter: drop-shadow(0 6px 20px rgba(139, 92, 246, 0.6));
-}
-
-/* Ajuste para mobile (não ficar em cima de textos importantes) */
-@media (max-width: 768px) {
-  .floating-btn {
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-  }
-}
-
-/* OVERLAY DO CHAT */
-
-/* =========================================
-   CSS PARA O OVERLAY DE CHAT IA
-   ========================================= */
-
-/* Container Principal do Overlay */
-.ai-chat-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(5, 5, 5, 0.7); /* Fundo escuro semi-transparente */
-  backdrop-filter: blur(8px); /* Efeito de desfoque de fundo */
-  z-index: 11000; /* Acima de tudo, até do botão flutuante */
-  display: flex;
-  justify-content: flex-end; /* Alinha a janela na direita */
-  align-items: flex-end; /* Alinha a janela na parte inferior */
-  padding: 0 40px 100px 0; /* Espaçamento da borda da tela e do botão */
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-/* Estado ativo do overlay */
-.ai-chat-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Janela de Chat */
-.ai-chat-window {
-  width: 380px;
-  height: 550px;
-  background: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transform: translateY(20px) scale(0.95); /* Animação de entrada */
-  transition: transform 0.3s ease;
-}
-
-/* Animação da janela quando o chat abre */
-.ai-chat-overlay.active .ai-chat-window {
-  transform: translateY(0) scale(1);
-}
-
-/* --- Cabeçalho do Chat --- */
-.ai-chat-header {
-  padding: 1rem 1.2rem;
-  background: rgba(20, 20, 20, 0.6);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.header-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid var(--purple-end);
-}
-
-.header-text h4 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-.status-online {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.dot-online {
-  width: 7px;
-  height: 7px;
-  background-color: var(--green);
-  border-radius: 50%;
-  display: inline-block;
-  box-shadow: 0 0 5px var(--green);
-}
-
-.close-chat-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.close-chat-btn:hover {
-  color: var(--red);
-}
-
-/* --- Corpo do Chat (Área de Mensagens) --- */
-.ai-chat-body {
-  flex: 1; /* Preenche o espaço restante */
-  padding: 1.5rem;
-  overflow-y: auto; /* Scroll apenas aqui */
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  background-image: radial-gradient(circle at 50% -20%, rgba(139, 92, 246, 0.05) 0%, transparent 60%);
-}
-
-/* Estilo do Scrollbar no corpo do chat */
-.ai-chat-body::-webkit-scrollbar {
-  width: 6px;
-}
-
-.ai-chat-body::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 3px;
-}
-
-/* Mensagens */
-.chat-message {
-  display: flex;
-  max-width: 80%;
-}
-
-.message-content {
-  padding: 0.8rem 1.1rem;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-/* Mensagem da IA (esquerda) */
-.ai-message {
-  align-self: flex-start;
-}
-
-.ai-message .message-content {
-  background: #1a1a1c;
-  color: #eee;
-  border-bottom-left-radius: 4px; /* Ponta da mensagem */
-}
-
-/* Mensagem do Usuário (direita) */
-.user-message {
-  align-self: flex-end;
-}
-
-.user-message .message-content {
-  background: linear-gradient(135deg, var(--purple-start), var(--purple-end));
-  color: #fff;
-  border-bottom-right-radius: 4px; /* Ponta da mensagem */
-  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
-}
-
-/* --- Área de Input do Chat --- */
-.ai-chat-input-area {
-  padding: 0.8rem 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  display: flex;
-  gap: 10px;
-  background-color: #0c0c0d;
-}
-
-#aiChatInput {
-  flex: 1;
-  padding: 0.7rem 1rem;
-  background: #141416;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 999px; /* Input arredondado */
-  color: #fff;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  transition: border-color 0.2s;
-}
-
-#aiChatInput:focus {
-  outline: none;
-  border-color: rgba(139, 92, 246, 0.4);
-}
-
-.send-message-btn {
-  background: linear-gradient(135deg, var(--purple-start), var(--purple-end));
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.2s, filter 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.send-message-btn:hover {
-  filter: brightness(1.1);
-  transform: scale(1.05);
-}
-
-.send-message-btn i {
-  font-size: 0.9rem;
-}
-
-/* --- Responsividade Mobile --- */
-@media (max-width: 480px) {
-  .ai-chat-overlay {
-    padding: 0; /* Remove padding na tela cheia mobile */
-    align-items: center;
-    justify-content: center;
-  }
-
-  .ai-chat-window {
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
-    border: none;
-  }
-}
-
-/* HEADER */
-
-.ai-chat-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:12px;
-background:#181818;
-border-bottom:1px solid #333;
-}
-
-.close-chat-btn{
-background:none;
-border:none;
-color:white;
-font-size:18px;
-cursor:pointer;
-}
-
-/* MENSAGENS */
-
-.ai-chat-body{
-flex:1;
-overflow-y:auto;
-padding:10px;
-}
-
-.chat-message{
-margin-bottom:8px;
-}
-
-.message-content{
-padding:8px 10px;
-border-radius:6px;
-font-size:14px;
-}
-
-.ai-message .message-content{
-background:#222;
-color:white;
-}
-
-.user-message .message-content{
-background:#8b5cf6;
-color:white;
-text-align:right;
-}
-
-/* INPUT */
-
-.ai-chat-input-area{
-display:flex;
-padding:10px;
-border-top:1px solid #333;
-}
-
-.ai-chat-input-area input{
-flex:1;
-padding:8px;
-border:none;
-outline:none;
-background:#1a1a1a;
-color:white;
-}
-
-.send-message-btn{
-background:#8b5cf6;
-border:none;
-padding:8px 12px;
-cursor:pointer;
-color:white;
-}
-
 :root {
-  --bg-body: #050505;
-  --bg-card: #0f0f10;
-  --bg-footer: #000000;
-  
-  --purple-start: #ff75e1;
-  --purple-end: rgba(249, 0, 193, 0.3);
-  
-  --text-main: #ffffff;
-  --text-muted: #71717a;
-  
+  --bg: #06060a;
+  --bg-card: #0e0e14;
+  --bg-card-hover: #13131c;
+  --surface: #16161f;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.14);
+
+  --pink: #f43efa;
+  --pink-dim: rgba(244,62,250,0.18);
+  --pink-glow: rgba(244,62,250,0.35);
+  --violet: #8b5cf6;
+  --violet-dim: rgba(139,92,246,0.15);
+
+  --text: #f0f0f8;
+  --text-muted: #6b6b80;
+  --text-dim: #9898b0;
+
   --green: #22c55e;
-  --red: #ef4444;
-  --btn-blocked: #27272a;
+  --red: #ff4466;
+
+  --radius: 14px;
+  --radius-sm: 8px;
+  --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
 }
 
-/* Container único para o conteúdo do Overlay */
-.single-card-wrapper {
-    background: var(--bg-card);
-    border-radius: 16px;
-    overflow: hidden; /* Garante que a imagem não saia das bordas arredondadas */
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    max-width: 650px;
-    margin: 0 auto;
-}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-/* Espaçamento para a parte de listas dentro do card único */
-.nested-prices-container {
-    padding: 0 1.5rem 1.5rem 1.5rem;
-}
-
-/* Divisor visual discreto entre o topo e a lista */
-.card-internal-divider {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.05);
-    margin: 0 1.5rem 1.5rem 1.5rem;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--bg-body);
-  color: var(--text-main);
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* --- NAVBAR --- */
-.navbar {
-  background: rgba(10, 10, 10, 0.4); 
-  backdrop-filter: blur(12px); 
-  -webkit-backdrop-filter: blur(12px); 
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
   position: fixed;
-  top: 0;
-  width: 100%;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* ── TYPOGRAPHY ── */
+h1, h2, h3, h4, h5, .logo-text { font-family: 'Syne', sans-serif; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(244,62,250,0.3); border-radius: 99px; }
+
+/* ════════════════════════════════
+   NAVBAR
+════════════════════════════════ */
+.navbar {
+  position: fixed;
+  top: 0; width: 100%;
   z-index: 1000;
-  padding: 0.8rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.9rem 0;
+  background: rgba(6,6,10,0.75);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
 }
 
 .nav-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 6%;
+  padding: 0 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-main);
+  gap: 10px;
   text-decoration: none;
-  letter-spacing: 0.5px;
+  color: var(--text);
 }
 
 .logo img {
-  height: 35px;
-  width: auto;
+  width: 34px; height: 34px;
   border-radius: 50%;
+  border: 1.5px solid var(--pink-dim);
+}
+
+.logo-text {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.logo-text span {
+  background: linear-gradient(90deg, var(--pink), var(--violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  align-items: center;
+  gap: 0.3rem;
 }
 
 .nav-links a {
   text-decoration: none;
   color: var(--text-muted);
+  font-size: 0.875rem;
   font-weight: 500;
-  font-size: 0.9rem;
-  transition: color 0.3s;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  letter-spacing: 0.01em;
 }
 
 .nav-links a:hover, .nav-links a.active {
-  color: var(--text-main);
+  color: var(--text);
+  background: var(--surface);
 }
 
+.nav-discord {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: linear-gradient(135deg, var(--pink), var(--violet)) !important;
+  color: white !important;
+  padding: 0.45rem 1rem !important;
+}
+
+.nav-discord:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+/* ── Mobile Menu Btn ── */
 .mobile-menu-btn {
   display: none;
   background: none;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 38px; height: 38px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
+  font-size: 1rem;
+  transition: var(--transition);
 }
 
-/* --- HEADER --- */
+.mobile-menu-btn:hover { background: var(--surface); border-color: var(--border-hover); }
+
+/* ── Mobile Sidebar ── */
+.menu-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(6px);
+  z-index: 1999;
+  opacity: 0; visibility: hidden;
+  transition: 0.3s;
+}
+
+.menu-overlay.active { opacity: 1; visibility: visible; }
+
+.mobile-sidebar {
+  position: fixed;
+  top: 0; right: -100%;
+  width: 280px; height: 100vh;
+  background: #0a0a10;
+  border-left: 1px solid var(--border);
+  z-index: 2000;
+  transition: 0.4s cubic-bezier(0.4,0,0.2,1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mobile-sidebar.active { right: 0; }
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  background: linear-gradient(90deg, var(--pink), var(--violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.close-sidebar-btn {
+  background: none; border: none;
+  color: var(--text-muted);
+  font-size: 1.2rem; cursor: pointer;
+  width: 34px; height: 34px;
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+
+.close-sidebar-btn:hover { background: var(--surface); color: var(--text); }
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.02);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-links a:hover {
+  background: var(--pink-dim);
+  color: var(--pink);
+}
+
+.sidebar-links a i { width: 18px; text-align: center; }
+
+/* ════════════════════════════════
+   HERO HEADER
+════════════════════════════════ */
 header {
-  text-align: center;
-  padding: 14rem 1rem 10rem; 
-  background: 
-    linear-gradient(to bottom, rgba(5, 5, 5, 0.3), var(--bg-body)),
-    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
-    url('https://64.media.tumblr.com/a63daddc6a9f668a6e469f3b67a16f00/c8a0ce503241c5b5-95/s400x600/99f95339505976886278a3b7b4397ca11256de6d.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   position: relative;
+  padding: 13rem 5% 9rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(6,6,10,0.2) 0%, var(--bg) 100%),
+    url('https://64.media.tumblr.com/a63daddc6a9f668a6e469f3b67a16f00/c8a0ce503241c5b5-95/s400x600/99f95339505976886278a3b7b4397ca11256de6d.png') center/cover no-repeat;
+  z-index: -1;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(to top, var(--bg), transparent);
+}
+
+/* Glowing orbs */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.orb-1 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(244,62,250,0.15), transparent 70%);
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+}
+
+.orb-2 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(139,92,246,0.12), transparent 70%);
+  top: 50px; left: 15%;
+}
+
+header .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--pink);
+  background: rgba(244,62,250,0.08);
+  border: 1px solid rgba(244,62,250,0.2);
+  padding: 0.4rem 1rem;
+  border-radius: 99px;
+  margin-bottom: 1.5rem;
 }
 
 header h1 {
-  font-size: 3rem;
-  color: white;
-  margin-bottom: 10px;
+  font-size: clamp(2.8rem, 7vw, 5rem);
   font-weight: 800;
-  letter-spacing: -1px;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.2rem;
+}
+
+header h1 span {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--pink), var(--violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 header p {
   color: var(--text-muted);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+  max-width: 420px;
+  margin: 0 auto;
 }
 
-/* --- CATÁLOGO & CARDS --- */
+/* ════════════════════════════════
+   CATALOG
+════════════════════════════════ */
 .catalogo {
-  padding: 0 6% 6rem;
+  padding: 0 5% 7rem;
   max-width: 1200px;
-  margin: -4rem auto 0;
+  margin: -3rem auto 0;
   position: relative;
   z-index: 2;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
-/* CARD ESTILO BASE */
+.section-label::before, .section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ── CARD ── */
 .card {
   background: var(--bg-card);
-  border-radius: 16px;
+  border-radius: var(--radius);
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(244,62,250,0.04), transparent 60%);
+  opacity: 0;
+  transition: var(--transition);
+  border-radius: var(--radius);
+  pointer-events: none;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(244,62,250,0.12);
+  border-color: var(--border-hover);
 }
+
+.card:hover::before { opacity: 1; }
 
 .image-wrap {
   position: relative;
@@ -654,58 +409,71 @@ header p {
 }
 
 .card img {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
+  filter: brightness(0.85);
 }
 
 .card:hover img {
-  transform: scale(1.05);
+  transform: scale(1.06);
+  filter: brightness(1);
+}
+
+/* Image gradient overlay */
+.image-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 80px;
+  background: linear-gradient(to top, var(--bg-card), transparent);
 }
 
 .card-content {
-  padding: 1.5rem;
+  padding: 1.4rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
 .card-content h3 {
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: #fff;
+  margin-bottom: 0.45rem;
+  color: var(--text);
+  letter-spacing: -0.02em;
 }
 
 .status {
-  font-size: 0.8rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 1rem;
-  font-weight: 500;
+  margin-bottom: 0.8rem;
 }
 
 .status::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
+  content: '';
+  width: 6px; height: 6px;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .status.disponivel { color: var(--green); }
-.status.disponivel::before { background-color: var(--green); }
+.status.disponivel::before { background: var(--green); box-shadow: 0 0 6px var(--green); }
 
-.status.em-breve { color: var(--red); }
-.status.em-breve::before { background-color: var(--red); }
+.status.em-breve { color: var(--text-muted); }
+.status.em-breve::before { background: var(--text-muted); }
 
 .info {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: var(--text-muted);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   line-height: 1.5;
+  flex-grow: 1;
 }
 
 .card-footer {
@@ -713,274 +481,177 @@ header p {
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
+  gap: 1rem;
 }
 
-.preco   {
-  font-size: 1.2rem;
-  color: #fff;
-  font-weight: 700;
+.preco {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.preco small {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-left: 2px;
 }
 
 .btn-acao {
   text-decoration: none;
-  padding: 0.6rem 1.4rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
+  padding: 0.55rem 1.2rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
   font-weight: 600;
-  transition: all 0.2s ease;
+  transition: all var(--transition);
   color: white;
   display: inline-block;
   cursor: pointer;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
 .btn-ver-mais {
-  background: linear-gradient(90deg, var(--purple-start), var(--purple-end));
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+  background: linear-gradient(135deg, var(--pink), var(--violet));
+  box-shadow: 0 4px 14px rgba(244,62,250,0.25);
 }
 
 .btn-ver-mais:hover {
   filter: brightness(1.1);
   transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(244,62,250,0.35);
 }
 
 .btn-bloqueado {
-  background: var(--btn-blocked);
-  color: #555;
+  background: rgba(255,255,255,0.04);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
   cursor: not-allowed;
 }
 
-/* --- FOOTER --- */
-footer {
-  background-color: var(--bg-footer);
-  padding: 4rem 0 2rem;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  border-top: 1px solid rgba(255,255,255,0.05);
+/* Em breve card tint */
+.card.em-breve {
+  opacity: 0.7;
 }
 
-.footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 6%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 3rem;
+.card.em-breve:hover {
+  transform: none;
+  box-shadow: none;
 }
 
-.footer-brand {
-  flex: 1;
-  min-width: 250px;
-}
-
-.footer-brand h4 {
-  color: #fff;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.footer-brand h4 img {
-  height: 30px;
-  border-radius: 50%;
-}
-
-.social-icons {
-  display: flex;
-  gap: 10px;
-  margin-top: 1.5rem;
-}
-
-.social-btn {
-  background: #111;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: 0.3s;
-  border: 1px solid #222;
-}
-
-.social-btn:hover {
-  background: #222;
-  color: #fff;
-  border-color: #333;
-}
-
-.footer-links-group {
-  display: flex;
-  gap: 4rem;
-}
-
-.footer-column h5 {
-  color: #fff;
-  font-size: 0.75rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 1.2rem;
-}
-
-.footer-column ul {
-  list-style: none;
-}
-
-.footer-column ul li {
-  margin-bottom: 0.8rem;
-}
-
-.footer-column ul li a {
-  text-decoration: none;
-  color: var(--text-muted);
-  transition: color 0.2s;
-}
-
-.footer-column ul li a:hover {
-  color: #fff;
-}
-
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #0a0a0a;
-  padding: 8px 16px;
-  border-radius: 20px;
-  border: 1px solid #222;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  background-color: var(--green);
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--green);
-}
-
-.footer-bottom {
-  max-width: 1200px;
-  margin: 3rem auto 0;
-  padding: 2rem 6% 0;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.build-version {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.8rem;
-}
-
-.dot-purple {
-  width: 6px;
-  height: 6px;
-  background-color: var(--purple-end);
-  border-radius: 50%;
-}
-
-/* =========================================
-   CSS ADICIONAL PARA O OVERLAY (TELA NOVA)
-   ========================================= */
+/* ════════════════════════════════
+   OVERLAY
+════════════════════════════════ */
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(5, 5, 5, 0.95);
+  background: rgba(4,4,8,0.92);
+  backdrop-filter: blur(12px);
   display: none;
-  z-index: 9999;
+  z-index: 9000;
   overflow-y: auto;
-  backdrop-filter: blur(5px);
 }
 
-.overlay.active {
-  display: block;
-}
+.overlay.active { display: block; }
 
 .overlay-header {
   display: flex;
-  justify-content: flex-end; /* Botão fechar na direita */
-  align-items: center;
-  padding: 1.5rem 6%;
+  justify-content: flex-end;
+  padding: 1.2rem 5%;
   position: sticky;
   top: 0;
-  background: transparent;
   z-index: 10;
   pointer-events: none;
 }
 
-.overlay-header .close-btn {
+.overlay-close {
   pointer-events: auto;
-  background: rgba(0,0,0,0.5);
-  border: 1px solid rgba(255,255,255,0.1);
-  width: 40px;
-  height: 40px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  width: 40px; height: 40px;
   border-radius: 50%;
-  font-size: 1.2rem;
-  color: #fff;
+  color: var(--text-muted);
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.2s;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  transition: var(--transition);
 }
 
-.overlay-header .close-btn:hover {
-  background: var(--red);
-  border-color: var(--red);
+.overlay-close:hover { background: var(--red); border-color: var(--red); color: white; }
+
+.overlay-content {
+  padding: 0 5% 5rem;
+  max-width: 700px;
+  margin: 0 auto;
+  animation: slideUp 0.3s ease;
 }
 
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-
-/* Ajustes Específicos do Card dentro do Overlay */
-.overlay-top-card {
-  width: 100%;
+/* Product header inside overlay */
+.overlay-product-header {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
   margin-bottom: 2rem;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-  cursor: default;
-}
-.overlay-top-card .image-wrap {
-  height: 220px;
+  background: var(--bg-card);
 }
 
-/* Divisor */
-.overlay-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  margin: 2rem 0;
-  width: 100%;
+.overlay-img {
+  width: 100%; height: 220px;
+  object-fit: cover;
+  filter: brightness(0.9);
+  display: block;
 }
 
-/* Estilo das Listas (Tabelas) */
-.section-wrapper {
-  margin-bottom: 2rem; /* Espaço entre as listas */
+.overlay-product-info {
+  padding: 1.4rem;
 }
+
+.overlay-product-info h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.4rem;
+}
+
+.overlay-product-info p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Sections */
+.section-wrapper { margin-bottom: 1.5rem; }
 
 .section-title {
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.8rem;
-  padding-left: 5px;
-  border-left: 3px solid var(--purple-start);
-  line-height: 1.2;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pink);
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title::before {
+  content: '';
+  width: 14px; height: 2px;
+  background: var(--pink);
+  flex-shrink: 0;
 }
 
 .price-table {
-  background: #0f0f10;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
   overflow: hidden;
 }
 
@@ -988,1674 +659,1395 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.2rem;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  font-size: 0.95rem;
-  transition: background 0.2s;
+  padding: 0.8rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+  transition: background var(--transition);
+  gap: 1rem;
 }
 
-.price-row:hover {
-  background: rgba(255,255,255,0.02);
-}
+.price-row:last-child { border-bottom: none; }
 
-.price-row:last-child {
-  border-bottom: none;
-}
+.price-row:hover { background: rgba(255,255,255,0.02); }
+
+.price-row span:first-child { color: var(--text-dim); }
 
 .price-row span:last-child {
+  font-family: 'Syne', sans-serif;
   font-weight: 700;
-  color: var(--purple-start);
+  color: var(--pink);
   white-space: nowrap;
+  font-size: 0.9rem;
 }
 
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .mobile-menu-btn { display: block; }
-  .footer-links-group { flex-direction: column; gap: 2rem; }
-  .footer-bottom { flex-direction: column; text-align: center; }
+/* Info overlay card */
+.info-overlay-header {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
 }
 
+.info-overlay-header img {
+  width: 100%; height: 200px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.8);
+}
+
+.info-overlay-body {
+  padding: 0;
+}
+
+.info-overlay-body h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.info-overlay-body h1 span {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--pink), var(--violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.info-subtitle {
+  color: var(--green);
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.info-subtitle .dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; box-shadow: 0 0 6px var(--green); }
+
+.term-block {
+  margin-bottom: 1.2rem;
+  padding: 1.1rem 1.2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  border-left: 2px solid var(--pink);
+}
+
+.term-block h4 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pink);
+  margin-bottom: 0.5rem;
+}
+
+.term-block p {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+
+/* ════════════════════════════════
+   TEAM SECTION (overlay)
+════════════════════════════════ */
 .team-wrapper {
   text-align: center;
-  padding: 60px 20px;
+  padding: 2rem 0;
 }
 
-.team-title {
-  font-size: 40px;
-  font-weight: 900;
-  margin-bottom: 10px;
+.team-heading {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.4rem;
 }
 
-.team-subtitle {
-  color: #999;
-  margin-bottom: 50px;
+.team-heading span {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--pink), var(--violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.team-sub {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 2.5rem;
 }
 
 .team-grid {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 1.5rem;
   flex-wrap: wrap;
 }
 
-/* CARD BASE */
 .team-card {
+  width: 220px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.2rem;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
   position: relative;
-  width: 320px;
-  background: linear-gradient(145deg, #0a0a0a, #050505);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 30px;
-  padding: 30px;
-  transition: transform 0.4s ease;
+  overflow: hidden;
+}
+
+.team-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--pink), var(--violet));
+  opacity: 0;
+  transition: var(--transition);
 }
 
 .team-card:hover {
-  transform: translateY(-8px) scale(1.05);
+  transform: translateY(-6px);
+  border-color: rgba(244,62,250,0.2);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(244,62,250,0.1);
 }
+
+.team-card:hover::before { opacity: 1; }
 
 .team-card.destaque {
-  transform: scale(1.07);
-  z-index: 2;
+  border-color: rgba(244,62,250,0.2);
 }
 
-.team-card.destaque:hover {
-  transform: translateY(-8px) scale(1.09);
-}
+.team-card.destaque::before { opacity: 1; }
 
-/* BADGE */
-.role-badge {
-  display: inline-block;
-  background: #f1c40f;
-  color: #000;
-  font-weight: 700;
-  font-size: 13px;
-  padding: 10px 22px;
-  border-radius: 50px;
-  text-align: center;
-  white-space: nowrap;
-  width: fit-content;
-}
-
-/* ÍCONE */
-.card-icon {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 22px;
-  color: rgba(249, 0, 193, 0.3); /* #F900C1 suave */
-  transition: 0.4s;
-}
-
-.team-card:hover .card-icon {
-  color: #ff75e1;
-  transform: rotate(12deg);
-}
-
-/* AVATAR */
-.avatar-wrapper {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  margin: 0 auto 20px;
+.team-avatar {
+  width: 90px; height: 90px;
   border-radius: 50%;
-  overflow: hidden;
-  border: 4px solid rgba(255,255,255,0.1);
-  transition: 0.4s;
-}
-
-.avatar-wrapper img {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
+  border: 2px solid var(--border);
+  margin: 0 auto 1rem;
+  display: block;
+  transition: border-color var(--transition);
 }
 
-.team-card:hover .avatar-wrapper {
-  border-color: rgba(249, 0, 193, 0.6); /* #F900C1 */
-  box-shadow: 0 0 40px rgba(255, 117, 225, 0.4); /* #ff75e1 */
-}
+.team-card:hover .team-avatar { border-color: rgba(244,62,250,0.4); }
 
-/* BADGE HOVER */
-.hover-badge {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  opacity: 0;
-  transition: 0.4s;
-}
-
-.team-card:hover .hover-badge {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-.hover-badge span {
-  background: linear-gradient(to right, #F900C1, #ff75e1);
-  padding: 6px 18px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 900;
-  text-transform: uppercase;
-  color: black;
-}
-
-/* LABELS */
-.role-label {
-  font-size: 10px;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-}
-
-.role-gold { color: #F900C1; }
-.role-blue { color: #F900C1; }
-.role-purple { color: #F900C1; }
-
-.desc {
-  color: #aaa;
-  font-size: 13px;
-}
-
-
-/* =========================================
-   NEW CSS FOR COMPACT OVERLAYS
-   ========================================= */
-.compact-wrapper {
-    max-width: 600px; /* Reduced max-width for "exprimido" look */
-    margin: 4rem auto; /* Vertical centering and horizontal spacing */
-    background: var(--bg-card);
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.08);
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-    padding: 0; /* Clear internal padding */
-}
-
-/* Target specific content areas within compact wrappers */
-.compact-wrapper.product-content {
-    padding: 1rem; /* Internal padding for product info and lists */
-}
-
-.compact-wrapper.info-content {
-    padding: 1.5rem; /* Standard internal padding for text-heavy info popups */
-}
-
-/* Nested elements styles to remove internal borders and adjust spacing */
-.compact-wrapper .card.info-card {
-    border: none;
-    background: transparent;
-    border-radius: 0;
-    margin-bottom: 0;
-    margin-top: 0;
-}
-.compact-wrapper .card.info-card .card-content {
-    padding: 0; /* Let overall compact wrapper handle padding */
-}
-
-/* Target image wraps specifically inside a card inside compact-wrapper to adjust for product popups */
-.compact-wrapper .card.nested-product-card {
-    border: none;
-    border-radius: 0;
-    margin-bottom: 0;
-}
-.compact-wrapper .card.nested-product-card .image-wrap {
-    border-radius: 12px;
-    margin-bottom: 1rem;
-    height: 180px; /* Matching compact cards on main page */
-}
-.compact-wrapper .card.nested-product-card .card-content {
-    padding: 0;
-}
-.compact-wrapper .card.nested-product-card .status {
-    margin-bottom: 1rem;
-}
-.compact-wrapper .card.nested-product-card .info {
-    margin-bottom: 0.5rem;
-}
-
-/* Global nested image wrap style adjustment inside compact wrapper for standard cards */
-.compact-wrapper .card.info-card .image-wrap {
-    height: 180px; /* Matching compact image look */
-    border-radius: 12px;
-    margin-bottom: 0.5rem;
-}
-.compact-wrapper .card.info-card .image-wrap img {
-    height: 100%;
-    object-fit: cover;
-}
-
-.compact-wrapper .card.info-card .card-content h3 {
-    font-size: 1.2rem;
-}
-.compact-wrapper .card.info-card .status {
-    margin-bottom: 0.5rem;
-}
-.compact-wrapper .card.info-card .info {
-    margin-bottom: 1rem;
-}
-
-.compact-wrapper .overlay-divider {
-    margin: 1rem 0; /* Decreased global margin for nested elements */
-}
-
-.compact-wrapper .section-wrapper {
-    margin-bottom: 1rem; /* Decreased margin */
-}
-
-.compact-wrapper .price-table {
-    background: transparent; /* Rely on compact wrapper border */
-    border: 1px solid rgba(255,255,255,0.05); /* Lighter nested border */
-}
-.compact-wrapper .price-row {
-    padding: 0.8rem 1rem; /* Decreased padding */
-}
-
-/* Re-target nested info-list within compact wrapper info card */
-.compact-wrapper .card.info-card .info-list {
-    margin-top: 1rem;
-}
-.compact-wrapper .card.info-card .info-item {
-    margin-bottom: 0.5rem; /* Reduced margin */
-}
-.compact-wrapper .card.info-card .card-footer {
-    margin-top: 1rem;
-}
-
-/* CSS for team overlay (Quem Faz Acontecer) to ensure it stays wide and clean */
-#overlayContent .team-wrapper {
-    width: 100%;
-    padding: 40px; /* Keep good spacing */
-    max-width: none; /* No max width limitation */
-    margin: 0;
-    display: block !important; /* Ensure it overrides any flex/display changes */
-}
-#overlayContent .team-grid {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-}
-#overlayContent .team-card {
-    width: 320px; /* Keep defined width */
-}
-
-/* =========================
-   STATUS TITLE STYLE
-   ========================= */
-
-.status-title{
-  font-family: 'Inter', sans-serif;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.05em;
-  line-height: 0.9;
-  font-size: 2.4rem;
-
-  display: flex;
-  align-items: center;
-  gap: 12px; /* distância entre as palavras */
-}
-
-.status-title .status-italic{
-  font-style: italic;
-}
-
-/* subtítulo */
-
-.status-subtitle{
-  font-family: 'Inter', sans-serif;
+.team-card h3 {
+  font-size: 1rem;
   font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.team-role {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pink);
+  background: var(--pink-dim);
+  padding: 0.25rem 0.7rem;
+  border-radius: 99px;
+  display: inline-block;
+}
+
+/* ════════════════════════════════
+   FOOTER
+════════════════════════════════ */
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 4rem 0 2rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.footer-brand { flex: 1; min-width: 220px; }
+
+.footer-brand .logo { margin-bottom: 0.7rem; }
+
+.footer-brand p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  max-width: 240px;
+  line-height: 1.5;
+}
+
+.social-icons {
+  display: flex;
+  gap: 8px;
+  margin-top: 1.2rem;
+}
+
+.social-btn {
+  width: 36px; height: 36px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  text-decoration: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.social-btn:hover {
+  background: var(--pink-dim);
+  border-color: rgba(244,62,250,0.3);
+  color: var(--pink);
+  transform: translateY(-2px);
+}
+
+.footer-links-group {
+  display: flex;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.footer-column h5 {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+
+.footer-column ul { list-style: none; }
+
+.footer-column ul li { margin-bottom: 0.6rem; }
+
+.footer-column ul li a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  transition: color var(--transition);
+}
+
+.footer-column ul li a:hover { color: var(--text); }
+
+.footer-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text-muted);
   letter-spacing: 0.08em;
-  color: #2ecc71;
+  cursor: pointer;
+  transition: var(--transition);
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+.footer-status:hover {
+  border-color: rgba(34,197,94,0.3);
+  color: var(--green);
+}
+
+.status-dot-green {
+  width: 7px; height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--green);
+  flex-shrink: 0;
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 3rem auto 0;
+  padding: 2rem 5% 0;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-bottom p { font-size: 0.8rem; }
+.footer-bottom p + p { font-size: 0.72rem; color: #333; margin-top: 4px; }
+
+.version-badge {
   display: flex;
   align-items: center;
   gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
 }
 
-/* bolinha verde */
-
-.status-dot{
-  width: 8px;
-  height: 8px;
-  background: #2ecc71;
+.version-dot {
+  width: 6px; height: 6px;
+  background: linear-gradient(135deg, var(--pink), var(--violet));
   border-radius: 50%;
-  display: inline-block;
 }
 
-/* =========================
-   TEAM TITLE STYLE
-   ========================= */
+/* ════════════════════════════════
+   FLOATING CHAT BUTTON
+════════════════════════════════ */
+.floating-btn {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  width: 56px; height: 56px;
+  z-index: 10000;
+  border-radius: 50%;
+  box-shadow: 0 4px 20px rgba(244,62,250,0.4);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
 
-.team-title-custom{
-  font-family: 'Inter', sans-serif;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.04em;
-  line-height: 0.9;
-  font-size: 2.4rem;
+.floating-btn img {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
+.floating-btn:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 28px rgba(244,62,250,0.6);
+}
+
+/* ════════════════════════════════
+   AI CHAT OVERLAY
+════════════════════════════════ */
+.ai-chat-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4,4,8,0.6);
+  backdrop-filter: blur(8px);
+  z-index: 11000;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 14px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0 24px 92px 0;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
 }
 
-.team-title-custom .team-italic{
-  font-style: italic;
-}
+.ai-chat-overlay.active { opacity: 1; visibility: visible; }
 
-.buy-title{
-  font-family: 'Inter', sans-serif;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.04em;
-  line-height: 0.9;
-  font-size: 2.4rem;
-
+.ai-chat-window {
+  width: 370px;
+  height: 520px;
+  background: #0e0e16;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
   display: flex;
-  justify-content: flex-start; /* esquerda */
-  align-items: center;
-  gap: 14px;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(20px) scale(0.96);
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 
-.buy-title .buy-italic{
-  font-style: italic;
+.ai-chat-overlay.active .ai-chat-window {
+  transform: translateY(0) scale(1);
 }
 
-.site-title{
-  font-family: 'Inter', sans-serif;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.04em;
-  line-height: 0.9;
-  font-size: 3rem;
-
+.ai-chat-header {
+  padding: 1rem 1.2rem;
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid var(--border);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 14px;
 }
 
-.site-title .site-italic{
-  font-style: italic;
+.header-info { display: flex; align-items: center; gap: 10px; }
+
+.header-avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(244,62,250,0.3);
 }
 
+.header-text h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.status-online {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dot-online {
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 5px var(--green);
+}
+
+.close-chat-btn {
+  background: none; border: none;
+  color: var(--text-muted);
+  font-size: 1rem;
+  cursor: pointer;
+  width: 30px; height: 30px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+
+.close-chat-btn:hover { background: rgba(255,68,102,0.15); color: var(--red); }
+
+.ai-chat-body {
+  flex: 1;
+  padding: 1.2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.ai-chat-body::-webkit-scrollbar { width: 4px; }
+.ai-chat-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.chat-message { display: flex; max-width: 85%; }
+
+.message-content {
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.ai-message { align-self: flex-start; }
+.ai-message .message-content {
+  background: var(--surface);
+  color: var(--text-dim);
+  border-bottom-left-radius: 3px;
+}
+
+.user-message { align-self: flex-end; }
+.user-message .message-content {
+  background: linear-gradient(135deg, rgba(244,62,250,0.8), rgba(139,92,246,0.8));
+  color: white;
+  border-bottom-right-radius: 3px;
+}
+
+.ai-chat-input-area {
+  padding: 0.8rem 1rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  background: rgba(0,0,0,0.2);
+}
+
+#aiChatInput {
+  flex: 1;
+  padding: 0.6rem 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  transition: border-color var(--transition);
+}
+
+#aiChatInput:focus { outline: none; border-color: rgba(244,62,250,0.35); }
+#aiChatInput::placeholder { color: var(--text-muted); }
+
+.send-message-btn {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, var(--pink), var(--violet));
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  transition: filter var(--transition), transform var(--transition);
+  flex-shrink: 0;
+}
+
+.send-message-btn:hover { filter: brightness(1.1); transform: scale(1.05); }
+
+/* ════════════════════════════════
+   RESPONSIVE
+════════════════════════════════ */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
+
+  header { padding: 10rem 5% 7rem; }
+  header h1 { font-size: 2.6rem; }
+
+  .footer-links-group { flex-direction: column; gap: 2rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  .ai-chat-overlay { padding: 0; align-items: flex-end; justify-content: center; }
+  .ai-chat-window { width: 100%; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+
+  .team-grid { gap: 1rem; }
+  .team-card { width: 100%; max-width: 260px; }
+}
+
+@media (max-width: 480px) {
+  .floating-btn { bottom: 16px; right: 16px; width: 50px; height: 50px; }
+}
 </style>
 </head>
 
 <body>
 
-<button class="mobile-open-btn" onclick="toggleMenu()">
-    <i class="fa-solid fa-bars"></i>
-</button>
-
+<!-- Mobile Sidebar -->
 <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
-
 <nav class="mobile-sidebar" id="mobileSidebar">
-    <div class="sidebar-header">
-        <span class="sidebar-logo">NOVA</span>
-        <button class="close-btn" onclick="toggleMenu()">✕</button>
-    </div>
-
-    <div class="sidebar-links">
-    <a href="#" onclick="toggleMenu()">
-        <i class="fa-solid fa-house"></i> Início
-    </a>
-    <a href="#" onclick="toggleMenu(); openInfoOverlay('comoComprar');">
-        <i class="fa-solid fa-cart-shopping"></i> Como Comprar
-    </a>
-    <a href="#" onclick="toggleMenu(); openInfoOverlay('termos');">
-        <i class="fa-solid fa-file-contract"></i> Termos
-    </a>
-    <a href="https://discord.gg/Szqbsd4TNa" target="_blank" rel="noopener noreferrer">
-        <i class="fa-brands fa-discord"></i> Discord
-    </a>
-</div>
+  <div class="sidebar-header">
+    <span class="sidebar-logo">NOVA</span>
+    <button class="close-sidebar-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="sidebar-links">
+    <a href="#" onclick="toggleMenu()"><i class="fa-solid fa-house"></i> Início</a>
+    <a href="#" onclick="toggleMenu(); openInfoOverlay('comoComprar');"><i class="fa-solid fa-cart-shopping"></i> Como Comprar</a>
+    <a href="#" onclick="toggleMenu(); openInfoOverlay('termos');"><i class="fa-solid fa-file-contract"></i> Termos</a>
+    <a href="https://discord.gg/Szqbsd4TNa" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Discord</a>
+  </div>
 </nav>
 
+<!-- Navbar -->
 <nav class="navbar">
   <div class="nav-container">
     <a href="#" class="logo">
       <img src="https://64.media.tumblr.com/c4beee0769a4381a43741e02c28defea/182fcda3a0d77b6c-42/s2048x3072/aebc414dc2195a76b42655ed294e7633ed551872.png" alt="Logo">
-      NovaCommunity
+      <span class="logo-text"><span>Nova</span> Community</span>
     </a>
-
     <div class="nav-links">
       <a href="#" class="active">Início</a>
-      
-      <a href="#" onclick="openInfoOverlay('comoComprar')">Como Comprar</a>
-      <a href="#" onclick="openInfoOverlay('termos')">Termos de Compra</a>
+      <a href="#" onclick="openInfoOverlay('comoComprar'); return false;">Como Comprar</a>
+      <a href="#" onclick="openInfoOverlay('termos'); return false;">Termos</a>
       <a href="https://discord.com/channels/1404336816563159111/1404503231245193376">Tickets</a>
-      <a href="#">.</a>
+      <a href="https://discord.gg/Szqbsd4TNa" target="_blank" class="nav-discord"><i class="fa-brands fa-discord"></i> Discord</a>
     </div>
-
-    <button class="mobile-menu-btn" onclick="toggleMenu()">
-    <i class="fa-solid fa-bars"></i>
-    </button>
+    <button class="mobile-menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
   </div>
 </nav>
 
+<!-- Hero -->
 <header>
-  <h1 class="site-title">
-    <span class="site-italic">Nova</span>
-    <span>Community</span>
-  </h1>
-  <p>Catálogo Oficial de Serviços</p>
+  <div class="hero-bg"></div>
+  <div class="hero-orb orb-1"></div>
+  <div class="hero-orb orb-2"></div>
+  <p class="eyebrow"><i class="fa-solid fa-star" style="font-size:0.65rem;"></i> Catálogo Oficial</p>
+  <h1><span>Nova</span><br>Community</h1>
+  <p>Serviços premium para seus jogos favoritos, com segurança e qualidade garantida.</p>
 </header>
 
+<!-- Catalog -->
 <section class="catalogo">
-<div class="grid">
+  <div class="section-label">Produtos disponíveis</div>
+  <div class="grid">
 
-  <div class="card">
-    <div class="image-wrap">
-      <img src="https://fastcdn.hoyoverse.com/content-v2/plat/162828/c50d8c6e2597e9f88a66e06c3c32c5c5_8400293576027107227.jpg" alt="Genshin Impact">
-    </div>
-    <div class="card-content">
-      <h3>Genshin Impact: Manual</h3>
-      <div class="status disponivel">Disponível</div>
-      <p class="info">Serviços Premium de Genshin Impact. (Catálogo Dessincronizado.)</p>
-      <div class="card-footer">
-        <span class="preco">R$ 1,00</span>
-        <a onclick="openOverlay('genshin')" class="btn-acao btn-ver-mais">Ver Mais</a>
+    <div class="card">
+      <div class="image-wrap">
+        <img src="https://fastcdn.hoyoverse.com/content-v2/plat/162828/c50d8c6e2597e9f88a66e06c3c32c5c5_8400293576027107227.jpg" alt="Genshin Impact">
+      </div>
+      <div class="card-content">
+        <h3>Genshin Impact: Manual</h3>
+        <div class="status disponivel">Disponível</div>
+        <p class="info">Serviços Premium de Genshin Impact. Catálogo completo de missões, exploração, ascensão e mais.</p>
+        <div class="card-footer">
+          <span class="preco">R$ 1,00 <small>/ serviço</small></span>
+          <a onclick="openOverlay('genshin')" class="btn-acao btn-ver-mais">Ver Mais</a>
+        </div>
       </div>
     </div>
-  </div> 
 
-<div class="card">
-    <div class="image-wrap">
-      <img src="https://onpoplife.com.br/wp-content/uploads/2026/01/Key-Art_EN.jpg" alt="Genshin Impact">
-    </div>
-    <div class="card-content">
-      <h3>Genshin Impact: Script</h3>
-      <div class="status disponivel">Disponível</div>
-      <p class="info">Serviços Premium de Genshin Impact. (Catálogo Dessincronizado.)</p>
-      <div class="card-footer">
-        <span class="preco">R$ 0,50</span>
-        <a onclick="openOverlay('genshinsc')" class="btn-acao btn-ver-mais">Ver Mais</a>
+    <div class="card">
+      <div class="image-wrap">
+        <img src="https://onpoplife.com.br/wp-content/uploads/2026/01/Key-Art_EN.jpg" alt="Genshin Impact Script">
+      </div>
+      <div class="card-content">
+        <h3>Genshin Impact: Script</h3>
+        <div class="status disponivel">Disponível</div>
+        <p class="info">Serviços via script para Genshin Impact. Preços mais acessíveis, mesma qualidade.</p>
+        <div class="card-footer">
+          <span class="preco">R$ 0,50 <small>/ serviço</small></span>
+          <a onclick="openOverlay('genshinsc')" class="btn-acao btn-ver-mais">Ver Mais</a>
+        </div>
       </div>
     </div>
-  </div> 
 
-  <div class="card">
-    <div class="image-wrap">
-      <img src="https://onpoplife.com.br/wp-content/uploads/2025/12/2.5-kv-capa.jpg" alt="Zenless Zone Zero">
-    </div>
-    <div class="card-content">
-      <h3>Zenless Zone Zero</h3>
-      <div class="status disponivel">Disponível</div>
-      <p class="info">Serviços Premium de Zenless Zone Zero.</p>
-      <div class="card-footer">
-        <span class="preco">R$ 2,00</span>
-        <a onclick="openOverlay('zzz')" class="btn-acao btn-ver-mais">Ver Mais</a>
+    <div class="card">
+      <div class="image-wrap">
+        <img src="https://onpoplife.com.br/wp-content/uploads/2025/12/2.5-kv-capa.jpg" alt="Zenless Zone Zero">
+      </div>
+      <div class="card-content">
+        <h3>Zenless Zone Zero</h3>
+        <div class="status disponivel">Disponível</div>
+        <p class="info">Serviços Premium de Zenless Zone Zero. Missões, policromos, end-game e cuidados com a conta.</p>
+        <div class="card-footer">
+          <span class="preco">R$ 2,00 <small>/ serviço</small></span>
+          <a onclick="openOverlay('zzz')" class="btn-acao btn-ver-mais">Ver Mais</a>
+        </div>
       </div>
     </div>
+
+    <div class="card">
+      <div class="image-wrap">
+        <img src="https://webstatic.hoyoverse.com/upload/op-public/2023/09/14/3c862d085db721a5625b6e12649399bc_8067514115196038699.png" alt="Honkai Star Rail">
+      </div>
+      <div class="card-content">
+        <h3>Honkai: Star Rail</h3>
+        <div class="status disponivel">Disponível</div>
+        <p class="info">Serviços Premium de Honkai: Star Rail. Stellar Jade, end-game, exploração e muito mais.</p>
+        <div class="card-footer">
+          <span class="preco">R$ 5,00 <small>/ serviço</small></span>
+          <a onclick="openOverlay('hsr')" class="btn-acao btn-ver-mais">Ver Mais</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="image-wrap">
+        <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/05/wuthering_waves_banner_schedule.jpg" alt="Wuthering Waves">
+      </div>
+      <div class="card-content">
+        <h3>Wuthering Waves</h3>
+        <div class="status disponivel">Disponível</div>
+        <p class="info">Serviços Premium de Wuthering Waves. Exploração, astrites, builds e Tower of Adversity.</p>
+        <div class="card-footer">
+          <span class="preco">R$ 1,50 <small>/ serviço</small></span>
+          <a onclick="openOverlay('wuwa')" class="btn-acao btn-ver-mais">Ver Mais</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card em-breve">
+      <div class="image-wrap">
+        <img src="https://endfield.wiki.gg/images/Arknights_Endfield_Cover_Art.png" alt="Arknights Endfield">
+      </div>
+      <div class="card-content">
+        <h3>Arknights: Endfield</h3>
+        <div class="status em-breve">Em breve</div>
+        <p class="info">Serviços premium chegando em breve para este título. Fique atento às novidades!</p>
+        <div class="card-footer">
+          <span class="preco" style="color:var(--text-muted);">—</span>
+          <span class="btn-acao btn-bloqueado">Bloqueado</span>
+        </div>
+      </div>
+    </div>
+
   </div>
-
-  <div class="card">
-    <div class="image-wrap">
-      <img src="https://webstatic.hoyoverse.com/upload/op-public/2023/09/14/3c862d085db721a5625b6e12649399bc_8067514115196038699.png" alt="Honkai">
-    </div>
-    <div class="card-content">
-      <h3>Honkai: Star Rail</h3>
-      <div class="status disponivel">Disponível</div>
-      <p class="info">Serviços Premium de Honkai: Star Rail.</p>
-      <div class="card-footer">
-        <span class="preco">R$ 5,00</span>
-        <a onclick="openOverlay('hsr')" class="btn-acao btn-ver-mais">Ver Mais</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="image-wrap">
-      <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/05/wuthering_waves_banner_schedule.jpg" alt="WuWa">
-    </div>
-    <div class="card-content">
-      <h3>Wuthering Waves</h3>
-      <div class="status disponivel">Disponível</div>
-      <p class="info">Serviços Premium de Wuthering Waves.</p>
-      <div class="card-footer">
-        <span class="preco">R$ 1,50</span>
-        <a onclick="openOverlay('wuwa')" class="btn-acao btn-ver-mais">Ver Mais</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="card em-breve">
-    <div class="image-wrap">
-      <img src="https://endfield.wiki.gg/images/Arknights_Endfield_Cover_Art.png" alt="Arknights">
-    </div>
-    <div class="card-content">
-      <h3>Arknights: Endfield</h3>
-      <div class="status em-breve">Em breve</div>
-      <p class="info">Serviços premium chegando em breve para este título.</p>
-      <div class="card-footer">
-        <span class="preco">---</span>
-        <span class="btn-acao btn-bloqueado">Bloqueado</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-</div>
 </section>
 
+<!-- Footer -->
 <footer>
   <div class="footer-container">
     <div class="footer-brand">
-      <h4>
-        <div class="logo" onclick="alert('Feito com ❤︎ por Nova Community!')">
+      <a href="#" class="logo" style="margin-bottom:0.8rem;">
         <img src="https://64.media.tumblr.com/c4beee0769a4381a43741e02c28defea/182fcda3a0d77b6c-42/s2048x3072/aebc414dc2195a76b42655ed294e7633ed551872.png" alt="Logo">
-  <span>NOVA COMMUNITY</span>
-</div>
-
-      </h4>
+        <span class="logo-text"><span>Nova</span> Community</span>
+      </a>
+      <p>Serviços premium para gacha games com qualidade e segurança.</p>
       <div class="social-icons">
-        <a href="https://discord.gg/Szqbsd4TNa" class="social-btn"><i class="fa-brands fa-discord"></i></a>
-        <a href="https://www.tiktok.com/@novacommunitydc" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
-        <a href="https://www.instagram.com/novacommunitydc/" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://discord.gg/Szqbsd4TNa" class="social-btn" title="Discord"><i class="fa-brands fa-discord"></i></a>
+        <a href="https://www.tiktok.com/@novacommunitydc" class="social-btn" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://www.instagram.com/novacommunitydc/" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
       </div>
     </div>
+
     <div class="footer-links-group">
       <div class="footer-column">
-        <h5>CONTATOS</h5>
+        <h5>Contato</h5>
         <ul>
-          <li><a href="https://discord.gg/Szqbsd4TNa">Servidor</a></li>
+          <li><a href="https://discord.gg/Szqbsd4TNa">Servidor Discord</a></li>
           <li><a href="#">WhatsApp</a></li>
         </ul>
       </div>
       <div class="footer-column">
-        <h5>SOBRE NÓS</h5>
+        <h5>Sobre Nós</h5>
         <ul>
-          <li><a href="#" onclick="openInfoOverlay('equipe'); return false;">Colaboradores</li>
-          <li><a href="javascript:void(0)" onclick="openInfoOverlay('cargos')">Cargos</a></li>        </ul>
+          <li><a href="#" onclick="openInfoOverlay('equipe'); return false;">Colaboradores</a></li>
+          <li><a href="#" onclick="openInfoOverlay('cargos'); return false;">Cargos</a></li>
+        </ul>
       </div>
       <div class="footer-column">
-        <h5>USE AGORA</h5>
+        <h5>Use Agora</h5>
         <ul>
           <li><a href="https://discord.com/channels/1404336816563159111/1404503231245193376">Tickets</a></li>
-          <li><a href="https://discord.com/channels/1404336816563159111/1447372774313168898">Feedbacks e Proofs</a></li>
+          <li><a href="https://discord.com/channels/1404336816563159111/1447372774313168898">Feedbacks</a></li>
         </ul>
       </div>
     </div>
-    <div>
-      <a href="#" class="status-badge" onclick="openInfoOverlay('status'); return false;">
-  <span class="status-dot"></span>
-  STATUS
-</a>
+
+    <div style="align-self: flex-start; padding-top: 0.3rem;">
+      <a class="footer-status" onclick="openInfoOverlay('status'); return false;">
+        <span class="status-dot-green"></span> STATUS DO SISTEMA
+      </a>
     </div>
   </div>
+
   <div class="footer-bottom">
     <div>
       <p>© 2025–2026 NOVA COMMUNITY.</p>
-      <p style="font-size: 0.75rem; color: #444; margin-top: 5px;">Nova Community. Todos os Direitos Reservados.</p>
+      <p>Todos os Direitos Reservados.</p>
     </div>
-    <div class="build-version">
-      <span class="dot-purple"></span>
-      V2.1.0
+    <div class="version-badge">
+      <span class="version-dot"></span> V2.1.0
     </div>
   </div>
 </footer>
 
+<!-- Main Overlay -->
 <div class="overlay" id="overlay">
   <div class="overlay-header">
-    <button class="close-btn" onclick="closeOverlay()">✕</button>
+    <button class="overlay-close" onclick="closeOverlay()"><i class="fa-solid fa-xmark"></i></button>
   </div>
-  <div class="overlay-content" id="overlayContent">
-    </div>
+  <div class="overlay-content" id="overlayContent"></div>
 </div>
 
-<script>
-// Helper function to build compact HTML structure
-function buildCompactHTML(content, className) {
-    return `<div class="compact-wrapper ${className}">${content}</div>`;
-}
-
-// Function to build terms sections directly for cleaner compact look
-function buildTermSection(title, text) {
-    return `
-        <div class="section-wrapper">
-          <h4 class="section-title">${title}</h4>
-          <p class="info" style="margin-top: 0.5rem; padding: 0 5px;">${text}</p>
-        </div>
-    `;
-}
-
-function openInfoOverlay(type) {
-  const overlay = document.getElementById("overlay");
-  const content = document.getElementById("overlayContent");
-
-  let html = "";
-
-  if (type === "comoComprar") {
-  let innerHTML = `
-    <div class="image-wrap" style="height: 200px; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden;">
-      <img src="https://placehold.co/600x400/252525/fff?font=poppins&text=Guia%20de%20Compra" alt="Banner Guia" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-
-    <h1 class="buy-title">
-       <span class="buy-italic">Como</span>
-       <span>Comprar?</span>
-    </h1>
-   <p class="team-subtitle">Siga os passos abaixo para adquirir seus serviços na Nova Community de forma rápida e segura:</p>
-    <div style="margin-bottom: 1.5rem;"></div>
-  `;
-
-  // Dados das etapas de compra
-  const guiaData = [
-    {
-      title: "1. Aceite dos Termos",
-      text: "Ao contratar qualquer serviço, você confirma que leu e concorda integralmente com os nossos Termos de Compra. É fundamental estar ciente das regras antes de prosseguir."
-    },
-    {
-      title: "2. Escolha do Serviço",
-      text: "Navegue pelo nosso catálogo e escolha o serviço que melhor atende às suas necessidades. Verifique os valores e detalhes específicos de cada jogo (Genshin, HSR, ZZZ ou WuWa)."
-    },
-    {
-      title: "3. Abertura de Ticket",
-      text: "Entre no nosso servidor oficial do Discord. Vá até o canal de suporte e abra um ticket de compra. Todo o processo é realizado por lá para garantir a sua segurança."
-    },
-    {
-      title: "4. Atendimento e Formulário",
-      text: "Preencha o pequeno formulário automático no ticket com os dados do serviço escolhido. Após o envio, aguarde até que um de nossos especialistas assuma o seu atendimento."
-    }
-  ];
-
-  // Constrói as seções usando a mesma função auxiliar dos termos
-  innerHTML += guiaData.map(item => buildTermSection(item.title, item.text)).join('');
-
-  // Envelopa tudo no container compacto único
-  html = buildCompactHTML(innerHTML, 'info-content');
-}
-
-  if (type === "equipe") {
-  // Directly build HTML without compact-wrapper to maintain grid full width
-  html = `
-    <div class="team-wrapper">
-
-      <h1 class="team-title-custom">
-      <span class="team-italic">Colaboradores</span>
-      </h1>
-      <p class="team-subtitle">Equipe Central.</p>
-
-      <div class="team-grid">
-
-        <div class="team-card">
-          <div class="card-icon">
-            <i class="fas fa-chess-queen"></i>
-          </div>
-
-          <div class="avatar-wrapper">
-            <img src="https://media.discordapp.net/attachments/1476661396673527809/1476661419993989212/WhatsApp_Image_2026-02-25_at_20.07.27.jpeg?ex=69a1ef9d&is=69a09e1d&hm=9fa27beb7930e41f61fcaa40b6acff0f97bb488d0fc2ce856ec93fc801af124d&=&format=webp&width=443&height=788">
-            <div class="hover-badge">
-              <span>Administradorx</span>
-            </div>
-          </div>
-
-          <h3>-</h3>
-          <p class="role-label role-blue">ADMINISTRADORX</p>
-        </div>
-
-        <div class="team-card destaque">
-          <div class="card-icon">
-            <i class="fas fa-crown"></i>
-          </div>
-
-          <div class="avatar-wrapper destaque-avatar">
-            <img src="https://media.discordapp.net/attachments/1363677152800800961/1487547726844399646/download.jpg?ex=69c98a47&is=69c838c7&hm=45c62667cace79cd36e216df2e3932336f4f9c17a794ea4b7a6abc7b2ad435d7&=&format=webp">
-            <div class="hover-badge gold">
-              <span>Owner</span>
-            </div>
-          </div>
-
-          <h3>wz.foxyyy</h3>
-          <p class="role-label role-gold">OWNER</p>
-        </div>
-
-        <div class="team-card">
-          <div class="card-icon">
-            <i class="fas fa-shield"></i>
-          </div>
-
-          <div class="avatar-wrapper">
-            <img src="https://media.discordapp.net/attachments/1476661396673527809/1476664328894808106/IMG-20260126-WA0151.jpg?ex=69a1f253&is=69a0a0d3&hm=d1c4a4f17c6c939905c3072bfbb5acfdbbd4af90a47764dcb25bcf5095b31f4b&=&format=webp&width=706&height=788">
-            <div class="hover-badge purple">
-              <span>STAFF</span>
-            </div>
-          </div>
-
-          <h3>ventisfavone</h3>
-          <p class="role-label role-purple">STAFF SÊNIOR</p>
-        </div>
-
-      </div>
-    </div>
-  `;
-}
-
-if (type === "status") {
-  let innerHTML = `
-    <div class="image-wrap" style="height: 200px; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden;">
-      <img src="https://placehold.co/600x400/252525/fff?font=poppins&text=Status+do+Sistema" alt="Banner Status" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-
-    <h1 class="status-title">
-   <span class="status-italic">Status</span> Atual
-   </h1>
-
-   <p class="status-subtitle">
-   <span class="status-dot"></span> Todos os Sistemas Operacionais (last att: 10/4)
-   </p>
-
-<div style="margin-bottom: 1.5rem;"></div>
-  `;
-
-  // Dados de integridade do sistema
-  const statusData = [
-    {
-      title: "Plataforma Web",
-      text: "O site da Nova Community encontra-se On-line e operando com baixa latência. Todos os catálogos estão sincronizados. Host by GitHub."
-    },
-    {
-      title: "Serviços Script",
-      text: "Status: Atualizado & Seguro. Nossos scripts foram testados na versão mais recente de cada jogo. Detecção: Negativa."
-    },
-    {
-        title: "Fila de Atendimento",
-  text: "Tickets via Discord: Operando normalmente. Tempo médio de resposta: 15 a 45 minutos.<br>Tickets via Site: Desabilitado."
-    }
-  ];
-
-  // Constrói as seções usando a função auxiliar padrão
-  innerHTML += statusData.map(status => buildTermSection(status.title, status.text)).join('');
-
-  // Envelopa tudo no container compacto único para "mexer inteiro"
-  html = buildCompactHTML(innerHTML, 'info-content');
-}
-
-if (type === "cargos") {
-  let innerHTML = `
-    <div class="image-wrap" style="height: 200px; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden;">
-      <img src="https://64.media.tumblr.com/a468c739fb65bce41727b16fec74ea75/907e8089aa90150e-b5/s2048x3072/7767dd1fc4bf32029a0d6e8d7c87a0e457befbf7.png" alt="Banner Equipe" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-
-    <h1 class="status-title">
-   <span class="status-italic">Cargos</span></h1>
-    <p class="team-subtitle">Conheça nossa equipe e o que cada um faz.</p>
-    <div style="margin-bottom: 1.5rem;"></div>
-  `;
-
-  // Dados dos Cargos
-  const cargosData = [
-    {
-  title: "Owner",
-  text: "Responsável pela loja. Define diretrizes, toma decisões finais e supervisiona a equipe e as operações."
-    },
-    {
-  title: "Staff",
-  text: "Responsável pelo funcionamento geral, incluindo atendimento, suporte, moderação e organização."
-    },
-    {
-  title: "Administrador",
-  text: "Gerencia sistemas, resolve conflitos e aplica decisões administrativas."
-    },
-    {
-  title: "Farmers",
-  text: "Realizam e entregam os serviços conforme prazos e padrões definidos."
-    },
-    {
-  title: "Promotor",
-  text: "Cuida de parcerias e negociações com outros servidores e projetos."
-    },
-    {
-  title: "Divulgador",
-  text: "Responsável por divulgar a loja em redes e comunidades."
-    },
-    {
-  title: "Mov Chat",
-  text: "Mantém o chat ativo e interage com os membros."
-    },
-{
-  title: "Designer",
-  text: "Cria e mantém as artes e a identidade visual."
-}
-  ];
-
-  // Constrói as seções usando sua função padrão
-  innerHTML += cargosData.map(cargo => buildTermSection(cargo.title, cargo.text)).join('');
-
-  // Envelopa tudo no container que "mexe inteiro"
-  html = buildCompactHTML(innerHTML, 'info-content');
-}
-
-if (type === "termos") {
-  let innerHTML = `
-    <div class="image-wrap" style="height: 200px; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden;">
-      <img src="https://64.media.tumblr.com/1ede90ae69c0a424dac5fae9cf535ee3/907e8089aa90150e-5e/s2048x3072/346b84b3331765752a5e9bea7df7e331b0055831.png" alt="Banner Termos" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-
-    <h1 class="buy-title">
-      <span class="buy-italic">Termos</span>
-      <span>de</span>
-      <span>Compra</span>
-    </h1>
-    <p class="team-subtitle">Ao efetuar qualquer compra na Nova Community, o cliente confirma que leu, entendeu e concorda integralmente com os termos abaixo:</p>
-    <p class="info" style="margin-bottom: 1.5rem;">
-  `;
-
-  // Define term sections data for cleaner iteration
-  const termData = [
-    {
-      title: "Pagamentos e início do serviço",
-      text: "O prazo padrão para inicialização do serviço é de até 48 horas após a confirmação do pagamento. Durante períodos de alta demanda, pedimos paciência. Pressões ou cobranças indevidas não serão toleradas. O tempo pode variar conforme a complexidade do pedido, e solicitações fora do prazo não garantem prioridade."
-    },
-    {
-      title: "Reembolsos e arrependimentos",
-      text: "Arrependimentos e mudanças de ideia não são reembolsáveis. Reembolsos só serão considerados em casos de falha comprovada por parte da equipe e após análise interna. Tentativas de forçar reembolso, realizar ameaças ou causar transtornos resultarão em bloqueio permanente e perda de acesso a serviços futuros."
-    },
-    {
-      title: "Atendimento e suporte",
-      text: "O atendimento ocorre exclusivamente via tickets do Discord. Mensagens privadas à equipe serão ignoradas sem exceção. Os atendimentos são feitos por ordem de chegada, sem favoritismos. Respeite o tempo da equipe — qualquer forma de desrespeito pode resultar em encerramento do atendimento."
-    },
-    {
-      title: "Execução e entrega",
-      text: "A Nova Community se compromete a entregar exatamente o que foi solicitado e pago. Caso o cliente não envie as informações necessárias para execução, o prazo será suspenso até regularização. Entregas parciais não significam falha — algumas etapas podem ser feitas em fases separadas. Alterações pós-entrega podem gerar custo adicional."
-    },
-    {
-      title: "Conduta e respeito",
-      text: "O respeito à equipe é obrigatório. Linguagem ofensiva, sarcasmo excessivo, spam ou ironias serão tratadas como falta de respeito. A Nova Community reserva o direito de recusar atendimento a qualquer cliente que descumpra os princípios básicos de convivência."
-    },
-    {
-      title: "Responsabilidade do comprador",
-      text: "Ao adquirir qualquer serviço da Nova Community, o cliente concorda que o processo de execução envolve o uso de ferramentas que podem apresentar riscos à conta utilizada. Caso ocorra qualquer tipo de punição, bloqueio, erro ou banimento decorrente desse uso, a responsabilidade é integralmente do comprador. A Nova Community não se responsabiliza por perdas, danos ou penalidades aplicadas pela plataforma, nem oferece reembolso ou compensação em situações desse tipo."
-    },
-    {
-      title: "Alterações nos termos",
-      text: "Os termos podem ser atualizados a qualquer momento, sem aviso prévio. A versão válida e aplicável será sempre a mais recente publicada oficialmente. É responsabilidade do cliente manter-se informado sobre as atualizações."
-    }
-  ];
-
-  // Iteratively build direct HTML sections using helper function
-  innerHTML += termData.map(term => buildTermSection(term.title, term.text)).join('');
-
-  // Combine and wrap everything in one `compact-wrapper`
-  html = buildCompactHTML(innerHTML, 'info-content');
-}
-
-
-  content.innerHTML = html;
-  overlay.classList.add("active");
-}
-
-// --- CONFIGURAÇÃO DOS PRODUTOS E LISTAS ---
-// Para criar novas listas, basta adicionar um bloco { title: "...", items: [...] } dentro de "sections"
-const produtos = {
-genshin: {
-  title: "Genshin Impact: Manual — Serviços",
-  img: "https://fastcdn.hoyoverse.com/content-v2/plat/162828/c50d8c6e2597e9f88a66e06c3c32c5c5_8400293576027107227.jpg",
-  desc: "Serviços Premium de Genshin Impact.",
-  status: "Disponível",
-  statusClass: "disponivel",
-  // AQUI VOCÊ EDITA AS LISTAS DO GENSHIN
-  sections: [
-      {
-        title: "Giros — Exploração Baixa (Abaixo de 70%)",
-        items: [
-          { name: "800 Gemas (05 giros)", price: "R$ 6,00" },
-          { name: "1.600 Gemas (10 giros)", price: "R$ 12,00" },
-          { name: "3.200 Gemas (20 giros)", price: "R$ 23,00" },
-          { name: "4.800 Gemas (30 giros)", price: "R$ 34,00" },
-          { name: "6.400 Gemas (40 giros)", price: "R$ 44,00" },
-          { name: "8.000 Gemas (50 giros)", price: "R$ 54,00" }
-        ]
-      },
-    {
-      title: "Giros — Exploração Alta (Acima de 70%)",
-      items: [
-        { name: "800 Gemas (05 giros)", price: "R$ 7,00" },
-        { name: "1.600 Gemas (10 giros)", price: "R$ 14,00" },
-        { name: "3.200 Gemas (20 giros)", price: "R$ 26,00" },
-        { name: "4.800 Gemas (30 giros)", price: "R$ 37,00" },
-        { name: "6.400 Gemas (40 giros)", price: "R$ 48,00" },
-        { name: "8.000 Gemas (50 giros)", price: "R$ 65,00" }
-      ]
-    },
-    {
-      title: "Ascenção",
-      items: [
-        { name: "Farm Pers. lvl 20–90", price: "R$ 15,00" },
-        { name: "Up Arma lvl 20–90", price: "R$ 15,00" },
-        { name: "Farm 01 set (status aleatórios)", price: "R$ 2,00" },
-        { name: "Talentos 1→9", price: "R$ 15,00" },
-        { name: "Talentos 9/9/9", price: "R$ 35,00" }
-      ]
-    },
-    {
-      title: "Missão",
-      items: [
-        { name: "Lendária / Personagens / Encontros", price: "R$ 5,00" },
-        { name: "Missão 76 Aranaras", price: "R$ 45,00" },
-        { name: "Arconte", price: "(cada ato) R$ 10,00" }
-      ]
-    },
-    {
-      title: "Abismo do Espiral",
-      items: [
-        { name: "Cada Piso", price: "R$ 2,00" },
-        { name: "Piso 01–08", price: "R$ 15,00" },
-        { name: "Lua Abissal", price: "R$ 10,00" }
-      ]
-    },
-    {
-      title: "Confronto Abissal",
-      items: [
-        { name: "Completo sem Penas", price: "R$ 7,00" },
-        { name: "Completo com Penas", price: "R$ 12,00" },
-        { name: "Completo com Armas 4★/5★", price: "R$ 20,00" }
-      ]
-    },
-    {
-      title: "Teatro Imaginário",
-      items: [
-        { name: "Fácil", price: "R$ 5,00" },
-        { name: "Médio", price: "R$ 10,00" },
-        { name: "Difícil", price: "R$ 15,00" },
-        { name: "Visionário", price: "R$ 20,00" },
-        { name: "Lunar", price: "R$ 25,00" }
-      ]
-    },
-    {
-      title: "Extras",
-      items: [
-        { name: "200k Moras", price: "R$ 1,00" },
-        { name: "Arma de Pesca", price: "R$ 14,00" },
-        { name: "Rastro Teatro", price: "R$ 4,00" },
-        { name: "Cada Refino", price: "R$ 7,00" },
-        { name: "TCG Completo", price: "R$ 45,00" },
-        { name: "Farm 50 unid. (Alimentos / Flores / Madeira / Inimigos)", price: "R$ 2,00 cada" }
-      ]
-    },
-    {
-      title: "Build de Personagem",
-      items: [
-        { name: "Básica", price: "R$ 5,00" },
-        { name: "Ótima", price: "R$ 15,00" },
-        { name: "Excelente", price: "R$ 30,00" }
-      ]
-    },
-    {
-      title: "Coleta de Oculis",
-      items: [
-        { name: "Anemoculus", price: "R$ 15,00" },
-        { name: "Geoculus", price: "R$ 25,00" },
-        { name: "Electroculus", price: "R$ 40,00" },
-        { name: "Dendroculus (Floresta)", price: "R$ 40,00" },
-        { name: "Dendroculus (Deserto)", price: "R$ 40,00" },
-        { name: "Hydroculus", price: "R$ 50,00" },
-        { name: "Pyroculus", price: "R$ 60,00" },
-        { name: "Lunoculus", price: "R$ 25,00" }
-      ]
-    },
-    {
-      title: "Exploração",
-      items: [
-        { name: "Mondstadt", price: "R$ 15,00" },
-        { name: "Espinha do Dragão", price: "R$ 25,00" },
-        { name: "Liyue", price: "R$ 35,00" },
-        { name: "Vale Chenyu", price: "R$ 30,00" },
-        { name: "Despenhadeiro", price: "R$ 30,00" },
-        { name: "Minas", price: "R$ 15,00" },
-        { name: "Inazuma", price: "R$ 45,00" },
-        { name: "Enkanomiya", price: "R$ 20,00" },
-        { name: "Sumeru (Floresta)", price: "R$ 55,00" },
-        { name: "Sumeru (Deserto)", price: "R$ 60,00" },
-        { name: "Fontaine", price: "R$ 50,00" },
-        { name: "Mar Antigo", price: "R$ 25,00" },
-        { name: "Natlan", price: "R$ 80,00" },
-        { name: "Montanha Sagrada", price: "R$ 25,00" },
-        { name: "Nod-Krai", price: "R$ 40,00" }
-      ]
-    },
-    {
-      title: "Eventos",
-      items: [
-        { name: "Evento Simples (eventos pequenos/secundários)", price: "R$ 5,00" },
-        { name: "Evento Principal (evento grande da versão)", price: "R$ 15,00" }
-      ]
-    },
-    {
-      title: "Cuidados com a Conta",
-      items: [
-        { name: "Manutenção Semanal (gasto de resina e missão diária)", price: "R$ 5,00" },
-        { name: "Manutenção Mensal (gasto de resina e missão diária)", price: "R$ 18,00" },
-        { name: "Manutenção da Versão (gasto de resina e missão diária)", price: "R$ 38,00" },
-      ]
-    }
-  ]
-},
-
-genshinsc: {
-  title: "Genshin Impact: Script — Serviços",
-  img: "https://onpoplife.com.br/wp-content/uploads/2026/01/Key-Art_EN.jpg",
-  desc: "Serviços Premium de Genshin Impact.",
-  status: "Disponível",
-  statusClass: "disponivel",
-  // AQUI VOCÊ EDITA AS LISTAS DO GENSHIN SCRIPT
-  sections: [
-      {
-        title: "Giros — Exploração Baixa (Abaixo de 70%)",
-        items: [
-          { name: "800 Gemas (05 giros)", price: "R$ 5,00" },
-          { name: "1.600 Gemas (10 giros)", price: "R$ 9,00" },
-          { name: "3.200 Gemas (20 giros)", price: "R$ 17,00" },
-          { name: "4.800 Gemas (30 giros)", price: "R$ 25,00" },
-          { name: "6.400 Gemas (40 giros)", price: "R$ 32,00" },
-          { name: "8.000 Gemas (50 giros)", price: "R$ 40,00" }
-        ]
-      },
-    {
-      title: "Giros — Exploração Alta (Acima de 70%)",
-      items: [
-        { name: "800 Gemas (05 giros)", price: "R$ 5,00" },
-        { name: "1.600 Gemas (10 giros)", price: "R$ 10,00" },
-        { name: "3.200 Gemas (20 giros)", price: "R$ 20,00" },
-        { name: "4.800 Gemas (30 giros)", price: "R$ 30,00" },
-        { name: "6.400 Gemas (40 giros)", price: "R$ 38,00" },
-        { name: "8.000 Gemas (50 giros)", price: "R$ 50,00" }
-      ]
-    },
-    {
-      title: "Ascenção",
-      items: [
-        { name: "Farm Pers. lvl 20–90", price: "R$ 10,00" },
-        { name: "Up Arma lvl 20–90", price: "R$ 10,00" },
-        { name: "Farm 01 set (status aleatórios)", price: "R$ 1,00" },
-        { name: "Talentos 1→9", price: "R$ 10,00" },
-        { name: "Talentos 9/9/9", price: "R$ 25,00" }
-      ]
-    },
-    {
-      title: "Missão",
-      items: [
-        { name: "Lendária / Personagens / Encontros", price: "R$ 2,00" },
-        { name: "Missão 76 Aranaras", price: "R$ 35,00" },
-        { name: "Arconte", price: "(cada ato) R$ 5,00" }
-      ]
-    },
-    {
-      title: "Abismo do Espiral",
-      items: [
-        { name: "Cada Piso", price: "R$ 1,00" },
-        { name: "Piso 01–08", price: "R$ 10,00" },
-        { name: "Lua Abissal", price: "R$ 7,00" }
-      ]
-    },
-    {
-      title: "Confronto Abissal",
-      items: [
-        { name: "Completo sem Penas", price: "R$ 5,00" },
-        { name: "Completo com Penas", price: "R$ 8,00" },
-        { name: "Completo com Armas 4★/5★", price: "R$ 10,00" }
-      ]
-    },
-    {
-      title: "Teatro Imaginário",
-      items: [
-        { name: "Fácil", price: "R$ 5,00" },
-        { name: "Médio", price: "R$ 10,00" },
-        { name: "Difícil", price: "R$ 15,00" },
-        { name: "Visionário", price: "R$ 20,00" },
-        { name: "Lunar", price: "R$ 25,00" }
-      ]
-    },
-    {
-      title: "Extras",
-      items: [
-        { name: "200k Moras", price: "R$ 0,50" },
-        { name: "Arma de Pesca", price: "R$ 10,00" },
-        { name: "Rastro Teatro", price: "R$ 3,00" },
-        { name: "Cada Refino", price: "R$ 4,00" },
-        { name: "TCG Completo", price: "R$ 35,00" },
-        { name: "Farm 50 unid. (Alimentos / Flores / Madeira / Inimigos)", price: "R$ 1,00 cada" }
-      ]
-    },
-    {
-      title: "Build de Personagem",
-      items: [
-        { name: "Básica", price: "R$ 5,00" },
-        { name: "Ótima", price: "R$ 10,00" },
-        { name: "Excelente", price: "R$ 25,00" }
-      ]
-    },
-    {
-      title: "Coleta de Oculis",
-      items: [
-        { name: "Anemoculus", price: "R$ 15,00" },
-        { name: "Geoculus", price: "R$ 25,00" },
-        { name: "Electroculus", price: "R$ 25,00" },
-        { name: "Dendroculus (Floresta)", price: "R$ 25,00" },
-        { name: "Dendroculus (Deserto)", price: "R$ 25,00" },
-        { name: "Hydroculus", price: "R$ 35,00" },
-        { name: "Pyroculus", price: "R$ 45,00" },
-        { name: "Lunoculus", price: "R$ 20,00" }
-      ]
-    },
-    {
-      title: "Exploração",
-      items: [
-        { name: "Mondstadt", price: "R$ 15,00" },
-        { name: "Espinha do Dragão", price: "R$ 20,00" },
-        { name: "Liyue", price: "R$ 25,00" },
-        { name: "Vale Chenyu", price: "R$ 25,00" },
-        { name: "Despenhadeiro", price: "R$ 25,00" },
-        { name: "Minas", price: "R$ 15,00" },
-        { name: "Inazuma", price: "R$ 35,00" },
-        { name: "Enkanomiya", price: "R$ 20,00" },
-        { name: "Sumeru (Floresta)", price: "R$ 45,00" },
-        { name: "Sumeru (Deserto)", price: "R$ 50,00" },
-        { name: "Fontaine", price: "R$ 35,00" },
-        { name: "Mar Antigo", price: "R$ 15,00" },
-        { name: "Natlan", price: "R$ 70,00" },
-        { name: "Montanha Sagrada", price: "R$ 15,00" },
-        { name: "Nod-Krai", price: "R$ 20,00" }
-      ]
-    },
-    {
-      title: "Eventos",
-      items: [
-        { name: "Evento Simples (eventos pequenos/secundários)", price: "R$ 5,00" },
-        { name: "Evento Principal (evento grande da versão)", price: "R$ 10,00" }
-      ]
-    },
-    {
-      title: "Cuidados com a Conta",
-      items: [
-        { name: "Manutenção Semanal (gasto de resina e missão diária)", price: "R$ 3,00" },
-        { name: "Manutenção Mensal (gasto de resina e missão diária)", price: "R$ 20,00" },
-        { name: "Manutenção da Versão (gasto de resina e missão diária)", price: "R$25,00" },
-      ]
-    }
-  ]
-},
-
-zzz: {
-  title: "Zenless Zone Zero: Manual — Serviços",
-  img: "https://onpoplife.com.br/wp-content/uploads/2025/12/2.5-kv-capa.jpg",
-  desc: "Serviços Premium de Zenless Zone Zero.",
-  status: "Disponível",
-  statusClass: "disponivel",
-  // AQUI VOCÊ EDITA AS LISTAS DO ZZZ
-  sections: [
-    {
-      title: "Policromos",
-      items: [
-        { name: "800 Policromos (5 giros)", price: "R$ 9,00" },
-        { name: "1.600 Policromos (10 giros)", price: "R$ 14,00" },
-        { name: "3.200 Policromos (20 giros)", price: "R$ 24,00" },
-        { name: "4.800 Policromos (30 giros)", price: "R$ 34,00" },
-        { name: "6.400 Policromos (40 giros)", price: "R$ 44,00" },
-        { name: "8.000 Policromos (50 giros)", price: "R$ 54,00" }
-      ]
-    },
-    {
-      title: "Missão",
-      items: [
-        { name: "Missão principal (completa — 9 capítulos)", price: "R$ 70,00" },
-        { name: "Missão principal (1 capítulo)", price: "R$ 10,00" },
-        { name: "Missão secundária (cada)", price: "R$ 2,00" }
-      ]
-    },
-    {
-      title: "Evento",
-      items: [
-        { name: "Evento simples (eventos pequenos/secundários)", price: "R$ 5,00" },
-        { name: "Evento principal (evento grande da versão)", price: "R$ 20,00" }
-      ]
-    },
-    {
-      title: "Agentes",
-      items: [
-        { name: "Todas as histórias (18 no total)", price: "R$ 55,00" },
-        { name: "História individual (1)", price: "R$ 5,00" }
-      ]
-    },
-    {
-      title: "Oficial Miau-Miau",
-      items: [
-        { name: "Por área", price: "R$ 15,00" },
-        { name: "1 página", price: "R$ 6,00" }
-      ]
-    },
-    {
-      title: "End Games",
-      items: [
-        { name: "Nódulo Estável (Nível 1 ao 10)", price: "R$ 15,00" },
-        { name: "Nódulo de Conflito (Nível 1 ao 8)", price: "R$ 13,00" },
-        { name: "Nódulo Crítico (Nível 1 ao 7)", price: "R$ 12,00" },
-        { name: "Investida Mortal", price: "R$ 20,00" },
-        { name: "Teste de Combate Virtual (por nível)", price: "R$ 2,00" },
-        { name: "Teste de Combate: Sem Saída (por nível)", price: "R$ 3,00" } 
-      ]
-    },
-    {
-      title: "Cidade Definhada",
-      items: [
-        { name: "Área 01 — Metrô da Velha Capital", price: "R$ 10,00" },
-        { name: "Área 02 — Ruínas da Construção", price: "R$ 10,00" },
-        { name: "Área 03 — Ruínas do Edifício Gigante", price: "R$ 10,00" },
-        { name: "Canteiro Definhado", price: "R$ 15,00" },
-        { name: "Colheita Ardente", price: "R$ 15,00" }
-      ]
-    },
-    {
-      title: "Vazio Perdido",
-      items: [
-        { name: "Extermínio da Linha de Frente (até o nível máximo)", price: "R$ 15,00" },
-        { name: "Aniquilação dos Transgressores (todos os níveis)", price: "R$ 5,00" },
-        { name: "Operação de Reconstituição", price: "R$ 15,00" }
-      ]
-    },
-    {
-      title: "Cuidado com a Conta",
-      items: [
-        { name: "Pacote Semanal (diárias, gasto de bateria e passe)", price: "R$ 15,00" },
-        { name: "Pacote por Versão (diárias, gasto de bateria e passe)", price: "R$ 50,00" }
-      ]
-    }
-  ]
-},
-
-hsr: {
-  title: "Honkai: Star Rail: Manual — Serviços",
-  img: "https://webstatic.hoyoverse.com/upload/op-public/2023/09/14/3c862d085db721a5625b6e12649399bc_8067514115196038699.png",
-  desc: "Serviços Premium de Honkai: Star Rail.",
-  status: "Disponível",
-  statusClass: "disponivel",
-  // AQUI VOCÊ EDITA AS LISTAS DO HSR
-  sections: [
-    {
-      title: "Stellar Jade",
-      items: [
-        { name: "800 Stellar (5 giros)", price: "R$ 8,00" },
-        { name: "1.600 Stellar (10 giros)", price: "R$ 12,00" },
-        { name: "3.200 Stellar (20 giros)", price: "R$ 24,00" },
-        { name: "4.800 Stellar (30 giros)", price: "R$ 36,00" },
-        { name: "8.000 Stellar (50 giros)", price: "R$ 48,00" }
-      ]
-    },
-    {
-      title: "Cuidados",
-      items: [
-        { name: "Cuidado mensal", price: "R$ 15,00" },
-        { name: "Cuidado completo da versão", price: "R$ 50,00" }
-
-      ]
-    },
-    {
-      title: "End Games",
-      items: [
-        { name: "MOC", price: "R$ 20,00" },
-        { name: "Sombra AP", price: "R$ 40,00" },
-        { name: "Pura Ficção", price: "R$ 60,00" },
-        { name: "Arbitragem de Anomalias", price: "R$ 100,00" }
-      ]
-    },
-    {
-      title: "Exploração",
-      items: [
-        { name: "Nave da Herta", price: "R$ 10,00" },
-        { name: "Jarilo-VI", price: "R$ 20,00" },
-        { name: "Xianzhou", price: "R$ 35,00" },
-        { name: "Penacony", price: "R$ 50,00" },
-        { name: "Amphoreus", price: "R$ 45,00" }
-      ]
-    },
-    {
-      title: "Coletas",
-      items: [
-        { name: "Coleta de Pássaros de Origami", price: "R$ 35,00" },
-        { name: "Coleta de Ninfas", price: "R$ 5,00 / 10 ninfas" }
-      ]
-    },
-    {
-      title: "Missões",
-      items: [
-        { name: "Missão de Desbravamento (por ato)", price: "R$ 10,00" },
-        { name: "Desbravamento (completo)", price: "R$ 40,00" },
-        { name: "Missão de Companheiro", price: "R$ 10,00" }
-      ]
-    },
-    {
-      title: "Ascenção",
-      items: [
-        { name: "Up de Personagem", price: "R$ 10,00" },
-        { name: "Up de Rastro", price: "R$ 15,00" },
-        { name: "Up de Cone de Luz", price: "R$ 15,00" }
-      ]
-    },
-    {
-      title: "Conteúdos",
-      items: [
-        { name: "Universo Simulado Inteiro (cada mundo)", price: "R$ 50" },
-        { name: "Universo Simulado Semanal (cada mundo)", price: "R$ 15,00" },
-        { name: "Universo do Enxame", price: "R$ 35,00" },
-        { name: "Universo do Ouro e Engrenagem", price: "R$ 35,00" },
-        { name: "Universo Domínio Incógnito", price: "R$ 35,00" },
-        { name: "Universo Divergente (Amphoreus) Inteiro", price: "R$ 25,00" },
-        { name: "Universo Divergente (Amphoreus) Semanal", price: "R$ 15,00" },
-        { name: "Guerras Monetárias", price: "R$ 20,00" }
-      ]
-    }
-  ]
-},
-
-wuwa: {
-  title: "Wuthering Waves: Manual — Serviços",
-  img: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/05/wuthering_waves_banner_schedule.jpg",
-  desc: "Serviços Premium de Wuthering Waves.",
-  status: "Disponível",
-  statusClass: "disponivel",
-  // AQUI VOCÊ EDITA AS LISTAS DO WUWA
-  sections: [
-    {
-      title: "Astrites",
-      items: [
-        { name: "800 Astrites", price: "R$ 6,00" },
-        { name: "1.600 Astrites", price: "R$ 14,00" },
-        { name: "3.200 Astrites", price: "R$ 24,00" },
-        { name: "4.800 Astrites", price: "R$ 34,00" },
-        { name: "6.400 Astrites", price: "R$ 44,00" },
-        { name: "8.000 Astrites", price: "R$ 54,00" },
-        { name: "9.600 Astrites", price: "R$ 64,00" }
-      ]
-    },
-    {
-      title: "Exploração — Huanglong",
-      items: [
-        { name: "Gorges of Spirits", price: "R$ 27,00" },
-        { name: "Norfall Barrens", price: "R$ 26,00" },
-        { name: "Whining Aix's Mire", price: "R$ 28,00" },
-        { name: "Dim Forest", price: "R$ 25,00" },
-        { name: "Port City of Guixu", price: "R$ 24,00" },
-        { name: "Tiger's Maw", price: "R$ 28,00" },
-        { name: "Wuming Bay", price: "R$ 23,00" },
-        { name: "Jinzhou", price: "R$ 30,00" },
-        { name: "Desorock Highland", price: "R$ 19,00" },
-        { name: "Central Plains", price: "R$ 24,00" },
-        { name: "Mt. Firmament", price: "R$ 29,00" },
-        { name: "Huanglong 100% (pacote completo)", price: "R$ 228,00" }
-      ]
-    },
-    {
-      title: "Exploração — Black Shores",
-      items: [
-        { name: "Black Shores Archipelago + Tethys' Deep", price: "R$ 29,00" },
-      ]
-    },
-    {
-      title: "Exploração — Rinascita",
-      items: [
-        { name: "Ilha Principal", price: "R$ 115,00" },
-        { name: "Beohr Waters", price: "R$ 24,00" },
-        { name: "Avinoleum", price: "R$ 26,00" },
-        { name: "Septimont", price: "R$ 36,00" },
-        { name: "Fabricatorium of the Deep", price: "R$ 14,00" },
-        { name: "Sanguis Plateaus", price: "R$ 32,00" },
-        { name: "Rinascita 100% (pacote completo)", price: "R$ 250,00" }
-      ]
-    },
-    {
-      title: "Exploração — Roya Frostlands",
-      items: [
-        { name: "Etching Plains", price: "R$ 26,00" },
-        { name: "Startorch Academy", price: "R$ 24,00" },
-        { name: "Starward Riseway", price: "R$ 23,00" },
-        { name: "Fangspire Chasm", price: "R$ 25,00" },
-        { name: "Bjartr Woods", price: "R$ 23,00" },
-        { name: "Stagnant Run", price: "R$ 23,00" },
-        { name: "Rebirth Uplands", price: "R$ 22,00" },
-        { name: "Mawburrow Desert", price: "R$ 24,00" },
-        { name: "Giant's Gaze", price: "R$ 23,00" },
-        { name: "Roya Frostlands 100%", price: "R$ 186,00" }
-      ]
-    },
-    {
-      title: "End Games — Tower of Adversity",
-      items: [
-        { name: "Resonant", price: "R$ 10,00" },
-        { name: "Hazard", price: "R$ 16,00" },
-        { name: "Echoing", price: "R$ 11,00" },
-        { name: "Tower of Adversity (completa)", price: "R$ 30,00" },
-        { name: "Whimpering Wastes", price: "R$ 21,00" },
-        { name: "Holograma (Phantom Pain / Synchronization / Impermanence)", price: "R$ 1,50 por dificuldade" }
-
-      ]
-    },
-    {
-      title: "Data Bank",
-      items: [
-        { name: "Data Bank (nível 1 ao 30)", price: "R$ 58,00" },
-        { name: "Data Bank (por nível)", price: "R$ 2,50" }
-      ]
-    },
-    {
-      title: "Missões",
-      items: [
-        { name: "Missão Principal", price: "R$ 50,00 por região" },
-        { name: "Missão de Companheiro", price: "R$ 13,00" },
-        { name: "Missões de Exploração", price: "R$ 13,00" },
-        { name: "Missões Secundárias", price: "R$ 9,00" }
-      ]
-    },
-    {
-      title: "Up de Personagens",
-      items: [
-        { name: "Nível 1 até 90", price: "R$ 15,00" },
-        { name: "De 10 em 10 níveis", price: "R$ 5,00" },
-      ]
-    },
-    {
-      title: "Builds",
-      items: [
-        { name: "Build Básica", price: "R$ 10,00" },
-        { name: "Build Média", price: "R$ 13,00" },
-        { name: "Build Excelente", price: "R$ 20,00" }
-      ]
-    }
-  ]
-}
-};
-
-// --- LÓGICA DO OVERLAY ---
-// --- NOVA LÓGICA DO OVERLAY (SEPARADA) ---
-function openOverlay(key) {
-  const data = produtos[key];
-  if (!data) return;
-
-  const content = document.getElementById("overlayContent");
-
-  // 1. Criamos a parte das listas primeiro
-  let listsHTML = data.sections.map(section => `
-    <div class="section-wrapper">
-      <h4 class="section-title">${section.title}</h4>
-      <div class="price-table">
-        ${section.items.map(item => `
-          <div class="price-row">
-            <span>${item.name}</span>
-            <span>${item.price}</span>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  `).join('');
-
-  // 2. Juntamos tudo dentro de UM ÚNICO container centralizado (o segredo da largura)
-  content.innerHTML = `
-    <div style="max-width: 650px; margin: 0 auto; width: 95%;"> 
-      <div class="card overlay-top-card">
-        <div class="image-wrap">
-          <img src="${data.img}" alt="${data.title}">
-        </div>
-        <div class="card-content">
-          <h3>${data.title}</h3>
-          <div class="status ${data.statusClass}">${data.status}</div>
-          <p class="info" style="margin-bottom:0.5rem;">${data.desc}</p>
-        </div>
-      </div>
-
-      <div class="overlay-divider"></div>
-
-      ${listsHTML}
-    </div>
-  `;
-
-  document.getElementById("overlay").classList.add("active");
-  document.body.style.overflow = "hidden";
-}
-
-function closeOverlay() {
-  document.getElementById("overlay").classList.remove("active");
-  document.body.style.overflow = "auto";
-}
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === "Escape") closeOverlay();
-});
-</script>
-
-<!-- BOTÃO FLUTUANTE -->
-
+<!-- Floating Chat Button -->
 <a href="#" class="floating-btn" id="openAiChatBtn">
   <img src="https://64.media.tumblr.com/31d12c3897e77f854a7f37c0caeb9c1e/afca7b58e138c485-bb/s500x750/829462ed99d95defcfd20160263d24f49f70a491.png" alt="Suporte">
 </a>
 
-<!-- CHAT -->
-
+<!-- AI Chat -->
 <div class="ai-chat-overlay" id="aiChatOverlay">
   <div class="ai-chat-window">
-    
     <div class="ai-chat-header">
       <div class="header-info">
         <img src="https://64.media.tumblr.com/31d12c3897e77f854a7f37c0caeb9c1e/afca7b58e138c485-bb/s500x750/829462ed99d95defcfd20160263d24f49f70a491.png" alt="IA Nova" class="header-avatar">
         <div class="header-text">
           <h4>Nova Assistant</h4>
-          <span class="status-online"><span class="dot-online"></span> Online - Zero Conhecimento 😒 </span>
+          <span class="status-online"><span class="dot-online"></span> Online</span>
         </div>
       </div>
-      <button class="close-chat-btn" id="closeAiChatBtn">✕</button>
+      <button class="close-chat-btn" id="closeAiChatBtn"><i class="fa-solid fa-xmark"></i></button>
     </div>
-
     <div class="ai-chat-body" id="aiChatBody">
       <div class="chat-message ai-message">
-        <div class="message-content">
-          Olá! Sou a Nova Assistant. Como posso te ajudar hoje com dúvidas sobre nossos serviços?
-        </div>
+        <div class="message-content">Olá! Sou a Nova Assistant. Como posso te ajudar com nossos serviços? 👋</div>
       </div>
     </div>
-
     <div class="ai-chat-input-area">
-      <input type="text" id="aiChatInput" placeholder="Digite sua dúvida aqui...">
-      <button class="send-message-btn" id="sendAiMessageBtn">
-        <i class="fas fa-paper-plane"></i>
-      </button>
+      <input type="text" id="aiChatInput" placeholder="Digite sua dúvida...">
+      <button class="send-message-btn" id="sendAiMessageBtn"><i class="fas fa-paper-plane"></i></button>
     </div>
-
   </div>
 </div>
+
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+// ── HELPERS ──────────────────────────────────────────────
+function termBlock(title, text) {
+  return `<div class="term-block"><h4>${title}</h4><p>${text}</p></div>`;
+}
 
-  const chatOverlay = document.getElementById("aiChatOverlay");
-  const chatBody = document.getElementById("aiChatBody");
-  const chatInput = document.getElementById("aiChatInput");
+// ── PRODUTOS ─────────────────────────────────────────────
+const produtos = {
+genshin: {
+  title: "Genshin Impact: Manual",
+  img: "https://fastcdn.hoyoverse.com/content-v2/plat/162828/c50d8c6e2597e9f88a66e06c3c32c5c5_8400293576027107227.jpg",
+  desc: "Serviços Premium de Genshin Impact. (Catálogo Dessincronizado.)",
+  status: "Disponível", statusClass: "disponivel",
+  sections: [
+    { title: "Giros — Exploração Baixa (Abaixo de 70%)", items: [
+      { name: "800 Gemas (05 giros)", price: "R$ 6,00" },
+      { name: "1.600 Gemas (10 giros)", price: "R$ 12,00" },
+      { name: "3.200 Gemas (20 giros)", price: "R$ 23,00" },
+      { name: "4.800 Gemas (30 giros)", price: "R$ 34,00" },
+      { name: "6.400 Gemas (40 giros)", price: "R$ 44,00" },
+      { name: "8.000 Gemas (50 giros)", price: "R$ 54,00" }
+    ]},
+    { title: "Giros — Exploração Alta (Acima de 70%)", items: [
+      { name: "800 Gemas (05 giros)", price: "R$ 7,00" },
+      { name: "1.600 Gemas (10 giros)", price: "R$ 14,00" },
+      { name: "3.200 Gemas (20 giros)", price: "R$ 26,00" },
+      { name: "4.800 Gemas (30 giros)", price: "R$ 37,00" },
+      { name: "6.400 Gemas (40 giros)", price: "R$ 48,00" },
+      { name: "8.000 Gemas (50 giros)", price: "R$ 65,00" }
+    ]},
+    { title: "Ascenção", items: [
+      { name: "Farm Pers. lvl 20–90", price: "R$ 15,00" },
+      { name: "Up Arma lvl 20–90", price: "R$ 15,00" },
+      { name: "Farm 01 set (status aleatórios)", price: "R$ 2,00" },
+      { name: "Talentos 1→9", price: "R$ 15,00" },
+      { name: "Talentos 9/9/9", price: "R$ 35,00" }
+    ]},
+    { title: "Missão", items: [
+      { name: "Lendária / Personagens / Encontros", price: "R$ 5,00" },
+      { name: "Missão 76 Aranaras", price: "R$ 45,00" },
+      { name: "Arconte (cada ato)", price: "R$ 10,00" }
+    ]},
+    { title: "Abismo do Espiral", items: [
+      { name: "Cada Piso", price: "R$ 2,00" },
+      { name: "Piso 01–08", price: "R$ 15,00" },
+      { name: "Lua Abissal", price: "R$ 10,00" }
+    ]},
+    { title: "Confronto Abissal", items: [
+      { name: "Completo sem Penas", price: "R$ 7,00" },
+      { name: "Completo com Penas", price: "R$ 12,00" },
+      { name: "Completo com Armas 4★/5★", price: "R$ 20,00" }
+    ]},
+    { title: "Teatro Imaginário", items: [
+      { name: "Fácil", price: "R$ 5,00" },
+      { name: "Médio", price: "R$ 10,00" },
+      { name: "Difícil", price: "R$ 15,00" },
+      { name: "Visionário", price: "R$ 20,00" },
+      { name: "Lunar", price: "R$ 25,00" }
+    ]},
+    { title: "Extras", items: [
+      { name: "200k Moras", price: "R$ 1,00" },
+      { name: "Arma de Pesca", price: "R$ 14,00" },
+      { name: "Rastro Teatro", price: "R$ 4,00" },
+      { name: "Cada Refino", price: "R$ 7,00" },
+      { name: "TCG Completo", price: "R$ 45,00" },
+      { name: "Farm 50 unid. (Alimentos/Flores/Madeira/Inimigos)", price: "R$ 2,00 cada" }
+    ]},
+    { title: "Build de Personagem", items: [
+      { name: "Básica", price: "R$ 5,00" },
+      { name: "Ótima", price: "R$ 15,00" },
+      { name: "Excelente", price: "R$ 30,00" }
+    ]},
+    { title: "Coleta de Oculis", items: [
+      { name: "Anemoculus", price: "R$ 15,00" },
+      { name: "Geoculus", price: "R$ 25,00" },
+      { name: "Electroculus", price: "R$ 40,00" },
+      { name: "Dendroculus (Floresta)", price: "R$ 40,00" },
+      { name: "Dendroculus (Deserto)", price: "R$ 40,00" },
+      { name: "Hydroculus", price: "R$ 50,00" },
+      { name: "Pyroculus", price: "R$ 60,00" },
+      { name: "Lunoculus", price: "R$ 25,00" }
+    ]},
+    { title: "Exploração", items: [
+      { name: "Mondstadt", price: "R$ 15,00" },
+      { name: "Espinha do Dragão", price: "R$ 25,00" },
+      { name: "Liyue", price: "R$ 35,00" },
+      { name: "Vale Chenyu", price: "R$ 30,00" },
+      { name: "Despenhadeiro", price: "R$ 30,00" },
+      { name: "Minas", price: "R$ 15,00" },
+      { name: "Inazuma", price: "R$ 45,00" },
+      { name: "Enkanomiya", price: "R$ 20,00" },
+      { name: "Sumeru (Floresta)", price: "R$ 55,00" },
+      { name: "Sumeru (Deserto)", price: "R$ 60,00" },
+      { name: "Fontaine", price: "R$ 50,00" },
+      { name: "Mar Antigo", price: "R$ 25,00" },
+      { name: "Natlan", price: "R$ 80,00" },
+      { name: "Montanha Sagrada", price: "R$ 25,00" },
+      { name: "Nod-Krai", price: "R$ 40,00" }
+    ]},
+    { title: "Eventos", items: [
+      { name: "Evento Simples", price: "R$ 5,00" },
+      { name: "Evento Principal", price: "R$ 15,00" }
+    ]},
+    { title: "Cuidados com a Conta", items: [
+      { name: "Manutenção Semanal", price: "R$ 5,00" },
+      { name: "Manutenção Mensal", price: "R$ 18,00" },
+      { name: "Manutenção da Versão", price: "R$ 38,00" }
+    ]}
+  ]
+},
 
-  const openChatBtn = document.getElementById("openAiChatBtn");
-  const closeChatBtn = document.getElementById("closeAiChatBtn");
-  const sendMessageBtn = document.getElementById("sendAiMessageBtn");
+genshinsc: {
+  title: "Genshin Impact: Script",
+  img: "https://onpoplife.com.br/wp-content/uploads/2026/01/Key-Art_EN.jpg",
+  desc: "Serviços via Script de Genshin Impact. (Catálogo Dessincronizado.)",
+  status: "Disponível", statusClass: "disponivel",
+  sections: [
+    { title: "Giros — Exploração Baixa (Abaixo de 70%)", items: [
+      { name: "800 Gemas (05 giros)", price: "R$ 5,00" },
+      { name: "1.600 Gemas (10 giros)", price: "R$ 9,00" },
+      { name: "3.200 Gemas (20 giros)", price: "R$ 17,00" },
+      { name: "4.800 Gemas (30 giros)", price: "R$ 25,00" },
+      { name: "6.400 Gemas (40 giros)", price: "R$ 32,00" },
+      { name: "8.000 Gemas (50 giros)", price: "R$ 40,00" }
+    ]},
+    { title: "Giros — Exploração Alta (Acima de 70%)", items: [
+      { name: "800 Gemas (05 giros)", price: "R$ 5,00" },
+      { name: "1.600 Gemas (10 giros)", price: "R$ 10,00" },
+      { name: "3.200 Gemas (20 giros)", price: "R$ 20,00" },
+      { name: "4.800 Gemas (30 giros)", price: "R$ 30,00" },
+      { name: "6.400 Gemas (40 giros)", price: "R$ 38,00" },
+      { name: "8.000 Gemas (50 giros)", price: "R$ 50,00" }
+    ]},
+    { title: "Ascenção", items: [
+      { name: "Farm Pers. lvl 20–90", price: "R$ 10,00" },
+      { name: "Up Arma lvl 20–90", price: "R$ 10,00" },
+      { name: "Farm 01 set (status aleatórios)", price: "R$ 1,00" },
+      { name: "Talentos 1→9", price: "R$ 10,00" },
+      { name: "Talentos 9/9/9", price: "R$ 25,00" }
+    ]},
+    { title: "Missão", items: [
+      { name: "Lendária / Personagens / Encontros", price: "R$ 2,00" },
+      { name: "Missão 76 Aranaras", price: "R$ 35,00" },
+      { name: "Arconte (cada ato)", price: "R$ 5,00" }
+    ]},
+    { title: "Abismo do Espiral", items: [
+      { name: "Cada Piso", price: "R$ 1,00" },
+      { name: "Piso 01–08", price: "R$ 10,00" },
+      { name: "Lua Abissal", price: "R$ 7,00" }
+    ]},
+    { title: "Confronto Abissal", items: [
+      { name: "Completo sem Penas", price: "R$ 5,00" },
+      { name: "Completo com Penas", price: "R$ 8,00" },
+      { name: "Completo com Armas 4★/5★", price: "R$ 10,00" }
+    ]},
+    { title: "Teatro Imaginário", items: [
+      { name: "Fácil", price: "R$ 5,00" },
+      { name: "Médio", price: "R$ 10,00" },
+      { name: "Difícil", price: "R$ 15,00" },
+      { name: "Visionário", price: "R$ 20,00" },
+      { name: "Lunar", price: "R$ 25,00" }
+    ]},
+    { title: "Extras", items: [
+      { name: "200k Moras", price: "R$ 0,50" },
+      { name: "Arma de Pesca", price: "R$ 10,00" },
+      { name: "Rastro Teatro", price: "R$ 3,00" },
+      { name: "Cada Refino", price: "R$ 4,00" },
+      { name: "TCG Completo", price: "R$ 35,00" },
+      { name: "Farm 50 unid. (Alimentos/Flores/Madeira/Inimigos)", price: "R$ 1,00 cada" }
+    ]},
+    { title: "Build de Personagem", items: [
+      { name: "Básica", price: "R$ 5,00" },
+      { name: "Ótima", price: "R$ 10,00" },
+      { name: "Excelente", price: "R$ 25,00" }
+    ]},
+    { title: "Coleta de Oculis", items: [
+      { name: "Anemoculus", price: "R$ 15,00" },
+      { name: "Geoculus", price: "R$ 25,00" },
+      { name: "Electroculus", price: "R$ 25,00" },
+      { name: "Dendroculus (Floresta)", price: "R$ 25,00" },
+      { name: "Dendroculus (Deserto)", price: "R$ 25,00" },
+      { name: "Hydroculus", price: "R$ 35,00" },
+      { name: "Pyroculus", price: "R$ 45,00" },
+      { name: "Lunoculus", price: "R$ 20,00" }
+    ]},
+    { title: "Exploração", items: [
+      { name: "Mondstadt", price: "R$ 15,00" },
+      { name: "Espinha do Dragão", price: "R$ 20,00" },
+      { name: "Liyue", price: "R$ 25,00" },
+      { name: "Vale Chenyu", price: "R$ 25,00" },
+      { name: "Despenhadeiro", price: "R$ 25,00" },
+      { name: "Minas", price: "R$ 15,00" },
+      { name: "Inazuma", price: "R$ 35,00" },
+      { name: "Enkanomiya", price: "R$ 20,00" },
+      { name: "Sumeru (Floresta)", price: "R$ 45,00" },
+      { name: "Sumeru (Deserto)", price: "R$ 50,00" },
+      { name: "Fontaine", price: "R$ 35,00" },
+      { name: "Mar Antigo", price: "R$ 15,00" },
+      { name: "Natlan", price: "R$ 70,00" },
+      { name: "Montanha Sagrada", price: "R$ 15,00" },
+      { name: "Nod-Krai", price: "R$ 20,00" }
+    ]},
+    { title: "Eventos", items: [
+      { name: "Evento Simples", price: "R$ 5,00" },
+      { name: "Evento Principal", price: "R$ 10,00" }
+    ]},
+    { title: "Cuidados com a Conta", items: [
+      { name: "Manutenção Semanal", price: "R$ 3,00" },
+      { name: "Manutenção Mensal", price: "R$ 20,00" },
+      { name: "Manutenção da Versão", price: "R$ 25,00" }
+    ]}
+  ]
+},
 
-  function openChat() {
-    chatOverlay.classList.add("active");
-  }
+zzz: {
+  title: "Zenless Zone Zero",
+  img: "https://onpoplife.com.br/wp-content/uploads/2025/12/2.5-kv-capa.jpg",
+  desc: "Serviços Premium de Zenless Zone Zero.",
+  status: "Disponível", statusClass: "disponivel",
+  sections: [
+    { title: "Policromos", items: [
+      { name: "800 Policromos (5 giros)", price: "R$ 9,00" },
+      { name: "1.600 Policromos (10 giros)", price: "R$ 14,00" },
+      { name: "3.200 Policromos (20 giros)", price: "R$ 24,00" },
+      { name: "4.800 Policromos (30 giros)", price: "R$ 34,00" },
+      { name: "6.400 Policromos (40 giros)", price: "R$ 44,00" },
+      { name: "8.000 Policromos (50 giros)", price: "R$ 54,00" }
+    ]},
+    { title: "Missão", items: [
+      { name: "Missão principal completa (9 capítulos)", price: "R$ 70,00" },
+      { name: "Missão principal (1 capítulo)", price: "R$ 10,00" },
+      { name: "Missão secundária (cada)", price: "R$ 2,00" }
+    ]},
+    { title: "Evento", items: [
+      { name: "Evento simples", price: "R$ 5,00" },
+      { name: "Evento principal", price: "R$ 20,00" }
+    ]},
+    { title: "Agentes", items: [
+      { name: "Todas as histórias (18 no total)", price: "R$ 55,00" },
+      { name: "História individual (1)", price: "R$ 5,00" }
+    ]},
+    { title: "Oficial Miau-Miau", items: [
+      { name: "Por área", price: "R$ 15,00" },
+      { name: "1 página", price: "R$ 6,00" }
+    ]},
+    { title: "End Games", items: [
+      { name: "Nódulo Estável (Nível 1 ao 10)", price: "R$ 15,00" },
+      { name: "Nódulo de Conflito (Nível 1 ao 8)", price: "R$ 13,00" },
+      { name: "Nódulo Crítico (Nível 1 ao 7)", price: "R$ 12,00" },
+      { name: "Investida Mortal", price: "R$ 20,00" },
+      { name: "Teste de Combate Virtual (por nível)", price: "R$ 2,00" },
+      { name: "Teste de Combate: Sem Saída (por nível)", price: "R$ 3,00" }
+    ]},
+    { title: "Cidade Definhada", items: [
+      { name: "Área 01 — Metrô da Velha Capital", price: "R$ 10,00" },
+      { name: "Área 02 — Ruínas da Construção", price: "R$ 10,00" },
+      { name: "Área 03 — Ruínas do Edifício Gigante", price: "R$ 10,00" },
+      { name: "Canteiro Definhado", price: "R$ 15,00" },
+      { name: "Colheita Ardente", price: "R$ 15,00" }
+    ]},
+    { title: "Vazio Perdido", items: [
+      { name: "Extermínio da Linha de Frente (nível máximo)", price: "R$ 15,00" },
+      { name: "Aniquilação dos Transgressores", price: "R$ 5,00" },
+      { name: "Operação de Reconstituição", price: "R$ 15,00" }
+    ]},
+    { title: "Cuidado com a Conta", items: [
+      { name: "Pacote Semanal", price: "R$ 15,00" },
+      { name: "Pacote por Versão", price: "R$ 50,00" }
+    ]}
+  ]
+},
 
-  function closeChat() {
-    chatOverlay.classList.remove("active");
-  }
+hsr: {
+  title: "Honkai: Star Rail",
+  img: "https://webstatic.hoyoverse.com/upload/op-public/2023/09/14/3c862d085db721a5625b6e12649399bc_8067514115196038699.png",
+  desc: "Serviços Premium de Honkai: Star Rail.",
+  status: "Disponível", statusClass: "disponivel",
+  sections: [
+    { title: "Stellar Jade", items: [
+      { name: "800 Stellar (5 giros)", price: "R$ 8,00" },
+      { name: "1.600 Stellar (10 giros)", price: "R$ 12,00" },
+      { name: "3.200 Stellar (20 giros)", price: "R$ 24,00" },
+      { name: "4.800 Stellar (30 giros)", price: "R$ 36,00" },
+      { name: "8.000 Stellar (50 giros)", price: "R$ 48,00" }
+    ]},
+    { title: "Cuidados", items: [
+      { name: "Cuidado mensal", price: "R$ 15,00" },
+      { name: "Cuidado completo da versão", price: "R$ 50,00" }
+    ]},
+    { title: "End Games", items: [
+      { name: "MOC", price: "R$ 20,00" },
+      { name: "Sombra AP", price: "R$ 40,00" },
+      { name: "Pura Ficção", price: "R$ 60,00" },
+      { name: "Arbitragem de Anomalias", price: "R$ 100,00" }
+    ]},
+    { title: "Exploração", items: [
+      { name: "Nave da Herta", price: "R$ 10,00" },
+      { name: "Jarilo-VI", price: "R$ 20,00" },
+      { name: "Xianzhou", price: "R$ 35,00" },
+      { name: "Penacony", price: "R$ 50,00" },
+      { name: "Amphoreus", price: "R$ 45,00" }
+    ]},
+    { title: "Coletas", items: [
+      { name: "Coleta de Pássaros de Origami", price: "R$ 35,00" },
+      { name: "Coleta de Ninfas", price: "R$ 5,00 / 10 ninfas" }
+    ]},
+    { title: "Missões", items: [
+      { name: "Missão de Desbravamento (por ato)", price: "R$ 10,00" },
+      { name: "Desbravamento (completo)", price: "R$ 40,00" },
+      { name: "Missão de Companheiro", price: "R$ 10,00" }
+    ]},
+    { title: "Ascenção", items: [
+      { name: "Up de Personagem", price: "R$ 10,00" },
+      { name: "Up de Rastro", price: "R$ 15,00" },
+      { name: "Up de Cone de Luz", price: "R$ 15,00" }
+    ]},
+    { title: "Conteúdos", items: [
+      { name: "Universo Simulado Inteiro (cada mundo)", price: "R$ 50,00" },
+      { name: "Universo Simulado Semanal (cada mundo)", price: "R$ 15,00" },
+      { name: "Universo do Enxame", price: "R$ 35,00" },
+      { name: "Universo do Ouro e Engrenagem", price: "R$ 35,00" },
+      { name: "Universo Domínio Incógnito", price: "R$ 35,00" },
+      { name: "Universo Divergente (Amphoreus) Inteiro", price: "R$ 25,00" },
+      { name: "Universo Divergente (Amphoreus) Semanal", price: "R$ 15,00" },
+      { name: "Guerras Monetárias", price: "R$ 20,00" }
+    ]}
+  ]
+},
 
-  openChatBtn.addEventListener("click", openChat);
-  closeChatBtn.addEventListener("click", closeChat);
+wuwa: {
+  title: "Wuthering Waves",
+  img: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/05/wuthering_waves_banner_schedule.jpg",
+  desc: "Serviços Premium de Wuthering Waves.",
+  status: "Disponível", statusClass: "disponivel",
+  sections: [
+    { title: "Astrites", items: [
+      { name: "800 Astrites", price: "R$ 6,00" },
+      { name: "1.600 Astrites", price: "R$ 14,00" },
+      { name: "3.200 Astrites", price: "R$ 24,00" },
+      { name: "4.800 Astrites", price: "R$ 34,00" },
+      { name: "6.400 Astrites", price: "R$ 44,00" },
+      { name: "8.000 Astrites", price: "R$ 54,00" },
+      { name: "9.600 Astrites", price: "R$ 64,00" }
+    ]},
+    { title: "Exploração — Huanglong", items: [
+      { name: "Gorges of Spirits", price: "R$ 27,00" },
+      { name: "Norfall Barrens", price: "R$ 26,00" },
+      { name: "Whining Aix's Mire", price: "R$ 28,00" },
+      { name: "Dim Forest", price: "R$ 25,00" },
+      { name: "Port City of Guixu", price: "R$ 24,00" },
+      { name: "Tiger's Maw", price: "R$ 28,00" },
+      { name: "Wuming Bay", price: "R$ 23,00" },
+      { name: "Jinzhou", price: "R$ 30,00" },
+      { name: "Desorock Highland", price: "R$ 19,00" },
+      { name: "Central Plains", price: "R$ 24,00" },
+      { name: "Mt. Firmament", price: "R$ 29,00" },
+      { name: "Huanglong 100% (pacote completo)", price: "R$ 228,00" }
+    ]},
+    { title: "Exploração — Black Shores", items: [
+      { name: "Black Shores Archipelago + Tethys' Deep", price: "R$ 29,00" }
+    ]},
+    { title: "Exploração — Rinascita", items: [
+      { name: "Ilha Principal", price: "R$ 115,00" },
+      { name: "Beohr Waters", price: "R$ 24,00" },
+      { name: "Avinoleum", price: "R$ 26,00" },
+      { name: "Septimont", price: "R$ 36,00" },
+      { name: "Fabricatorium of the Deep", price: "R$ 14,00" },
+      { name: "Sanguis Plateaus", price: "R$ 32,00" },
+      { name: "Rinascita 100% (pacote completo)", price: "R$ 250,00" }
+    ]},
+    { title: "Exploração — Roya Frostlands", items: [
+      { name: "Etching Plains", price: "R$ 26,00" },
+      { name: "Startorch Academy", price: "R$ 24,00" },
+      { name: "Starward Riseway", price: "R$ 23,00" },
+      { name: "Fangspire Chasm", price: "R$ 25,00" },
+      { name: "Bjartr Woods", price: "R$ 23,00" },
+      { name: "Stagnant Run", price: "R$ 23,00" },
+      { name: "Rebirth Uplands", price: "R$ 22,00" },
+      { name: "Mawburrow Desert", price: "R$ 24,00" },
+      { name: "Giant's Gaze", price: "R$ 23,00" },
+      { name: "Roya Frostlands 100%", price: "R$ 186,00" }
+    ]},
+    { title: "End Games — Tower of Adversity", items: [
+      { name: "Resonant", price: "R$ 10,00" },
+      { name: "Hazard", price: "R$ 16,00" },
+      { name: "Echoing", price: "R$ 11,00" },
+      { name: "Tower of Adversity (completa)", price: "R$ 30,00" },
+      { name: "Whimpering Wastes", price: "R$ 21,00" },
+      { name: "Holograma (por dificuldade)", price: "R$ 1,50" }
+    ]},
+    { title: "Data Bank", items: [
+      { name: "Data Bank (nível 1 ao 30)", price: "R$ 58,00" },
+      { name: "Data Bank (por nível)", price: "R$ 2,50" }
+    ]},
+    { title: "Missões", items: [
+      { name: "Missão Principal", price: "R$ 50,00 / região" },
+      { name: "Missão de Companheiro", price: "R$ 13,00" },
+      { name: "Missões de Exploração", price: "R$ 13,00" },
+      { name: "Missões Secundárias", price: "R$ 9,00" }
+    ]},
+    { title: "Up de Personagens", items: [
+      { name: "Nível 1 até 90", price: "R$ 15,00" },
+      { name: "De 10 em 10 níveis", price: "R$ 5,00" }
+    ]},
+    { title: "Builds", items: [
+      { name: "Build Básica", price: "R$ 10,00" },
+      { name: "Build Média", price: "R$ 13,00" },
+      { name: "Build Excelente", price: "R$ 20,00" }
+    ]}
+  ]
+}
+};
 
-  function addMessage(text, isUser) {
-    const div = document.createElement("div");
-    div.className = `chat-message ${isUser ? "user-message" : "ai-message"}`;
+// ── OVERLAY PRODUTOS ─────────────────────────────────────
+function openOverlay(key) {
+  const data = produtos[key];
+  if (!data) return;
 
-    div.innerHTML = `
-      <div class="message-content">
-        ${text}
+  const listsHTML = data.sections.map(s => `
+    <div class="section-wrapper">
+      <h4 class="section-title">${s.title}</h4>
+      <div class="price-table">
+        ${s.items.map(i => `
+          <div class="price-row">
+            <span>${i.name}</span>
+            <span>${i.price}</span>
+          </div>`).join('')}
       </div>
-    `;
+    </div>`).join('');
 
+  document.getElementById('overlayContent').innerHTML = `
+    <div class="overlay-product-header">
+      <img src="${data.img}" alt="${data.title}" class="overlay-img">
+      <div class="overlay-product-info">
+        <div class="status ${data.statusClass}" style="margin-bottom:0.5rem;">${data.status}</div>
+        <h3>${data.title}</h3>
+        <p>${data.desc}</p>
+      </div>
+    </div>
+    ${listsHTML}
+  `;
+
+  document.getElementById('overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+// ── OVERLAY INFO ─────────────────────────────────────────
+function openInfoOverlay(type) {
+  const content = document.getElementById('overlayContent');
+  let html = '';
+
+  if (type === 'comoComprar') {
+    html = `
+      <div class="info-overlay-body">
+        <h1><span>Como</span> Comprar?</h1>
+        <p class="info-subtitle"><span class="dot"></span> Guia de Compra</p>
+        ${termBlock('1. Aceite dos Termos', 'Ao contratar qualquer serviço, você confirma que leu e concorda integralmente com os nossos Termos de Compra. É fundamental estar ciente das regras antes de prosseguir.')}
+        ${termBlock('2. Escolha do Serviço', 'Navegue pelo catálogo e escolha o serviço que melhor atende às suas necessidades. Verifique os valores e detalhes específicos de cada jogo.')}
+        ${termBlock('3. Abertura de Ticket', 'Entre no nosso servidor oficial do Discord. Vá até o canal de suporte e abra um ticket de compra. Todo o processo é realizado por lá para garantir a sua segurança.')}
+        ${termBlock('4. Atendimento e Formulário', 'Preencha o formulário automático no ticket com os dados do serviço escolhido. Aguarde até que um de nossos especialistas assuma o atendimento.')}
+      </div>`;
+  }
+
+  if (type === 'termos') {
+    html = `
+      <div class="info-overlay-body">
+        <h1><span>Termos</span> de Compra</h1>
+        <p class="info-subtitle" style="margin-bottom:1.5rem;"><span class="dot"></span> Leia com atenção antes de comprar</p>
+        ${termBlock('Pagamentos e início do serviço', 'O prazo padrão para inicialização do serviço é de até 48 horas após a confirmação do pagamento. Pressões ou cobranças indevidas não serão toleradas.')}
+        ${termBlock('Reembolsos e arrependimentos', 'Arrependimentos e mudanças de ideia não são reembolsáveis. Reembolsos só serão considerados em casos de falha comprovada por parte da equipe.')}
+        ${termBlock('Atendimento e suporte', 'O atendimento ocorre exclusivamente via tickets do Discord. Mensagens privadas à equipe serão ignoradas. Os atendimentos são feitos por ordem de chegada.')}
+        ${termBlock('Execução e entrega', 'A Nova Community se compromete a entregar exatamente o que foi solicitado e pago. Entregas parciais não significam falha — algumas etapas podem ser feitas em fases separadas.')}
+        ${termBlock('Conduta e respeito', 'O respeito à equipe é obrigatório. Linguagem ofensiva, spam ou ironias serão tratadas como falta de respeito. A Nova Community reserva o direito de recusar atendimento.')}
+        ${termBlock('Responsabilidade do comprador', 'O cliente concorda que o processo pode envolver riscos à conta. Caso ocorra qualquer punição ou banimento, a responsabilidade é integralmente do comprador.')}
+        ${termBlock('Alterações nos termos', 'Os termos podem ser atualizados a qualquer momento. A versão válida será sempre a mais recente publicada oficialmente.')}
+      </div>`;
+  }
+
+  if (type === 'status') {
+    html = `
+      <div class="info-overlay-body">
+        <h1><span>Status</span> do Sistema</h1>
+        <p class="info-subtitle"><span class="dot"></span> Todos os Sistemas Operacionais — last att: 10/4</p>
+        <div style="margin-bottom:1rem;"></div>
+        ${termBlock('Plataforma Web', 'O site da Nova Community encontra-se On-line e operando com baixa latência. Todos os catálogos estão sincronizados. Host by GitHub.')}
+        ${termBlock('Serviços Script', 'Status: Atualizado & Seguro. Nossos scripts foram testados na versão mais recente de cada jogo. Detecção: Negativa.')}
+        ${termBlock('Fila de Atendimento', 'Tickets via Discord: Operando normalmente. Tempo médio de resposta: 15 a 45 minutos. Tickets via Site: Desabilitado.')}
+      </div>`;
+  }
+
+  if (type === 'cargos') {
+    html = `
+      <div class="info-overlay-body">
+        <h1><span>Cargos</span></h1>
+        <p class="info-subtitle" style="margin-bottom:1.5rem;"><span class="dot"></span> Estrutura da Equipe</p>
+        ${termBlock('Owner', 'Responsável pela loja. Define diretrizes, toma decisões finais e supervisiona a equipe e as operações.')}
+        ${termBlock('Staff', 'Responsável pelo funcionamento geral, incluindo atendimento, suporte, moderação e organização.')}
+        ${termBlock('Administrador', 'Gerencia sistemas, resolve conflitos e aplica decisões administrativas.')}
+        ${termBlock('Farmers', 'Realizam e entregam os serviços conforme prazos e padrões definidos.')}
+        ${termBlock('Promotor', 'Cuida de parcerias e negociações com outros servidores e projetos.')}
+        ${termBlock('Divulgador', 'Responsável por divulgar a loja em redes e comunidades.')}
+        ${termBlock('Mov Chat', 'Mantém o chat ativo e interage com os membros.')}
+        ${termBlock('Designer', 'Cria e mantém as artes e a identidade visual.')}
+      </div>`;
+  }
+
+  if (type === 'equipe') {
+    html = `
+      <div class="team-wrapper">
+        <h2 class="team-heading"><span>Colaboradores</span></h2>
+        <p class="team-sub">Equipe Central da Nova Community</p>
+        <div class="team-grid">
+          <div class="team-card">
+            <img src="https://media.discordapp.net/attachments/1476661396673527809/1476661419993989212/WhatsApp_Image_2026-02-25_at_20.07.27.jpeg?ex=69a1ef9d&is=69a09e1d&hm=9fa27beb7930e41f61fcaa40b6acff0f97bb488d0fc2ce856ec93fc801af124d&=&format=webp&width=443&height=788" class="team-avatar" alt="Admin">
+            <h3>—</h3>
+            <span class="team-role">Administradorx</span>
+          </div>
+          <div class="team-card destaque">
+            <img src="https://media.discordapp.net/attachments/1363677152800800961/1487547726844399646/download.jpg?ex=69c98a47&is=69c838c7&hm=45c62667cace79cd36e216df2e3932336f4f9c17a794ea4b7a6abc7b2ad435d7&=&format=webp" class="team-avatar" alt="Owner">
+            <h3>wz.foxyyy</h3>
+            <span class="team-role">Owner</span>
+          </div>
+          <div class="team-card">
+            <img src="https://media.discordapp.net/attachments/1476661396673527809/1476664328894808106/IMG-20260126-WA0151.jpg?ex=69a1f253&is=69a0a0d3&hm=d1c4a4f17c6c939905c3072bfbb5acfdbbd4af90a47764dcb25bcf5095b31f4b&=&format=webp&width=706&height=788" class="team-avatar" alt="Staff">
+            <h3>ventisfavone</h3>
+            <span class="team-role">Staff Sênior</span>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  content.innerHTML = html;
+  document.getElementById('overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOverlay() {
+  document.getElementById('overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
+
+// ── MOBILE MENU ──────────────────────────────────────────
+function toggleMenu() {
+  const sidebar = document.getElementById('mobileSidebar');
+  const overlay = document.getElementById('menuOverlay');
+  const isOpen = sidebar.classList.toggle('active');
+  overlay.classList.toggle('active');
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+// ── AI CHAT ──────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const chatOverlay = document.getElementById('aiChatOverlay');
+  const chatBody = document.getElementById('aiChatBody');
+  const chatInput = document.getElementById('aiChatInput');
+  const openBtn = document.getElementById('openAiChatBtn');
+  const closeBtn = document.getElementById('closeAiChatBtn');
+  const sendBtn = document.getElementById('sendAiMessageBtn');
+
+  openBtn.addEventListener('click', e => { e.preventDefault(); chatOverlay.classList.add('active'); });
+  closeBtn.addEventListener('click', () => chatOverlay.classList.remove('active'));
+
+  function addMsg(text, isUser) {
+    const div = document.createElement('div');
+    div.className = `chat-message ${isUser ? 'user-message' : 'ai-message'}`;
+    div.innerHTML = `<div class="message-content">${text}</div>`;
     chatBody.appendChild(div);
     chatBody.scrollTop = chatBody.scrollHeight;
   }
 
-  function sendMessage() {
+  function aiResponse(msg) {
+    const m = msg.toLowerCase();
+    let r = 'Ainda estou aprendendo! Abra um ticket no Discord para ajuda completa. 😊';
+    if (m.match(/oi|olá|ola|hey/)) r = 'Olá! Posso te informar sobre preços e serviços. Como posso ajudar?';
+    else if (m.match(/preço|valor|quanto/)) r = 'Temos serviços a partir de R$0,50 para Genshin (Script). Veja os cards acima para detalhes!';
+    else if (m.match(/ticket|comprar|como/)) r = 'Para comprar: abra um ticket no nosso Discord! O link está no menu "Tickets".';
+    else if (m.match(/seguro|confiável|segura/)) r = 'Sim! Temos muitos feedbacks de clientes satisfeitos no nosso Discord. 🛡️';
+    else if (m.match(/discord/)) r = 'Nosso servidor: discord.gg/Szqbsd4TNa — Entre e abra um ticket!';
+    setTimeout(() => addMsg(r, false), 700);
+  }
+
+  function send() {
     const msg = chatInput.value.trim();
     if (!msg) return;
-
-    addMessage(msg, true);
-    chatInput.value = "";
-
-    simulateAIResponse(msg);
+    addMsg(msg, true);
+    chatInput.value = '';
+    aiResponse(msg);
   }
 
-  function simulateAIResponse(msg) {
-    let response = "Ainda estou aprendendo. Abra um ticket no Discord se precisar de ajuda.";
-
-    const m = msg.toLowerCase();
-
-    if (m.includes("oi") || m.includes("olá")) {
-      response = "Olá! Posso te informar preços, serviços ou mandar o link do Discord.";
-    } 
-    else if (m.includes("preço") || m.includes("valor")) {
-      response = "Temos serviços para Genshin, HSR, ZZZ e WuWa. Os preços começam a partir de R$0,50 dependendo do serviço.";
-    } 
-    else if (m.includes("ticket")) {
-      response = "Para suporte completo, abra um ticket no nosso Discord.";
-    } 
-    else if (m.includes("seguro") || m.includes("confiável")) {
-      response = "Temos vários feedbacks de clientes no nosso Discord.";
-    }
-
-    setTimeout(() => {
-      addMessage(response, false);
-    }, 900);
-  }
-
-  sendMessageBtn.addEventListener("click", sendMessage);
-
-  chatInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") sendMessage();
-  });
-
+  sendBtn.addEventListener('click', send);
+  chatInput.addEventListener('keydown', e => { if (e.key === 'Enter') send(); });
 });
-</script>
-
-<script>
-function toggleMenu() {
-    const sidebar = document.getElementById('mobileSidebar');
-    const overlay = document.getElementById('menuOverlay');
-    
-    // Toggle adiciona a classe se não existir, e remove se já existir
-    sidebar.classList.toggle('active');
-    overlay.classList.toggle('active');
-    
-    // Trava o scroll da página quando o menu abrir
-    if (sidebar.classList.contains('active')) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = 'auto';
-    }
-}
 </script>
 
 </body>
