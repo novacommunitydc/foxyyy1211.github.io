@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NOVA — Premium Game Services</title>
-<link rel="icon" type="image/png" href="https://64.media.tumblr.com/c4beee0769a4381a43741e02c28defea/182fcda3a0d77b6c-42/s2048x3072/aebc414dc2195a76b42655ed294e7633ed551872.pnj">
+<link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1363677152800800961/1500640598548287618/content.png?ex=69f92bf7&is=69f7da77&hm=f1b661887c119d3b974032db6b8a7ed566e6024894a436272ac51e74412839d1&=&format=webp&quality=lossless&width=788&height=788">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 :root {
@@ -25,9 +26,9 @@
   --green: #4ade80;
   --red: #f87171;
   --r: 6px;
-  --mono: 'Space Mono', monospace;
-  --head: 'Syne', sans-serif;
-  --body: 'Outfit', sans-serif;
+  --mono: 'JetBrains Mono', sans-serif;
+  --head: 'Bebas Neue', sans-serif;
+  --body: 'Inter', monospace;
 }
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -39,12 +40,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:var(--amber);border-radius:99px;}
 
-/* ── scanline overlay ── */
-body::before{
-  content:'';position:fixed;inset:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
-  pointer-events:none;z-index:9999;
-}
+/* scanline removed */
 
 /* ═══════════════════ NAV ═══════════════════ */
 nav{
@@ -97,148 +93,160 @@ nav{
 }
 .mob-links a:hover{color:var(--amber);border-color:var(--amber-dim);background:var(--amber-dim);}
 
-/* ═══════════════════ HERO ═══════════════════ */
 .hero{
   min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:100px 2rem 80px;position:relative;overflow:hidden;
+  text-align:center;padding:120px 2rem 100px;position:relative;overflow:hidden;
 }
 .hero-grid-bg{
   position:absolute;inset:0;
   background-image:
-    linear-gradient(rgba(232,168,76,0.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(232,168,76,0.04) 1px,transparent 1px);
-  background-size:60px 60px;
+    linear-gradient(rgba(232,168,76,0.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(232,168,76,0.045) 1px,transparent 1px);
+  background-size:80px 80px;
 }
 .hero-grid-bg::after{
   content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 70% 60% at 50% 50%, rgba(8,8,8,0) 0%, rgba(8,8,8,0.9) 70%);
+  background:radial-gradient(ellipse 70% 65% at 50% 50%, rgba(8,8,8,0) 0%, rgba(8,8,8,0.92) 68%);
 }
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--mono);font-size:0.62rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--amber);border:1px solid rgba(232,168,76,0.3);padding:6px 14px;border-radius:3px;
-  margin-bottom:2.5rem;position:relative;z-index:1;
+  font-family:var(--mono);font-size:0.68rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--amber);border:1px solid rgba(232,168,76,0.3);padding:8px 18px;border-radius:4px;
+  margin-bottom:3rem;position:relative;z-index:1;
 }
-.hero-badge .dot{width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green);}
+.hero-badge .dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green);}
 .hero h1{
-  font-family:var(--head);font-size:clamp(3.5rem,10vw,7.5rem);font-weight:800;
-  letter-spacing:-0.03em;line-height:.9;margin-bottom:1rem;position:relative;z-index:1;
+  font-family:var(--head);
+  font-size:clamp(4.5rem,12vw,10rem);
+
+  font-weight:900;        /* mais pesado */
+  letter-spacing:-0.04em; /* mais “colado” */
+  font-style:italic;      /* inclinado igual */
+  line-height:.9;         /* mais compacto */
+
+  text-transform:uppercase;
 }
 .hero h1 em{font-style:normal;color:var(--amber);}
-.hero h1 .line2{display:block;font-size:clamp(1rem,3vw,1.8rem);font-weight:400;letter-spacing:.25em;color:var(--muted);margin-top:.6rem;font-family:var(--mono);}
+.hero h1 .line2{display:block;font-size:clamp(1.2rem,3.5vw,2.5rem);font-weight:400;letter-spacing:.4em;color:var(--muted);margin-top:.3rem;font-family:var(--mono);}
 .hero-sub{
-  font-size:1rem;color:var(--dim);max-width:400px;margin:1.5rem auto 3rem;
-  position:relative;z-index:1;font-weight:300;
+  font-size:1.05rem;color:var(--dim);max-width:440px;margin:2.2rem auto 3.5rem;
+  position:relative;z-index:1;font-weight:300;line-height:1.7;
 }
-.hero-ctas{display:flex;gap:12px;justify-content:center;position:relative;z-index:1;flex-wrap:wrap;}
+.hero-ctas{display:flex;gap:14px;justify-content:center;position:relative;z-index:1;flex-wrap:wrap;}
 .cta-primary{
-  font-family:var(--mono);font-size:0.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
-  background:var(--amber);color:#000;padding:14px 28px;border-radius:4px;text-decoration:none;
+  font-family:var(--mono);font-size:0.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+  background:var(--amber);color:#000;padding:15px 32px;border-radius:4px;text-decoration:none;
   border:none;cursor:pointer;transition:.2s;
 }
 .cta-primary:hover{background:#f0b85a;transform:translateY(-2px);}
 .cta-ghost{
-  font-family:var(--mono);font-size:0.72rem;letter-spacing:.1em;text-transform:uppercase;
-  background:transparent;color:var(--text);padding:14px 28px;border-radius:4px;text-decoration:none;
+  font-family:var(--mono);font-size:0.75rem;letter-spacing:.1em;text-transform:uppercase;
+  background:transparent;color:var(--text);padding:15px 32px;border-radius:4px;text-decoration:none;
   border:1px solid var(--border2);cursor:pointer;transition:.2s;
 }
 .cta-ghost:hover{border-color:var(--amber);color:var(--amber);}
 .hero-stats{
-  display:flex;gap:3rem;justify-content:center;margin-top:4rem;
+  display:flex;gap:4rem;justify-content:center;margin-top:5rem;
   position:relative;z-index:1;flex-wrap:wrap;
 }
 .stat{text-align:center;}
-.stat-n{font-family:var(--head);font-size:1.8rem;font-weight:800;color:var(--amber);}
-.stat-l{font-family:var(--mono);font-size:0.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:2px;}
+.stat-n{font-family:var(--head);font-size:2.4rem;font-weight:400;color:var(--amber);letter-spacing:.04em;}
+.stat-l{font-family:var(--mono);font-size:0.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
 
 /* ═══════════════════ SECTION HEADER ═══════════════════ */
-.s-wrap{max-width:1280px;margin:0 auto;padding:80px 2rem;}
+.s-wrap{max-width:1280px;margin:0 auto;padding:90px 2rem;}
 .s-tag{
-  font-family:var(--mono);font-size:0.62rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--amber);margin-bottom:1.2rem;display:flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:0.72rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:1.4rem;display:flex;align-items:center;gap:12px;
 }
-.s-tag::before{content:'';width:20px;height:1px;background:var(--amber);}
-.s-h2{font-family:var(--head);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.02em;margin-bottom:.5rem;}
+.s-tag::before{content:'';width:24px;height:1px;background:var(--amber);}
+.s-h2{
+  font-family:var(--head);
+  font-size:clamp(1.35rem,6vw,5.25rem);
+  font-weight:900;
+  letter-spacing:-0.04em;
+  text-transform:uppercase;
+  line-height:.9;
+  font-style:italic;
+  margin-bottom:.5rem;
+}
 .s-h2 em{font-style:normal;color:var(--amber);}
-.s-sub{color:var(--dim);font-size:.9rem;max-width:500px;}
+.s-sub{color:var(--dim);font-size:.95rem;max-width:520px;line-height:1.65;}
 
 /* ═══════════════════ CATALOG GRID ═══════════════════ */
 .catalog-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
-  gap:1px;
-  border:1px solid var(--border);
-  border-radius:var(--r);
-  overflow:hidden;
-  margin-top:2.5rem;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:16px;
+  margin-top:3rem;
 }
 .c-card{
-  background:var(--bg1);border:none;
+  background:var(--bg1);border:1px solid var(--border);border-radius:8px;
   display:flex;flex-direction:column;
   transition:.25s;position:relative;overflow:hidden;
   cursor:pointer;
 }
 .c-card::after{
   content:'';position:absolute;inset:0;
-  border:1px solid transparent;transition:.25s;pointer-events:none;border-radius:0;
+  border:1px solid transparent;transition:.25s;pointer-events:none;border-radius:8px;
 }
-.c-card:hover::after{border-color:rgba(232,168,76,0.25);}
-.c-card:hover{background:var(--bg2);z-index:2;}
+.c-card:hover::after{border-color:rgba(232,168,76,0.3);}
+.c-card:hover{background:var(--bg2);z-index:2;transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.4);}
 .c-card.locked{opacity:.45;cursor:default;}
-.c-card.locked:hover{background:var(--bg1);}
+.c-card.locked:hover{background:var(--bg1);transform:none;box-shadow:none;}
 .c-card.locked:hover::after{border-color:transparent;}
-.c-img{height:160px;overflow:hidden;position:relative;}
+.c-img{height:180px;overflow:hidden;position:relative;}
 .c-img img{width:100%;height:100%;object-fit:cover;transition:.5s;filter:brightness(.7) saturate(.8);}
-.c-card:hover .c-img img{transform:scale(1.05);filter:brightness(.85) saturate(1);}
+.c-card:hover .c-img img{transform:scale(1.05);filter:brightness(.9) saturate(1);}
 .c-img-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(to top,var(--bg1) 0%,transparent 60%);
+  background:linear-gradient(to top,var(--bg1) 0%,transparent 55%);
 }
-.c-body{padding:1.2rem 1.4rem 1.4rem;flex-grow:1;display:flex;flex-direction:column;gap:.6rem;}
+.c-body{padding:1.4rem 1.6rem 1.6rem;flex-grow:1;display:flex;flex-direction:column;gap:.7rem;}
 .c-tag-row{display:flex;align-items:center;justify-content:space-between;}
 .c-game-tag{
-  font-family:var(--mono);font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
   color:var(--amber);background:var(--amber-dim);border:1px solid rgba(232,168,76,0.2);
-  padding:3px 8px;border-radius:3px;
+  padding:4px 10px;border-radius:3px;
 }
-.c-status{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;}
+.c-status{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;}
 .c-status.on{color:var(--green);}
-.c-status.on::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);}
+.c-status.on::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
 .c-status.soon{color:var(--muted);}
-.c-status.soon::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--muted);}
-.c-title{font-family:var(--head);font-size:1.05rem;font-weight:700;letter-spacing:-.01em;color:var(--text);}
-.c-desc{font-size:.82rem;color:var(--dim);line-height:1.5;flex-grow:1;}
-.c-footer{display:flex;justify-content:space-between;align-items:center;margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--border);}
-.c-price{font-family:var(--head);font-size:1.1rem;font-weight:800;color:var(--text);}
-.c-price small{font-family:var(--mono);font-size:.58rem;color:var(--muted);font-weight:400;margin-left:3px;letter-spacing:.05em;}
+.c-status.soon::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--muted);}
+.c-title{font-family:var(--head);font-size:1.35rem;font-weight:400;letter-spacing:.04em;color:var(--text);text-transform:uppercase;}
+.c-desc{font-size:.88rem;color:var(--dim);line-height:1.6;flex-grow:1;}
+.c-footer{display:flex;justify-content:space-between;align-items:center;margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--border);}
+.c-price{font-family:var(--head);font-size:1.3rem;font-weight:400;color:var(--text);letter-spacing:.04em;}
+.c-price small{font-family:var(--mono);font-size:.6rem;color:var(--muted);font-weight:400;margin-left:4px;letter-spacing:.05em;}
 .btn-view{
-  font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;
-  background:var(--amber);color:#000;padding:7px 16px;border-radius:3px;
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--amber);color:#000;padding:8px 18px;border-radius:4px;
   border:none;cursor:pointer;font-weight:700;transition:.15s;
 }
 .btn-view:hover{background:#f0b85a;}
 .btn-locked{
-  font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;
-  background:transparent;color:var(--muted);padding:7px 16px;border-radius:3px;
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;
+  background:transparent;color:var(--muted);padding:8px 18px;border-radius:4px;
   border:1px solid var(--border);cursor:not-allowed;
 }
 
 /* ═══════════════════ HOW TO BUY ═══════════════════ */
 .steps-grid{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:1px;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:2.5rem;
+  gap:16px;margin-top:3rem;
 }
 .step{
-  background:var(--bg1);padding:2rem 1.5rem;position:relative;
-  border-right:1px solid var(--border);
+  background:var(--bg1);padding:2.2rem 1.8rem;position:relative;
+  border:1px solid var(--border);border-radius:8px;transition:.2s;
 }
-.step:last-child{border-right:none;}
+.step:hover{border-color:rgba(232,168,76,0.2);background:var(--bg2);}
 .step-num{
-  font-family:var(--mono);font-size:2.5rem;font-weight:700;color:var(--border2);
-  line-height:1;margin-bottom:.8rem;letter-spacing:-.05em;
+  font-family:var(--head);font-size:3rem;font-weight:400;color:rgba(232,168,76,0.15);
+  line-height:1;margin-bottom:1rem;letter-spacing:.04em;
 }
-.step-title{font-family:var(--head);font-size:1rem;font-weight:700;margin-bottom:.5rem;}
-.step-desc{font-size:.82rem;color:var(--dim);line-height:1.5;}
+.step-title{font-family:var(--head);font-size:1.4rem;font-weight:400;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.6rem;}
+.step-desc{font-size:.9rem;color:var(--dim);line-height:1.6;}
 
 /* ═══════════════════ TEAM ═══════════════════ */
 .team-grid{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:2.5rem;}
@@ -254,20 +262,20 @@ nav{
 .t-card.owner::before{opacity:1;}
 .t-avatar{width:76px;height:76px;border-radius:50%;object-fit:cover;border:2px solid var(--border);margin:0 auto .9rem;display:block;transition:.25s;}
 .t-card:hover .t-avatar{border-color:rgba(232,168,76,0.4);}
-.t-name{font-family:var(--head);font-size:.9rem;font-weight:700;margin-bottom:.4rem;}
+.t-name{font-family:var(--head);font-size:1.2rem;font-weight:400;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.4rem;}
 .t-role{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);background:var(--amber-dim);border:1px solid rgba(232,168,76,0.2);padding:3px 10px;border-radius:3px;}
 
 /* ═══════════════════ STATUS BAR ═══════════════════ */
 .status-bar{
-  background:var(--bg1);border:1px solid var(--border);border-radius:var(--r);
-  padding:1.5rem 2rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:1rem;margin-top:2.5rem;
+  background:var(--bg1);border:1px solid var(--border);border-radius:10px;
+  padding:2.5rem 2.5rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:2rem;margin-top:3rem;
 }
-.status-item{display:flex;align-items:center;gap:10px;}
-.s-dot-green{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);flex-shrink:0;}
-.s-dot-amber{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber);flex-shrink:0;}
-.status-item-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
-.status-item-val{font-family:var(--mono);font-size:.65rem;color:var(--green);margin-top:1px;letter-spacing:.05em;}
+.status-item{display:flex;align-items:flex-start;gap:14px;}
+.s-dot-green{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);flex-shrink:0;margin-top:5px;}
+.s-dot-amber{width:10px;height:10px;border-radius:50%;background:var(--amber);box-shadow:0 0 10px var(--amber);flex-shrink:0;margin-top:5px;}
+.status-item-label{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text);font-weight:500;margin-bottom:4px;}
+.status-item-val{font-family:var(--mono);font-size:.72rem;color:var(--green);letter-spacing:.04em;}
 
 /* ═══════════════════ TICKET SYSTEM ═══════════════════ */
 #ticket-section{border-top:1px solid var(--border);}
@@ -315,46 +323,93 @@ nav{
 
 /* ═══════════════════ PRODUCT MODAL ═══════════════════ */
 .pmodal{
-  position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:5000;
-  display:flex;align-items:flex-start;justify-content:center;padding:5rem 1rem 2rem;
+  position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:5000;
+  display:flex;align-items:flex-start;justify-content:center;padding:3rem 1rem 2rem;
   opacity:0;visibility:hidden;transition:.25s;overflow-y:auto;
 }
 .pmodal.open{opacity:1;visibility:visible;}
 .pmodal-box{
-  background:var(--bg1);border:1px solid var(--border2);border-radius:var(--r);
-  width:100%;max-width:700px;overflow:hidden;animation:mup .3s ease;
+  background:var(--bg1);border:1px solid var(--border2);border-radius:10px;
+  width:100%;max-width:720px;overflow:hidden;animation:mup .3s ease;position:relative;
 }
 @keyframes mup{from{transform:translateY(20px);opacity:0;}to{transform:none;opacity:1;}}
 .pmodal-head{
   display:flex;justify-content:space-between;align-items:center;
-  padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);background:var(--bg2);
+  padding:1.4rem 1.8rem;border-bottom:1px solid var(--border);background:var(--bg2);
+  position:sticky;top:0;z-index:10;
 }
-.pmodal-title{font-family:var(--head);font-size:1rem;font-weight:700;letter-spacing:.02em;}
+.pmodal-title{font-family:var(--head);font-size:1.4rem;font-weight:400;letter-spacing:.06em;text-transform:uppercase;}
 .pmodal-close{
   background:none;border:1px solid var(--border);color:var(--dim);
-  width:34px;height:34px;border-radius:4px;cursor:pointer;font-size:.9rem;
-  transition:.2s;display:flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:6px;cursor:pointer;font-size:1rem;
+  transition:.2s;display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
 .pmodal-close:hover{background:rgba(248,113,113,.15);border-color:var(--red);color:var(--red);}
-.pmodal-img{width:100%;height:200px;object-fit:cover;filter:brightness(.75) saturate(.8);display:block;}
-.pmodal-body{padding:1.5rem;}
-.pmodal-desc{font-size:.85rem;color:var(--dim);margin-bottom:1.5rem;line-height:1.5;}
-.price-section{margin-bottom:1.5rem;}
+.pmodal-img{width:100%;height:220px;object-fit:cover;filter:brightness(.75) saturate(.85);display:block;}
+.pmodal-body{padding:1.8rem;}
+.pmodal-desc{font-size:.9rem;color:var(--dim);margin-bottom:1.8rem;line-height:1.6;}
+.price-section{margin-bottom:1.8rem;}
 .price-section-title{
-  font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--amber);margin-bottom:.6rem;display:flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:.7rem;display:flex;align-items:center;gap:10px;
 }
-.price-section-title::before{content:'';width:12px;height:1px;background:var(--amber);}
-.price-table{background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.price-section-title::before{content:'';width:14px;height:1px;background:var(--amber);}
+.price-table{background:var(--bg2);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
 .p-row{
   display:flex;justify-content:space-between;align-items:center;
-  padding:.7rem 1rem;border-bottom:1px solid var(--border);font-size:.82rem;
+  padding:.85rem 1.2rem;border-bottom:1px solid var(--border);font-size:.85rem;
   transition:.15s;
 }
 .p-row:last-child{border-bottom:none;}
 .p-row:hover{background:rgba(255,255,255,.02);}
 .p-row span:first-child{color:var(--dim);}
-.p-row span:last-child{font-family:var(--mono);font-size:.78rem;color:var(--amber);font-weight:700;}
+.p-row span:last-child{font-family:var(--mono);font-size:.8rem;color:var(--amber);font-weight:700;}
+
+/* ═══════════════════ TICKET TRACKER ═══════════════════ */
+.tracker-wrap{margin-top:3rem;}
+.tracker-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1.2rem;flex-wrap:wrap;gap:1rem;
+}
+.tracker-search{
+  display:flex;gap:8px;align-items:center;
+}
+.tracker-search input{
+  background:var(--bg1);border:1px solid var(--border);border-radius:4px;
+  color:var(--text);font-family:var(--mono);font-size:.78rem;padding:9px 14px;
+  outline:none;transition:.2s;width:200px;
+}
+.tracker-search input:focus{border-color:rgba(232,168,76,0.5);}
+.tracker-search input::placeholder{color:var(--muted);}
+.btn-track{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;
+  background:var(--bg2);color:var(--dim);padding:9px 18px;border:1px solid var(--border);border-radius:4px;
+  cursor:pointer;transition:.2s;
+}
+.btn-track:hover{border-color:var(--amber);color:var(--amber);}
+.tickets-list{display:flex;flex-direction:column;gap:10px;}
+.ticket-entry{
+  background:var(--bg1);border:1px solid var(--border);border-radius:8px;
+  padding:1.2rem 1.6rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;
+  transition:.2s;
+}
+.ticket-entry:hover{border-color:var(--border2);background:var(--bg2);}
+.ticket-id{font-family:var(--mono);font-size:.78rem;color:var(--amber);font-weight:700;letter-spacing:.08em;white-space:nowrap;}
+.ticket-game{font-family:var(--mono);font-size:.68rem;color:var(--dim);letter-spacing:.06em;text-transform:uppercase;}
+.ticket-service{font-size:.88rem;color:var(--text);flex-grow:1;}
+.ticket-status-badge{
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 12px;border-radius:99px;white-space:nowrap;
+}
+.badge-pending{background:rgba(232,168,76,.12);color:var(--amber);border:1px solid rgba(232,168,76,.25);}
+.badge-progress{background:rgba(74,222,128,.1);color:var(--green);border:1px solid rgba(74,222,128,.25);}
+.badge-done{background:rgba(255,255,255,.05);color:var(--dim);border:1px solid var(--border);}
+.ticket-date{font-family:var(--mono);font-size:.65rem;color:var(--muted);white-space:nowrap;}
+.tracker-empty{
+  text-align:center;padding:3rem;background:var(--bg1);border:1px solid var(--border);
+  border-radius:8px;font-family:var(--mono);font-size:.75rem;color:var(--muted);
+  letter-spacing:.1em;text-transform:uppercase;
+}
 
 /* ═══════════════════ FOOTER ═══════════════════ */
 footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;}
@@ -424,6 +479,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
     <a href="#catalog" onclick="closeMob()">Catálogo</a>
     <a href="#how-to-buy" onclick="closeMob()">Como Comprar</a>
     <a href="#ticket-section" onclick="closeMob()">Ticket</a>
+    <a href="#ticket-tracker" onclick="closeMob()">Acompanhar</a>
     <a href="#team" onclick="closeMob()">Equipe</a>
     <a href="#status" onclick="closeMob()">Status</a>
     <a href="https://discord.gg/Szqbsd4TNa" target="_blank" rel="noopener" style="color:var(--amber);border-color:rgba(232,168,76,.25);margin-top:.5rem;">Discord ↗</a>
@@ -434,7 +490,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
 <nav>
   <div class="nav-inner">
     <a href="#" class="logo">
-      <img src="https://64.media.tumblr.com/c4beee0769a4381a43741e02c28defea/182fcda3a0d77b6c-42/s2048x3072/aebc414dc2195a76b42655ed294e7633ed551872.png" alt="">
+      <img src="https://media.discordapp.net/attachments/1363677152800800961/1500640598548287618/content.png?ex=69f92bf7&is=69f7da77&hm=f1b661887c119d3b974032db6b8a7ed566e6024894a436272ac51e74412839d1&=&format=webp&quality=lossless&width=788&height=788" alt="">
       <span class="logo-name"><em>Nova</em> Community</span>
       <span class="logo-badge">v2.1</span>
     </a>
@@ -442,11 +498,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
       <a href="#catalog">Catálogo</a>
       <a href="#how-to-buy">Como Comprar</a>
       <a href="#ticket-section">Ticket</a>
+      <a href="#ticket-tracker">Acompanhar</a>
       <a href="#team">Equipe</a>
       <a href="#status">Status</a>
     </div>
     <a href="https://discord.gg/Szqbsd4TNa" target="_blank" class="btn-discord desktop">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+      <i class="fa-brands fa-discord"></i>
       Discord
     </a>
     <button class="hamburger" onclick="openMob()">☰</button>
@@ -459,7 +516,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
   <div class="hero-badge"><span class="dot"></span> Serviços Premium — Gacha Games</div>
   <h1>
     NOVA
-    <span class="line2">COMMUNITY</span>
+    <span class="line2">Community</span>
   </h1>
   <p class="hero-sub">Performance. Qualidade. Segurança. Serviços para seus jogos favoritos, feitos por especialistas.</p>
   <div class="hero-ctas">
@@ -491,9 +548,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
         <div class="c-body">
           <div class="c-tag-row">
             <span class="c-game-tag">Genshin Impact</span>
-            <span class="c-status on">Online</span>
+            <span class="c-status on">Disponível</span>
           </div>
-          <div class="c-title">Manual Premium</div>
+          <div class="c-title">Genshin Impact: Manual</div>
           <div class="c-desc">Exploração, missões, ascensão, Abismo e muito mais. Catálogo completo.</div>
           <div class="c-footer">
             <div class="c-price">R$ 1,00 <small>/ serviço</small></div>
@@ -510,9 +567,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
         <div class="c-body">
           <div class="c-tag-row">
             <span class="c-game-tag">Genshin Impact</span>
-            <span class="c-status on">Online</span>
+            <span class="c-status on">Disponível</span>
           </div>
-          <div class="c-title">Via Script</div>
+          <div class="c-title">Genshin Impact: Script</div>
           <div class="c-desc">Mesma qualidade, preços mais acessíveis. Serviços automatizados com segurança.</div>
           <div class="c-footer">
             <div class="c-price">R$ 0,50 <small>/ serviço</small></div>
@@ -529,7 +586,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
         <div class="c-body">
           <div class="c-tag-row">
             <span class="c-game-tag">Zenless Zone Zero</span>
-            <span class="c-status on">Online</span>
+            <span class="c-status on">Disponível</span>
           </div>
           <div class="c-title">Zenless Zone Zero</div>
           <div class="c-desc">Policromos, missões, end-game e cuidados com conta. Serviço premium.</div>
@@ -548,7 +605,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
         <div class="c-body">
           <div class="c-tag-row">
             <span class="c-game-tag">Honkai: Star Rail</span>
-            <span class="c-status on">Online</span>
+            <span class="c-status on">Disponível</span>
           </div>
           <div class="c-title">Honkai: Star Rail</div>
           <div class="c-desc">Stellar Jade, end-game, exploração, universo simulado e muito mais.</div>
@@ -567,7 +624,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
         <div class="c-body">
           <div class="c-tag-row">
             <span class="c-game-tag">Wuthering Waves</span>
-            <span class="c-status on">Online</span>
+            <span class="c-status on">Disponível</span>
           </div>
           <div class="c-title">Wuthering Waves</div>
           <div class="c-desc">Exploração completa, astrites, Tower of Adversity e builds otimizadas.</div>
@@ -661,7 +718,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
       </div>
 
       <div class="ticket-form">
-        <h3>Nova Solicitação</h3>
+        <h3>Nova Solicitação (Sistema em Implementação)</h3>
         <div class="form-row">
           <div class="form-group">
             <label>Nome / Discord</label>
@@ -704,6 +761,29 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
   </div>
 </section>
 
+<!-- TICKET TRACKER -->
+<section id="ticket-tracker" style="border-top:1px solid var(--border);">
+  <div class="s-wrap">
+    <div class="s-tag">Acompanhamento (Sistema em Implementação)</div>
+    <h2 class="s-h2">Meus <em>Tickets</em></h2>
+    <p class="s-sub">Acompanhe o status dos seus tickets abertos. Insira seu ID ou nome para filtrar.</p>
+    <div class="tracker-wrap">
+      <div class="tracker-header">
+        <div style="font-family:var(--mono);font-size:.72rem;color:var(--dim);letter-spacing:.08em;">
+          Tickets recentes desta sessão
+        </div>
+        <div class="tracker-search">
+          <input type="text" id="tracker-input" placeholder="Buscar por ID ou nome...">
+          <button class="btn-track" onclick="filterTickets()">Filtrar</button>
+        </div>
+      </div>
+      <div class="tickets-list" id="tickets-list">
+        <div class="tracker-empty" id="tracker-empty">Nenhum ticket aberto nesta sessão ainda.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- STATUS -->
 <section id="status" style="border-top:1px solid var(--border);">
   <div class="s-wrap">
@@ -722,7 +802,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
         <span class="s-dot-green"></span>
         <div>
           <div class="status-item-label">Scripts</div>
-          <div class="status-item-val">Operacional · Seg.</div>
+          <div class="status-item-val">Operacional · Seguros</div>
         </div>
       </div>
       <div class="status-item">
@@ -736,7 +816,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
         <span class="s-dot-amber"></span>
         <div>
           <div class="status-item-label">Fila de Tickets</div>
-          <div class="status-item-val" style="color:var(--amber);">15–45 min resposta</div>
+          <div class="status-item-val" style="color:var(--amber);">15–45 min de resposta</div>
         </div>
       </div>
       <div class="status-item">
@@ -761,23 +841,18 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
 <section id="team" style="border-top:1px solid var(--border);">
   <div class="s-wrap">
     <div class="s-tag">Colaboradores</div>
-    <h2 class="s-h2">Nossa <em>Equipe</em></h2>
+    <h2 class="s-h2">Gestão <em>Principal</em></h2>
     <p class="s-sub">As pessoas por trás dos serviços. Especialistas dedicados à sua experiência.</p>
     <div class="team-grid">
-      <div class="t-card">
-        <img src="https://media.discordapp.net/attachments/1476661396673527809/1476661419993989212/WhatsApp_Image_2026-02-25_at_20.07.27.jpeg?ex=69a1ef9d&is=69a09e1d&hm=9fa27beb7930e41f61fcaa40b6acff0f97bb488d0fc2ce856ec93fc801af124d&=&format=webp&width=443&height=788" class="t-avatar" alt="">
-        <div class="t-name">—</div>
-        <span class="t-role">Administrador</span>
-      </div>
       <div class="t-card owner">
-        <img src="https://media.discordapp.net/attachments/1363677152800800961/1487547726844399646/download.jpg?ex=69c98a47&is=69c838c7&hm=45c62667cace79cd36e216df2e3932336f4f9c17a794ea4b7a6abc7b2ad435d7&=&format=webp" class="t-avatar" alt="">
+        <img src="https://i.pinimg.com/736x/4a/b7/8c/4ab78c7c98b74b1909ca148bb60401aa.jpg" class="t-avatar" alt="">
         <div class="t-name">wz.foxyyy</div>
         <span class="t-role">Owner</span>
       </div>
-      <div class="t-card">
-        <img src="https://media.discordapp.net/attachments/1476661396673527809/1476664328894808106/IMG-20260126-WA0151.jpg?ex=69a1f253&is=69a0a0d3&hm=d1c4a4f17c6c939905c3021b39a35e8bbd01e4b4&=&format=webp&width=706&height=788" class="t-avatar" alt="">
+      <div class="t-card owner">
+        <img src="https://i.pinimg.com/736x/a6/af/01/a6af011c59447e0c4a58a1cca2b79a65.jpg" class="t-avatar" alt="">
         <div class="t-name">ventisfavone</div>
-        <span class="t-role">Staff Sênior</span>
+        <span class="t-role">Sub Owner</span>
       </div>
     </div>
   </div>
@@ -788,19 +863,19 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
   <div class="foot-inner">
     <div class="foot-brand">
       <a href="#" class="logo" style="margin-bottom:.7rem;">
-        <img src="https://64.media.tumblr.com/c4beee0769a4381a43741e02c28defea/182fcda3a0d77b6c-42/s2048x3072/aebc414dc2195a76b42655ed294e7633ed551872.png" alt="">
+        <img src="https://media.discordapp.net/attachments/1363677152800800961/1500640598548287618/content.png?ex=69f92bf7&is=69f7da77&hm=f1b661887c119d3b974032db6b8a7ed566e6024894a436272ac51e74412839d1&=&format=webp&quality=lossless&width=788&height=788" alt="">
         <span class="logo-name"><em>Nova</em> Community</span>
       </a>
       <p>Serviços premium para gacha games com qualidade e segurança.</p>
       <div class="socials">
         <a href="https://discord.gg/Szqbsd4TNa" class="soc-btn" title="Discord">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+          <i class="fa-brands fa-discord"></i>
         </a>
         <a href="https://www.tiktok.com/@novacommunitydc" class="soc-btn" title="TikTok">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34v-7.5a8.16 8.16 0 004.76 1.52V5.88a4.86 4.86 0 01-1-.19z"/></svg>
+          <i class="fa-brands fa-tiktok"></i>
         </a>
         <a href="https://www.instagram.com/novacommunitydc/" class="soc-btn" title="Instagram">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <i class="fa-brands fa-instagram"></i>
         </a>
       </div>
     </div>
@@ -834,7 +909,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 0 0;
   </div>
   <div class="foot-bottom">
     <p>© 2025–2026 NOVA COMMUNITY — TODOS OS DIREITOS RESERVADOS.</p>
-    <div class="ver-badge"><span class="ver-dot"></span> V2.1.0</div>
+    <div class="ver-badge"><span class="ver-dot"></span> V2.1.5</div>
   </div>
 </footer>
 
@@ -1007,6 +1082,40 @@ function showToast(msg,ok=false){
   setTimeout(()=>t.classList.remove('show'),3200);
 }
 
+const sessionTickets = [];
+
+function renderTickets(filter=''){
+  const list=document.getElementById('tickets-list');
+  const empty=document.getElementById('tracker-empty');
+  const filtered=filter
+    ?sessionTickets.filter(t=>t.id.toLowerCase().includes(filter.toLowerCase())||t.name.toLowerCase().includes(filter.toLowerCase()))
+    :sessionTickets;
+  if(filtered.length===0){
+    empty.style.display='block';
+    list.querySelectorAll('.ticket-entry').forEach(e=>e.remove());
+    return;
+  }
+  empty.style.display='none';
+  list.querySelectorAll('.ticket-entry').forEach(e=>e.remove());
+  filtered.forEach(t=>{
+    const el=document.createElement('div');
+    el.className='ticket-entry';
+    const statusClass=t.status==='Em Andamento'?'badge-progress':t.status==='Concluído'?'badge-done':'badge-pending';
+    el.innerHTML=`
+      <div class="ticket-id">${t.id}</div>
+      <div class="ticket-game">${t.game}</div>
+      <div class="ticket-service">${t.service}</div>
+      <span class="ticket-status-badge ${statusClass}">${t.status}</span>
+      <div class="ticket-date">${t.date}</div>`;
+    list.appendChild(el);
+  });
+}
+
+function filterTickets(){
+  const v=document.getElementById('tracker-input').value.trim();
+  renderTickets(v);
+}
+
 function submitTicket(){
   const name=document.getElementById('f-name').value.trim();
   const game=document.getElementById('f-game').value;
@@ -1031,7 +1140,11 @@ function submitTicket(){
 
   setTimeout(()=>{
     const id='NV-'+Date.now().toString(36).toUpperCase().slice(-6);
-    msg.innerHTML=`Ticket <strong>${id}</strong> registrado! Nossa equipe responde em até 48h. Confira o Discord para acompanhar.`;
+    const now=new Date();
+    const dateStr=now.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})+' '+now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    sessionTickets.unshift({id,name,game,service,status:'Aguardando',date:dateStr});
+    renderTickets();
+    msg.innerHTML=`Ticket <strong>${id}</strong> registrado! Nossa equipe responde em até 48h. Acompanhe abaixo.`;
     msg.className='form-msg success';
     btn.textContent='Enviar Solicitação →';btn.disabled=false;
     document.getElementById('f-name').value='';
